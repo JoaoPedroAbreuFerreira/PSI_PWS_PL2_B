@@ -1,11 +1,11 @@
 <?php
 Class Utilizador extends ActiveRecord\Model
 {
+    static $table_name = 'utilizador';
+
     public static function searchUtilizador($user, $pass)
-    {
-        static $table_name = 'utilizador';
-        
-        if($table_name::find_by_username_and_pass($user, $pass)) 
+    {          
+        if(Utilizador::find_by_username_and_pass($user, $pass)) 
         { 
             return true; 
         }
