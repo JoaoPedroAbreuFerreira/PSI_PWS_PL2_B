@@ -1,8 +1,8 @@
 <?php 
-    class HomeController 
+class HomeController 
+{
+    public function index()
     {
-        public function index()
-        {
-            require_once "./views/login.html";    
-        }
+        require_once "./views/login.html";    
     }
+}

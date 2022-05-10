@@ -1,6 +1,6 @@
 <?php
-    session_start();
+session_start();
 
-    unset($_SESSION["username"]);
-    //session_destroy();
-    header("Location: ./index.php?r=auth/login");
+unset($_SESSION["username"]);
+//session_destroy();
+header("Location: ./index.php?r=auth/login");

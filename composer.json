@@ -1,0 +1,6 @@
+{
+    "name": "2211889/pws",
+    "require": {
+        "php-activerecord/php-activerecord": "^1.2"
+    }
+}
