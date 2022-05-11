@@ -7,7 +7,8 @@ Class Utilizador extends ActiveRecord\Model
     {          
         if(Utilizador::find_by_username_and_pass($user, $pass)) 
         { 
-            return true; 
+            
+            return true;
         }
         else
         {
