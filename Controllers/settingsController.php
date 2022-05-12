@@ -15,8 +15,8 @@ Class Settings extends Base
         {
             
             $user = Utilizador::find_by_username($_SESSION["username"]);
-            if(isset($_POST["user"])){
-                $user -> username = $_POST["user"];
+            if(isset($_POST["email"])){
+                $user -> email = $_POST["email"];
             }
     
             if(isset($_POST["pass"])){
@@ -46,7 +46,6 @@ Class Settings extends Base
             if(isset($_POST["user"]) && isset($_POST["pass"]) && isset($_POST["email"]) && isset($_POST["tele"]) && isset($_POST["nif"]) && isset($_POST["morada"]) && isset($_POST["local"]) && isset($_POST["cod"]))
             {
                 $user = new Utilizador();
-                $user -> id = 3;
                 $user -> username = $_POST["user"];
                 $user -> pass = $_POST["pass"];
                 $user -> email = $_POST["email"];
@@ -60,6 +59,43 @@ Class Settings extends Base
                 $user ->save();
 
                 $this -> redirectToRoute(ROTA_LOGIN);
+
+            }
+
+        }
+        else
+        {
+            $this->redirectToRoute(ROTA_LOGIN);
+            //header("Location: ./index.php?r=auth/login");
+        }
+    }
+
+    public function registerIva(){
+        $auth = new Auth();
+
+        $logged = $auth->isLoggedIn();
+
+        if($logged)
+        {
+            if(isset($_GET["i"])){
+                $iva = Iva::find($_GET["i"]);
+                echo "gud";
+            }else{
+                $iva = new Iva();
+                echo "not gud";
+            }
+            
+
+            if(isset($_POST["vigor"]) && isset($_POST["desc"]) && isset($_POST["percentagem"]))
+            {
+            
+                $iva -> percentagem = $_POST["percentagem"];
+                $iva -> vigor = $_POST["vigor"];
+                $iva -> descricao = $_POST["desc"];
+
+                $iva -> save();
+                $this -> redirectToRoute("gestao/iva");
+
 
             }
 

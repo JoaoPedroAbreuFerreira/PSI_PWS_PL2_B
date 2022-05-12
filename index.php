@@ -6,6 +6,10 @@ if(isset($_GET["r"]))
 {
     $rota = $_GET["r"];
 }
+if(isset($_GET["a"]))
+{
+    $what = $_GET["a"];
+}
 
 switch ($rota)
 {
@@ -24,7 +28,7 @@ switch ($rota)
         $plano = new Plano();
         $plano->load("settings");
         break;
-    case "account/create":
+    case "create":
         require_once("./controllers/planoController.php");
         $plano = new Plano();
         $plano->load("register");
@@ -43,6 +47,16 @@ switch ($rota)
         require_once("./controllers/planoController.php");
         $plano = new Plano();
         $plano->load("iva");
+        break;
+    case "register/iva":
+        require_once("./controllers/settingsController.php");
+        $settings = new Settings();
+        $settings-> registerIva();
+        break;
+    case"db/delete":
+        require_once("./controllers/DBController.php");
+        $settings = new DBController();
+        $settings-> deleteData();
         break;
     default: 
         require_once("./controllers/planoController.php");

@@ -31,6 +31,10 @@ Class Plano extends Base
         $auth = new Auth();
 
         $logged = $auth->isLoggedIn();
+        
+        if(isset($_GET["t"])){
+            $table = $_GET["t"];
+        }
 
         if($logged)
         {
@@ -40,11 +44,13 @@ Class Plano extends Base
                     $this->renderView($type);
                     break;
                 case "register":
-                    $this-> renderView($type);
+                    $this-> renderView($type.$table);
                     break;
                 case "iva":
-                    $this-> renderView("gestao".$type);
+                    $ivas = Iva::all();
+                    $this-> renderView("gestao".$type, ['ivas' => $ivas]);
                     break;
+                
                 default:
                     $this->redirectToRoute(ROTA_LOGIN);
                     break;
