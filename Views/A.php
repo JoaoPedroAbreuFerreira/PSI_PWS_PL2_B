@@ -1,7 +1,5 @@
-Bem vindo <?= $_SESSION["username"]?>
+Bem vindo <?= $_SESSION["username"]?> [Administrador]
 
 <br>
-
-admin
 
 <a href='?r=auth/logout'>Log Out</a>

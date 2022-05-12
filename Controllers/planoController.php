@@ -17,12 +17,10 @@ Class Plano extends Base
             
             $type = $user -> role;
             $this->renderView($type);
-            //require_once("./views/plano.php");
         }
         else
         {
             $this->redirectToRoute(ROTA_LOGIN);
-            //header("Location: ./index.php?r=auth/login");
         }
     }
 
@@ -36,12 +34,10 @@ Class Plano extends Base
         {
             
             $this->renderView("settings");
-            //require_once("./views/plano.php");
         }
         else
         {
             $this->redirectToRoute(ROTA_LOGIN);
-            //header("Location: ./index.php?r=auth/login");
         }
     }
 }

@@ -1,6 +1,4 @@
-Bem vindo <?= $_SESSION["username"]?>
-
-<br>
+Bem vindo <?= $_SESSION["username"]?> [Cliente]
 
 <br>
 

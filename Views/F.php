@@ -1,4 +1,5 @@
-Bem vindo <?= $_SESSION["username"]?>
+Bem vindo <?= $_SESSION["username"]?> [Funcionário]
+
 <br>
 
 <a href="?r=account/settings"> Alterar username/password</a>

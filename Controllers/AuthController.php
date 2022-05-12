@@ -6,13 +6,11 @@ Class AuthController extends Base
 {
     public function login()
     {
-
         $auth = new Auth();
 
         if($auth->isLoggedIn())
         {
             $this->redirectToRoute("");
-            //header("Location: ./index.php");
         }
 
         if(isset($_POST["user"]) && isset($_POST["pass"]))
@@ -35,7 +33,6 @@ Class AuthController extends Base
     public function logout()
     {
         $auth = new Auth();
-
         $auth->logout();
         $this->redirectToRoute(ROTA_LOGIN);
     }
