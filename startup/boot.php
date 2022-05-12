@@ -13,6 +13,6 @@ ActiveRecord\Config::initialize(function($cfg)
     );
 });
 
-define("NOME_APP", "Fatura+");
+define("NOME_APP", "Minha App");
 define("ROTA_LOGIN", "auth/login");
     
