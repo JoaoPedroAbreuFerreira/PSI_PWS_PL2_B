@@ -12,7 +12,44 @@ Class Plano extends Base
 
         if($logged)
         {
-            $this->renderView("plano");
+            
+            $user = Utilizador::find_by_username($_SESSION["username"]);
+            
+            $type = $user -> role;
+            $this->renderView($type);
+            //require_once("./views/plano.php");
+        }
+        else
+        {
+            $this->redirectToRoute(ROTA_LOGIN);
+            //header("Location: ./index.php?r=auth/login");
+        }
+    }
+
+    public function load($page)
+    {
+        $auth = new Auth();
+
+        $logged = $auth->isLoggedIn();
+        
+
+        if($logged)
+        {
+         
+            switch($page){
+                case "gestaoiva":
+                    $ivas = Iva::all();
+                    $this-> renderView($page, ['ivas' => $ivas]);
+                    break;
+                case "updateiva":
+                    $ivas = Iva::all();
+                    $this-> renderView($page, ['ivas' => $ivas]);
+                    break;          
+                default:
+                    $this->renderView($page);
+                    break;
+            }
+            ;
             //require_once("./views/plano.php");
         }
         else
