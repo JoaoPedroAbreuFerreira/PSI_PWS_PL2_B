@@ -1,18 +1,18 @@
-    <h2>Lista de ivas em vigor</h2>
+    <h2>Lista de ivas em registados</h2>
 
     <table class="table tablestriped">
             <thead>
                 <th>
-                    <h3>Id</h3>
+                    Id
                 </th>
                 <th>
-                    <h3>Taxa</h3>
+                    Taxa
                 </th>
                 <th>
-                    <h3>Descrição</h3>
+                    Descrição
                 </th> 
                 <th>
-                    <h3>Vigor</h3>
+                    Vigor
                 </th> 
             </thead>
             <tbody>

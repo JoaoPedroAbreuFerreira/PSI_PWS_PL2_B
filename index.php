@@ -46,6 +46,11 @@ switch ($rota)
                 $register = new ivaController();
                 $register -> registerIva();
                 break;
+            case "produto":
+                require_once("./controllers/produtoController.php");
+                $register = new ProdutoController();
+                $register -> registerproduto();
+                break;
         }
         break;
 
@@ -60,6 +65,11 @@ switch ($rota)
                 require_once("./controllers/ivaController.php");
                 $register = new ivaController();
                 $register -> updateIva();
+                break;
+            case "produto":
+                require_once("./controllers/produtoController.php");
+                $register = new ProdutoController();
+                $register -> updateproduto();
                 break;
         }
         break;

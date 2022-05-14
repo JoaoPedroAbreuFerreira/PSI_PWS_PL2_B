@@ -38,13 +38,17 @@ Class Plano extends Base
          
             switch($page){
                 case "gestaoiva":
+                case "updateiva":  
                     $ivas = Iva::all();
                     $this-> renderView($page, ['ivas' => $ivas]);
                     break;
-                case "updateiva":
+                case "registerproduto":
+                case "updateproduto":
+                case "gestaoproduto":
                     $ivas = Iva::all();
-                    $this-> renderView($page, ['ivas' => $ivas]);
-                    break;          
+                    $produtos = Produto::all();
+                    $this-> renderView($page, ['ivas' => $ivas, 'produtos' => $produtos]);
+                    break;
                 default:
                     $this->renderView($page);
                     break;

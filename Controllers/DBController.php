@@ -21,6 +21,10 @@ Class DBController extends Base{
                     $camp = Utilizador::find($id);
                     $camp ->delete();
                     break;
+                case "produto":
+                    $camp = Produto::find($id);
+                    $camp ->delete();
+                    break;
                 default:
                     $this->redirectToRoute(ROTA_LOGIN);
             
