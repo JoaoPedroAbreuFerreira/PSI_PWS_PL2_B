@@ -2,60 +2,53 @@
 require_once("./models/Auth.php");
 require_once("./controllers/BaseController.php");
 
-Class ProdutoController extends Base{
-
-    public function registerProduto(){
+Class ProdutoController extends Base
+{
+    public function registerProduto()
+    {
         $auth = new Auth();
 
-        $logged = $auth->isLoggedIn();
-
-        if($logged)
+        if($auth->isLoggedIn())
         {     
-
-            if(isset($_POST["referencia"]) && isset($_POST["desc"]) && isset($_POST["preco"]) && isset($_POST["stock"]) && isset($_POST["iva"]))
+            if(isset($_POST["referencia"]) && isset($_POST["preco"]) && isset($_POST["desc"]) && isset($_POST["stock"]) && isset($_POST["iva"]))
             {
                 $produto = new Produto();
-                $produto -> referencia = $_POST["referencia"];
-                $produto -> preco = $_POST["preco"];
-                $produto -> descricao = $_POST["desc"];
-                $produto -> stock = $_POST["stock"];
-                $produto -> iva_id = $_POST["iva"];
-                $produto -> save();
-                $this -> redirectToRoute("load&p=gestaoproduto");
-
+                $produto->referencia = $_POST["referencia"];
+                $produto->preco = $_POST["preco"];
+                $produto->descricao = $_POST["desc"];
+                $produto->stock = $_POST["stock"];
+                $produto->iva_id = (int)$_POST["iva"];
+                $produto->save();
+                $this->redirectToRoute("load&p=gestaoproduto");
             }
             else
             {
-            $this->redirectToRoute(ROTA_LOGIN);
-            //header("Location: ./index.php?r=auth/login");
+                $this->redirectToRoute(ROTA_LOGIN);
             }
-
         }
         else
         {
             $this->redirectToRoute(ROTA_LOGIN);
-            //header("Location: ./index.php?r=auth/login");
         }
     }
 
-    public function updateProduto(){
+    public function updateProduto()
+    {
+        if(isset($_POST["id"]) && isset($_POST["referencia"]) && isset($_POST["preco"]) && isset($_POST["desc"]) && isset($_POST["stock"]) && isset($_POST["iva"]))
+        {
+            $produto = Produto::find_by_id($_POST["id"]);
+            $produto->referencia = $_POST["referencia"];
+            $produto->preco = $_POST["preco"];
+            $produto->descricao = $_POST["desc"];
+            $produto->stock = $_POST["stock"];
+            $produto->iva_id = (int)$_POST["iva"];
 
-        if(isset($_POST["referencia"]) && isset($_POST["desc"]) && isset($_POST["preco"]) && isset($_POST["stock"]) && isset($_POST["iva"]) && isset($_POST["id"])){
-
-            $produto = Produto::find($_POST["id"]);
-            $produto -> referencia = $_POST["referencia"];
-            $produto -> preco = $_POST["preco"];
-            $produto -> descricao = $_POST["desc"];
-            $produto -> stock = $_POST["stock"];
-            $produto -> iva_id = $_POST["iva"];
-            $produto -> save();
-            $this -> redirectToRoute("load&p=gestaoproduto");
+            $produto->save();
+            $this->redirectToRoute("load&p=gestaoproduto");
         }
         else
         {
             $this->redirectToRoute(ROTA_LOGIN);
-            //header("Location: ./index.php?r=auth/login");
         }
-
     }
 }

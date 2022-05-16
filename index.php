@@ -1,5 +1,20 @@
 <?php
 require_once("./startup/boot.php");
+require_once("./controllers/AuthController.php");
+require_once("./controllers/PlanoController.php");
+require_once("./controllers/UtilizadorController.php");
+require_once("./controllers/IvaController.php");
+require_once("./controllers/ProdutoController.php");
+require_once("./controllers/DBController.php");
+
+
+$authController = new AuthController();
+$planoController = new Plano();  
+$userController = new UtilizadorController();
+$ivaController = new IvaController();
+$produtoController = new ProdutoController();
+$dbController = new DBController();
+
 $rota = '';
 $page = "";
 
@@ -7,80 +22,69 @@ if(isset($_GET["r"]))
 {
     $rota = $_GET["r"];
 }
+
 if(isset($_GET["p"]))
 {
     $page = $_GET["p"];
 }
+
 if(isset($_GET["t"]))
 {
     $table = $_GET["t"];
 }
 
-
 switch ($rota)
 {
-    case "auth/login": 
-        require_once("./controllers/AuthController.php");
-        $authController = new AuthController();
+    case "auth/login":
         $authController->login(); 
         break;
-    case "auth/logout": 
-        require_once("./controllers/AuthController.php");
-        $authController = new AuthController();
+
+    case "auth/logout":
         $authController->logout();
         break;
+
     case "load":
-        require_once("./controllers/planoController.php");
-        $plano = new Plano();
-        $plano->load($page);
+        $planoController->load($page);
         break;
+
     case "register":
-        switch ($table){
+        switch ($table)
+        {
             case "user":
-                require_once("./controllers/utilizadorController.php");
-                $register = new UtilizadorController();
-                $register -> clienteRegister();
+                $userController->clienteRegister();
                 break;
+
             case "iva":
-                require_once("./controllers/ivaController.php");
-                $register = new ivaController();
-                $register -> registerIva();
+                $ivaController->registerIva();
                 break;
+
             case "produto":
-                require_once("./controllers/produtoController.php");
-                $register = new ProdutoController();
-                $register -> registerproduto();
+                $produtoController->registerproduto();
                 break;
         }
         break;
 
     case "update":
-        switch ($table){
+        switch ($table)
+        {
             case "user":
-                require_once("./controllers/utilizadorController.php");
-                $register = new UtilizadorController();
-                $register ->changeAcc();
+                $userController->changeAcc();
                 break;
+
             case "iva":
-                require_once("./controllers/ivaController.php");
-                $register = new ivaController();
-                $register -> updateIva();
+                $ivaController->updateIva();
                 break;
+
             case "produto":
-                require_once("./controllers/produtoController.php");
-                $register = new ProdutoController();
-                $register -> updateproduto();
+                $produtoController->updateproduto();
                 break;
         }
         break;
 
     case"db/delete":
-        require_once("./controllers/DBController.php");
-        $settings = new DBController();
-        $settings-> deleteData();
+        $dbController->deleteData();
         break;
-    default: 
-        require_once("./controllers/planoController.php");
-        $plano = new Plano();
-        $plano->index();
+
+    default:
+        $planoController->index();
 }

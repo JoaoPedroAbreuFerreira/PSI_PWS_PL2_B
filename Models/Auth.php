@@ -11,7 +11,7 @@ Class Auth
         $valid = new Utilizador();
 
         if($valid->searchUtilizador($user, $pass)) 
-        { 
+        {
             $_SESSION["username"] = $user;
 
             return true; 

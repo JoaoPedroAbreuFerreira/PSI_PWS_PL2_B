@@ -8,58 +8,49 @@ Class Plano extends Base
     {
         $auth = new Auth();
 
-        $logged = $auth->isLoggedIn();
-
-        if($logged)
-        {
-            
+        if($auth->isLoggedIn())
+        {  
             $user = Utilizador::find_by_username($_SESSION["username"]);
             
-            $type = $user -> role;
+            $type = $user->role;
             $this->renderView($type);
-            //require_once("./views/plano.php");
         }
         else
         {
             $this->redirectToRoute(ROTA_LOGIN);
-            //header("Location: ./index.php?r=auth/login");
         }
     }
 
     public function load($page)
     {
         $auth = new Auth();
-
-        $logged = $auth->isLoggedIn();
         
-
-        if($logged)
+        if($auth->isLoggedIn())
         {
-         
-            switch($page){
+            switch($page)
+            {
                 case "gestaoiva":
                 case "updateiva":  
                     $ivas = Iva::all();
                     $this-> renderView($page, ['ivas' => $ivas]);
                     break;
+
                 case "registerproduto":
                 case "updateproduto":
                 case "gestaoproduto":
                     $ivas = Iva::all();
                     $produtos = Produto::all();
-                    $this-> renderView($page, ['ivas' => $ivas, 'produtos' => $produtos]);
+                    $this->renderView($page, ['ivas' => $ivas, 'produtos' => $produtos]);
                     break;
+
                 default:
                     $this->renderView($page);
                     break;
             }
-            ;
-            //require_once("./views/plano.php");
         }
         else
         {
             $this->redirectToRoute(ROTA_LOGIN);
-            //header("Location: ./index.php?r=auth/login");
         }
     }
 }
