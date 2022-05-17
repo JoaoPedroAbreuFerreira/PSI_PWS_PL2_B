@@ -1,6 +1,6 @@
 <div class="container">
-    <h2>Registar Cliente</h2>
-    <form action="index.php?r=register&t=user" method="post" class="needs-validation row justify-content-center" novalidate>
+    <h2>Registar <?= $type ?></h2>
+    <form action="index.php?r=register&t=<?= $type?>" method="post" class="needs-validation row justify-content-center" novalidate>
         <div class="col col-6">
             <div class="mb-3">
                 <label for="inputUsername" class="form-label">Username:</label>

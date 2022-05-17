@@ -8,54 +8,61 @@ Class Plano extends Base
     {
         $auth = new Auth();
 
-        $logged = $auth->isLoggedIn();
-
-        if($logged)
-        {
-            
+        if($auth->isLoggedIn())
+        {  
             $user = Utilizador::find_by_username($_SESSION["username"]);
             
-            $type = $user -> role;
+            $type = $user->role;
             $this->renderView($type);
-            //require_once("./views/plano.php");
         }
         else
         {
             $this->redirectToRoute(ROTA_LOGIN);
-            //header("Location: ./index.php?r=auth/login");
         }
     }
 
     public function load($page)
     {
         $auth = new Auth();
-
-        $logged = $auth->isLoggedIn();
         
-
-        if($logged)
+        if($auth->isLoggedIn())
         {
-         
-            switch($page){
+            switch($page)
+            {
                 case "gestaoiva":
+                case "updateiva":  
                     $ivas = Iva::all();
                     $this-> renderView($page, ['ivas' => $ivas]);
                     break;
-                case "updateiva":
+                
+                case "gestaoFuncionario":
+                    $funcionarios =  Utilizador::all(array('conditions' => 'role = "F"'));;
+                    $this->renderView("gestaoFuncionario", ['funcionarios' => $funcionarios]);
+                    break;
+
+                case "registerproduto":
+                case "updateproduto":
+                case "gestaoproduto":
                     $ivas = Iva::all();
-                    $this-> renderView($page, ['ivas' => $ivas]);
-                    break;          
+                    $produtos = Produto::all();
+                    $this->renderView($page, ['ivas' => $ivas, 'produtos' => $produtos]);
+                    break;
+
+                case "registerC":
+                    $this->renderView("registerUser", ['type' => "Cliente"]);
+                    break;
+                case "registerF":
+                    $this->renderView("registerUser", ['type' => "Funcionário"]);
+                    break;
+
                 default:
                     $this->renderView($page);
                     break;
             }
-            ;
-            //require_once("./views/plano.php");
         }
         else
         {
             $this->redirectToRoute(ROTA_LOGIN);
-            //header("Location: ./index.php?r=auth/login");
         }
     }
 }

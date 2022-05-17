@@ -1,18 +1,18 @@
-    <h2>Lista de ivas em vigor</h2>
+    <h2>Lista de ivas em registados</h2>
 
     <table class="table tablestriped">
             <thead>
                 <th>
-                    <h3>Id</h3>
+                    Id
                 </th>
                 <th>
-                    <h3>Taxa</h3>
+                    Taxa
                 </th>
                 <th>
-                    <h3>Descrição</h3>
+                    Descrição
                 </th> 
                 <th>
-                    <h3>Vigor</h3>
+                    Vigor
                 </th> 
             </thead>
             <tbody>
@@ -23,7 +23,7 @@
                     <td><?=$iva->descricao?></td>
                     <td><?=$iva->vigor?></td>
                     <td>
-                        <a href="index.php?r=load&p=updateiva" class="btn btn-info"
+                        <a href="index.php?r=load&p=updateiva&i=<?=$iva->id?>" class="btn btn-info"
                             role="button">Editar</a>
                         <a href="index.php?r=db/delete&t=iva&i=<?=$iva->id?>" class="btn btn-warning"
                             role="button">Delete</a>
