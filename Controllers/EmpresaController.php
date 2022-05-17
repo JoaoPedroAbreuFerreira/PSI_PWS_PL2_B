@@ -4,16 +4,11 @@ require_once("./controllers/BaseController.php");
 
 Class EmpresaController extends Base
 {
-   
-    public function registerEmpresa()
+    public function updateEmpresa()
     {
-        $auth = new Auth();
-
-        if($auth->isLoggedIn())
+        if(isset($_POST["designacaoSocial"]) && isset($_POST["capitalSocial"]) && isset($_POST["email"]) && isset($_POST["tele"]) && isset($_POST["nif"]) && isset($_POST["morada"]) && isset($_POST["local"]) && isset($_POST["cod"]))
         {
-            if(isset($_POST["designacaoSocial"]) && isset($_POST["capitalSocial"]) && isset($_POST["email"]) && isset($_POST["tele"]) && isset($_POST["nif"]) && isset($_POST["morada"]) && isset($_POST["local"]) && isset($_POST["cod"]))
-            {
-                $empresa = new Empresa();
+                $empresa = Empresa::find_by_id($_POST["id"]);
                 $empresa->designacaosocial = $_POST["designacaoSocial"];
                 $empresa->capitalsocial = $_POST["capitalSocial"];
                 $empresa->email = $_POST["email"];
@@ -25,7 +20,6 @@ Class EmpresaController extends Base
 
                 $empresa->save();
                 $this->redirectToRoute(ROTA_LOGIN);
-            }
         }
         else
         {

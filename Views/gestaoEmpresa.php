@@ -34,14 +34,14 @@
             <?php foreach ($empresas as $empresa) { ?>
             <tr>
                 <td><?=$empresa->id?></td>
-                <td><?=$empresa->designacaoSocial?></td>
+                <td><?=$empresa->designacaosocial?></td>
                 <td><?=$empresa->email?></td>
                 <td><?=$empresa->telefone?></td>
                 <td><?=$empresa->nif?></td>
                 <td><?=$empresa->morada?></td>
-                <td><?=$empresa->codigoPostal?></td>
+                <td><?=$empresa->codigopostal?></td>
                 <td><?=$empresa->localidade?></td>
-                <td><?=$empresa->capitalSocial?></td>
+                <td><?=$empresa->capitalsocial?></td>
                 <td>
                     <a href="index.php?r=load&p=updateEmpresa&i=<?= $empresa->id?>" class="btn btn-info"
                         role="button">Editar</a>

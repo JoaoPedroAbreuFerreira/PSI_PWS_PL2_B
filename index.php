@@ -68,10 +68,6 @@ switch ($rota)
                 $produtoController->registerproduto();
                 break;
 
-            case "empresa":
-                $empresaController->registerEmpresa();
-                break;
-
         }
         break;
 
@@ -88,6 +84,9 @@ switch ($rota)
 
             case "produto":
                 $produtoController->updateproduto();
+                break;
+             case "empresa":
+                 $empresaController->updateEmpresa();
                 break;
         }
         break;
