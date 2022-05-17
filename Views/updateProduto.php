@@ -1,47 +1,6 @@
 <h2>Lista de Produtos Registados</h2>
-<h2>Seleciona o Produto a alterar</h2>
     <form action="index.php?r=update&t=produto" method="post" class="needs-validation row justify-content-center" novalidate>
-    <table class="table tablestriped">
-        <thead>
-        <th>
-                Id
-            </th>
-            <th>
-                Id Iva
-            </th>
-            <th>
-                Referencia
-            </th> 
-            <th>
-                Descricao
-            </th> 
-            <th>
-                Preço
-            </th> 
-            <th>
-                Stock
-            </th> 
-        </thead>
-        <tbody>
-            <?php foreach ($produtos as $produto) { ?>
-
-            <tr>
-            <td><?=$produto->id?></td>
-            <td><a href="index.php?r=load&p=gestaoiva" class="btn btn-info"
-                    role="button"><?=$produto->iva_id?></a></td>
-            <td><?=$produto->referencia?></td>
-            <td><?=$produto->descricao?></td>
-            <td><?=$produto->preco?></td>
-            <td><?=$produto->stock?></td>
-            <td>
-                <input type="radio" id="html" name="id" value="<?=$produto->id?> ">
-            </td>
-
-            <?php } ?>
-        </tbody>
-    </table>
-    <br>
-    <br>
+    <input type="hidden" name="id" value="<?= $_GET["i"]?>">
     <div class="col col-6">
             <div class="mb-3">
                 <label for="inputUsername" class="form-label">Referencia:</label>

@@ -50,8 +50,12 @@ switch ($rota)
     case "register":
         switch ($table)
         {
-            case "user":
+            case "Cliente":
                 $userController->clienteRegister();
+                break;
+            
+            case "Funcionário":
+                $userController->funcionarioRegister();
                 break;
 
             case "iva":
@@ -77,6 +81,10 @@ switch ($rota)
 
             case "produto":
                 $produtoController->updateproduto();
+                break;
+            
+            case "funcionario":
+                $userController->funcionarioUpdate();
                 break;
         }
         break;

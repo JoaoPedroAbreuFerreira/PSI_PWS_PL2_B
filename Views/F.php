@@ -4,9 +4,9 @@ Bem vindo <?= $_SESSION["username"]?> [Funcionário]
 <br>
 <a href="index.php?r=load&p=gestaoiva">Gerir Taxas de Iva</a>
 <br>
-<a href="index.php?r=load&p=registerCliente">Registar um Cliente</a>
+<a href="index.php?r=load&p=registerC">Registar um Cliente</a>
 <br>
-<a href="index.php?r=load&p=updatecliente">Alterar Username / Email</a>
+<a href="index.php?r=load&p=updateC">Alterar Email / Password</a>
 <br>
 <a href='index.php?r=auth/logout'>Log Out</a>
 

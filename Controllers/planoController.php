@@ -34,6 +34,11 @@ Class Plano extends Base
                     $ivas = Iva::all();
                     $this-> renderView($page, ['ivas' => $ivas]);
                     break;
+                
+                case "gestaoFuncionario":
+                    $funcionarios =  Utilizador::all(array('conditions' => 'role = "F"'));;
+                    $this->renderView("gestaoFuncionario", ['funcionarios' => $funcionarios]);
+                    break;
 
                 case "registerproduto":
                 case "updateproduto":
@@ -41,6 +46,13 @@ Class Plano extends Base
                     $ivas = Iva::all();
                     $produtos = Produto::all();
                     $this->renderView($page, ['ivas' => $ivas, 'produtos' => $produtos]);
+                    break;
+
+                case "registerC":
+                    $this->renderView("registerUser", ['type' => "Cliente"]);
+                    break;
+                case "registerF":
+                    $this->renderView("registerUser", ['type' => "Funcionário"]);
                     break;
 
                 default:

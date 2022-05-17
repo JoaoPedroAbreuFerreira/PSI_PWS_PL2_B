@@ -42,7 +42,6 @@ Class ProdutoController extends Base
             $produto->descricao = $_POST["desc"];
             $produto->stock = $_POST["stock"];
             $produto->iva_id = (int)$_POST["iva"];
-
             $produto->save();
             $this->redirectToRoute("load&p=gestaoproduto");
         }

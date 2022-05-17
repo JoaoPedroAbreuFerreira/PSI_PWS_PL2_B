@@ -23,7 +23,7 @@
                     <td><?=$iva->descricao?></td>
                     <td><?=$iva->vigor?></td>
                     <td>
-                        <a href="index.php?r=load&p=updateiva" class="btn btn-info"
+                        <a href="index.php?r=load&p=updateiva&i=<?=$iva->id?>" class="btn btn-info"
                             role="button">Editar</a>
                         <a href="index.php?r=db/delete&t=iva&i=<?=$iva->id?>" class="btn btn-warning"
                             role="button">Delete</a>
