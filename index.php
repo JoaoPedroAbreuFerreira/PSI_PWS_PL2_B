@@ -6,6 +6,7 @@ require_once("./controllers/UtilizadorController.php");
 require_once("./controllers/IvaController.php");
 require_once("./controllers/ProdutoController.php");
 require_once("./controllers/DBController.php");
+require_once("./controllers/EmpresaController.php");
 
 
 $authController = new AuthController();
@@ -14,6 +15,7 @@ $userController = new UtilizadorController();
 $ivaController = new IvaController();
 $produtoController = new ProdutoController();
 $dbController = new DBController();
+$empresaController = new EmpresaController();
 
 $rota = '';
 $page = "";
@@ -65,6 +67,11 @@ switch ($rota)
             case "produto":
                 $produtoController->registerproduto();
                 break;
+
+            case "empresa":
+                $empresaController->registerEmpresa();
+                break;
+
         }
         break;
 

@@ -54,6 +54,12 @@ Class Plano extends Base
                 case "registerF":
                     $this->renderView("registerUser", ['type' => "Funcionário"]);
                     break;
+                
+                    case "gestaoEmpresa":
+                        case "updateEmpresa":  
+                            $empresas = Empresa::all();
+                            $this-> renderView($page, ['empresas' => $empresas]);
+                            break;
 
                 default:
                     $this->renderView($page);
