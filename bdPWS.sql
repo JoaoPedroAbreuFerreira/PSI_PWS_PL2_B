@@ -6,6 +6,7 @@ CREATE TABLE Iva (
   PRIMARY KEY(id)
 );
 
+
 CREATE TABLE Utilizador (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
   username VARCHAR(45) NULL,
@@ -15,10 +16,12 @@ CREATE TABLE Utilizador (
   nif INTEGER UNSIGNED ZEROFILL NULL,
   morada VARCHAR(45) NULL,
   codigoPostal VARCHAR(45) NULL,
-  role ENUM NULL,
+  role ENUM ("F","C","A")NULL,
   localidade VARCHAR(45) NULL,
   PRIMARY KEY(id)
 );
+
+
 
 CREATE TABLE Empresa (
   idEmpresa INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -32,6 +35,8 @@ CREATE TABLE Empresa (
   capitalSocial DECIMAL NULL,
   PRIMARY KEY(idEmpresa)
 );
+
+
 
 CREATE TABLE Produto (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -48,22 +53,23 @@ CREATE TABLE Produto (
       ON UPDATE NO ACTION
 );
 
+
+
 CREATE TABLE Fatura (
   id INTEGER UNSIGNED NOT NULL AUTO_INCREMENT,
-  cliente_id INTEGER UNSIGNED NOT NULL,
-  funcionario_id INTEGER UNSIGNED NOT NULL,
+  Utilizador_id INTEGER UNSIGNED NOT NULL,
   dataFatura DATE NULL,
   valorTotal DECIMAL NULL,
   ivaTotal DECIMAL NULL,
-  estado ENUM NOT NULL,
-  PRIMARY KEY(id, cliente_id, funcionario_id),
-  INDEX Fatura_FKIndex1(cliente_id),
-  INDEX Fatura_FKIndex2(funcionario_id),
-  FOREIGN KEY(cliente_id)
+  estado ENUM ("emitida","EmLancamento")NULL,
+  PRIMARY KEY(id, Utilizador_id),
+  INDEX Fatura_FKIndex1(Utilizador_id),
+  INDEX Fatura_FKIndex2(Utilizador_id),
+  FOREIGN KEY(Utilizador_id)
     REFERENCES Utilizador(id)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION,
-  FOREIGN KEY(funcionario_id)
+  FOREIGN KEY(Utilizador_id)
     REFERENCES Utilizador(id)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION
@@ -74,14 +80,14 @@ CREATE TABLE LinhaFatura (
   Fatura_id INTEGER UNSIGNED NOT NULL,
   Produto_id INTEGER UNSIGNED NOT NULL,
   Produto_Iva_id INTEGER UNSIGNED NOT NULL,
-  Fatura_cliente_id INTEGER UNSIGNED NOT NULL,
+  Fatura_Utilizador_id INTEGER UNSIGNED NOT NULL,
   quantidade INTEGER UNSIGNED NULL,
   valor INTEGER UNSIGNED NULL,
-  PRIMARY KEY(id, Fatura_id, Produto_id, Produto_Iva_id, Fatura_cliente_id),
-  INDEX LinhaFatura_FKIndex1(Fatura_id, Fatura_cliente_id),
+  PRIMARY KEY(id, Fatura_id, Produto_id, Produto_Iva_id, Fatura_Utilizador_id),
+  INDEX LinhaFatura_FKIndex1(Fatura_id, Fatura_Utilizador_id),
   INDEX LinhaFatura_FKIndex2(Produto_id, Produto_Iva_id),
-  FOREIGN KEY(Fatura_id, Fatura_cliente_id, Fatura_funcionario_id)
-    REFERENCES Fatura(id, cliente_id, funcionario_id)
+  FOREIGN KEY(Fatura_id, Fatura_Utilizador_id)
+    REFERENCES Fatura(id, Utilizador_id)
       ON DELETE NO ACTION
       ON UPDATE NO ACTION,
   FOREIGN KEY(Produto_id, Produto_Iva_id)

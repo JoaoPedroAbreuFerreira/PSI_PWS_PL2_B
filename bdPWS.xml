@@ -351,7 +351,7 @@
 <COLUMN ID="1284" ColName="nif" PrevColName="" Pos="5" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="0" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
 <OPTIONSELECT Value="1" />
-<OPTIONSELECT Value="1" />
+<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
 <COLUMN ID="1285" ColName="morada" PrevColName="" Pos="6" idDatatype="20" DatatypeParams="(45)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="0" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
@@ -404,9 +404,8 @@
 <OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
-<COLUMN ID="1297" ColName="vigor" PrevColName="" Pos="3" idDatatype="20" DatatypeParams="(45)" Width="-1" Prec="-1" PrimaryKey="0" NotNull="0" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
+<COLUMN ID="1297" ColName="vigor" PrevColName="" Pos="3" idDatatype="22" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="0" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
-<OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
 </COLUMNS>
@@ -576,6 +575,12 @@
 <OPTIONSELECT Value="0" />
 </OPTIONSELECTED>
 </COLUMN>
+<COLUMN ID="1389" ColName="Fatura_funcionario_id" PrevColName="" Pos="1" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="1" NotNull="1" AutoInc="0" IsForeignKey="1" DefaultValue="" Comments="">
+<OPTIONSELECTED>
+<OPTIONSELECT Value="1" />
+<OPTIONSELECT Value="0" />
+</OPTIONSELECTED>
+</COLUMN>
 <COLUMN ID="1326" ColName="quantidade" PrevColName="" Pos="1" idDatatype="5" DatatypeParams="" Width="-1" Prec="-1" PrimaryKey="0" NotNull="0" AutoInc="0" IsForeignKey="0" DefaultValue="" Comments="">
 <OPTIONSELECTED>
 <OPTIONSELECT Value="1" />
@@ -601,12 +606,14 @@
 <INDEXCOLUMN idColumn="1370" LengthParam="0" />
 <INDEXCOLUMN idColumn="1375" LengthParam="0" />
 <INDEXCOLUMN idColumn="1386" LengthParam="0" />
+<INDEXCOLUMN idColumn="1389" LengthParam="0" />
 </INDEXCOLUMNS>
 </INDEX>
 <INDEX ID="1336" IndexName="LinhaFatura_FKIndex1" IndexKind="1" FKRefDef_Obj_id="1334">
 <INDEXCOLUMNS>
 <INDEXCOLUMN idColumn="1366" LengthParam="0" />
 <INDEXCOLUMN idColumn="1386" LengthParam="0" />
+<INDEXCOLUMN idColumn="1389" LengthParam="0" />
 </INDEXCOLUMNS>
 </INDEX>
 <INDEX ID="1340" IndexName="LinhaFatura_FKIndex2" IndexKind="1" FKRefDef_Obj_id="1337">
