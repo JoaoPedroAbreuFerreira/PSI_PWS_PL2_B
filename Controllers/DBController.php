@@ -18,7 +18,7 @@ Class DBController extends Base{
                     break;
                     
                 case "user":
-                    $camp = Utilizador::find($id);
+                    $camp = Utilizador::find_by_id($id);
                     $camp->delete();
                     break;
 
