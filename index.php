@@ -82,6 +82,10 @@ switch ($rota)
             case "produto":
                 $produtoController->updateproduto();
                 break;
+            
+            case "funcionario":
+                $userController->funcionarioUpdate();
+                break;
         }
         break;
 

@@ -1,35 +1,6 @@
-<h2>Lista de ivas em vigor</h2>
-    <h2>Seleciona o Iva a editar</h2>
+
     <form action="index.php?r=update&t=iva" method="post" class="needs-validation row justify-content-center" novalidate>
-    <table class="table tablestriped">
-        <thead>
-        <th>
-            Id
-            </th>
-            <th>
-                Taxa
-            </th>
-            <th>
-                Descrição
-            </th> 
-            <th>
-                Vigor
-            </th> 
-        </thead>
-        <tbody>
-            <?php foreach ($ivas as $iva) { ?>
-            <tr>
-                <td><?=$iva->id?></td>
-                <td><?=$iva->percentagem?></td>
-                <td><?=$iva->descricao?></td>
-                <td><?=$iva->vigor?></td>
-                <td>
-                    <input type="radio" id="html" name="id" value="<?=$iva->id?> ">
-                </td>
-            </tr>
-            <?php } ?>
-        </tbody>
-    </table>
+    <input type="hidden" name="id" value="<?=$_GET["i"] ?>">
     <br>
     <br>
         <div class="col col-6">

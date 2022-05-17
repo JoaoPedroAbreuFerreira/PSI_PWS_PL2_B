@@ -42,7 +42,7 @@
                 
                 
                 <td>
-                    <a href="index.php?r=load&p=updateF" class="btn btn-info"
+                    <a href="index.php?r=load&p=updatefuncionario&i=<?=$funcionario->id?>" class="btn btn-info"
                         role="button">Editar</a>
                     <a href="index.php?r=db/delete&t=user&i=<?=$funcionario->id?>" class="btn btn-warning"
                         role="button">Delete</a>
@@ -54,7 +54,7 @@
     <br>
     <br>
 
-    <a href="index.php?r=load&p=registeriva"> Registar um taxa de Iva</a>
+    <a href="index.php?r=load&p=registerF"> Registar um Funcionário</a>
     <br>
     <br>
     <a href="index.php">Voltar ao menu</a>

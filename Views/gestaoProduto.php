@@ -32,7 +32,7 @@
                 <td><?=$produto->preco?></td>
                 <td><?=$produto->stock?></td>
                 <td>
-                    <a href="index.php?r=load&p=updateproduto" class="btn btn-info"
+                    <a href="index.php?r=load&p=updateproduto&i=<?=$produto->id?>" class="btn btn-info"
                         role="button">Editar</a>
                     <a href="index.php?r=db/delete&t=produto&i=<?=$produto->id?>" class="btn btn-warning"
                         role="button">Delete</a>

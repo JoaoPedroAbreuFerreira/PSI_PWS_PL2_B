@@ -45,7 +45,7 @@ Class UtilizadorController extends Base
                 $user->pass = $_POST["pass"];
                 $user->email = $_POST["email"];
                 $user->telefone = $_POST["tele"];
-                $user->nif = $_POST["tele"];
+                $user->nif = $_POST["nif"];
                 $user->morada = $_POST["morada"];
                 $user->localidade = $_POST["local"];
                 $user->codigopostal = $_POST["cod"];
@@ -89,4 +89,34 @@ Class UtilizadorController extends Base
             $this->redirectToRoute(ROTA_LOGIN);
         }
     }
+
+    public function funcionarioUpdate()
+    {
+        $auth = new Auth();
+
+        if($auth->isLoggedIn())
+        {
+            if(isset($_POST["id"]) && isset($_POST["user"]) && isset($_POST["pass"]) && isset($_POST["email"]) && isset($_POST["tele"]) && isset($_POST["nif"]) && isset($_POST["morada"]) && isset($_POST["local"]) && isset($_POST["cod"]))
+            {
+                $user = Utilizador::find_by_id($_POST["id"]);
+                $user->username = $_POST["user"];
+                $user->pass = $_POST["pass"];
+                $user->email = $_POST["email"];
+                $user->telefone = $_POST["tele"];
+                $user->nif = $_POST["tele"];
+                $user->morada = $_POST["morada"];
+                $user->localidade = $_POST["local"];
+                $user->codigopostal = $_POST["cod"];
+                $user->role = 'F';
+
+                $user->save();
+                $this->redirectToRoute(ROTA_LOGIN);
+            }
+        }
+        else
+        {
+            $this->redirectToRoute(ROTA_LOGIN);
+        }
+    }
+
 }
