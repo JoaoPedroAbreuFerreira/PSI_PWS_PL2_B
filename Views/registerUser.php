@@ -17,42 +17,42 @@
                 </div>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label">Email:</label>
+                <label for="inputEmail" class="form-label">Email:</label>
                 <input type="email" class="form-control" id="email" name="email" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label">Telefone:</label>
+                <label for="inputTelefone" class="form-label">Telefone:</label>
                 <input type="number" class="form-control" id="telefone" name="tele" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label">NIF:</label>
+                <label for="inputNif" class="form-label">NIF:</label>
                 <input type="number" class="form-control" id="nif" name="nif" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label">Morada:</label>
+                <label for="inputMorada" class="form-label">Morada:</label>
                 <input type="text" class="form-control" id="morada" name="morada" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label">Localidade:</label>
+                <label for="inputLocalidade" class="form-label">Localidade:</label>
                 <input type="text" class="form-control" id="local" name="local" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label">Codigo Postal:</label>
+                <label for="inputCodigoPostal" class="form-label">Codigo Postal:</label>
                 <input type="text" class="form-control" id="cod" name="cod" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
