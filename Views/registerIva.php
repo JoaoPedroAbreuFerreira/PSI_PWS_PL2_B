@@ -2,23 +2,23 @@
         <div class="col col-6">
             <div class="mb-3">
                 <label for="inputUsername" class="form-label">Percentagem:</label>
-                <input type="number" class="form-control" id="inputUsername" name="percentagem" required> %
+                <input type="number" class="form-control" id="percentagem" name="percentagem" required> %
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">Descrição:</label>
-                <input type="text" class="form-control" id="inputPassword" name="desc" required>
+                <input type="text" class="form-control" id="desc" name="desc" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 
-                <input type="radio" id="html" name="vigor" value=1>
+                <input type="radio" id="vigor1" name="vigor" value=1>
                 <label for="1">Em vigor</label><br>
-                <input type="radio" id="css" name="vigor" value=0>
+                <input type="radio" id="vigor2" name="vigor" value=0>
                 <label for="0">Não em vigor</label><br>
 
             </div>

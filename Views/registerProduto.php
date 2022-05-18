@@ -2,28 +2,28 @@
         <div class="col col-6">
             <div class="mb-3">
                 <label for="inputUsername" class="form-label">Referencia:</label>
-                <input type="text" class="form-control" id="inputUsername" name="referencia" required>
+                <input type="text" class="form-control" id="referencia" name="referencia" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">Descrição:</label>
-                <input type="text" class="form-control" id="inputPassword" name="desc" required>
+                <input type="text" class="form-control" id="descricao" name="desc" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">Preço:</label>
-                <input type="number" class="form-control" id="inputPassword" name="preco" required>€
+                <input type="number" class="form-control" id="preco" name="preco" required>€
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">Stock:</label>
-                <input type="number" class="form-control" id="inputPassword" name="stock" required>
+                <input type="number" class="form-control" id="stock" name="stock" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
@@ -53,7 +53,7 @@
                 <td><?=$iva->descricao?></td>
                 <td><?=$iva->vigor?></td>
                 <td>
-                    <input type="radio" id="html" name="iva" value="<?=$iva->id?> ">
+                    <input type="radio" id="iva" name="iva" value="<?=$iva->id?> ">
                 </td>
             </tr>
             <?php } ?>
