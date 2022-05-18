@@ -14,8 +14,8 @@
 <form action="index.php?r=update&t=user" method="post" class="needs-validation row justify-content-center" novalidate>
     <div class="col col-6">
         <div class="mb-3">
-            <label for="inputUsername" class="form-label">Nova Password</label>
-            <input type="text" class="form-control" id="inputUsername" name="pass" required> 
+            <label for="inputPassword" class="form-label">Nova Password</label>
+            <input type="text" class="form-control" id="inputPassword" name="pass" required> 
             <div class="invalid-feedback">
                 Campo obrigatório!
             </div>

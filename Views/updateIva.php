@@ -5,15 +5,15 @@
     <br>
         <div class="col col-6">
             <div class="mb-3">
-                <label for="inputUsername" class="form-label">Nova Percentagem</label>
-                <input type="number" class="form-control" id="inputUsername" name="percentagem" required> 
+                <label for="inputPercentagem" class="form-label">Nova Percentagem:</label>
+                <input type="number" class="form-control" id="inputPercentagem" name="percentagem" min="0" required>%
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label">Nova Descrição:</label>
-                <input type="text" class="form-control" id="inputPassword" name="desc" required>
+                <label for="inputDescricao" class="form-label">Nova Descrição:</label>
+                <input type="text" class="form-control" id="inputDescricao" name="desc" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>

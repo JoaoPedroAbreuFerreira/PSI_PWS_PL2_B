@@ -2,28 +2,28 @@
         <div class="col col-6">
             <div class="mb-3">
                 <label for="inputReferencia" class="form-label">Referencia:</label>
-                <input type="text" class="form-control" id="referencia" name="referencia" required>
+                <input type="text" class="form-control" id="inputReferencia" name="referencia" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputDescricao" class="form-label">Descrição:</label>
-                <input type="text" class="form-control" id="descricao" name="desc" required>
+                <input type="text" class="form-control" id="inputDescricao" name="desc" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputPreco" class="form-label">Preço:</label>
-                <input type="number" class="form-control" id="preco" name="preco" required>€
+                <input type="number" class="form-control" id="inputPreco" name="preco" min="0" required>€
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputStock" class="form-label">Stock:</label>
-                <input type="number" class="form-control" id="stock" name="stock" required>
+                <input type="number" class="form-control" id="inputStock" name="stock" min="0" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>

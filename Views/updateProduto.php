@@ -3,29 +3,29 @@
     <input type="hidden" name="id" value="<?= $_GET["i"]?>">
     <div class="col col-6">
             <div class="mb-3">
-                <label for="inputUsername" class="form-label">Referencia:</label>
-                <input type="text" class="form-control" id="inputUsername" name="referencia" required>
+                <label for="inputReferencia" class="form-label">Referencia:</label>
+                <input type="text" class="form-control" id="inputReferencia" name="referencia" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label">Descrição:</label>
-                <input type="text" class="form-control" id="inputPassword" name="desc" required>
+                <label for="inputDescricao" class="form-label">Descrição:</label>
+                <input type="text" class="form-control" id="inputDescricao" name="desc" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label">Preço:</label>
-                <input type="number" class="form-control" id="inputPassword" name="preco" required>€
+                <label for="inputPreco" class="form-label">Preço:</label>
+                <input type="number" class="form-control" id="inputPreco" name="preco" min="0" required>€
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label">Stock:</label>
-                <input type="number" class="form-control" id="inputPassword" name="stock" required>
+                <label for="inputStock" class="form-label">Stock:</label>
+                <input type="number" class="form-control" id="inputStock" name="stock" min="0" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>

@@ -2,14 +2,14 @@
         <div class="col col-6">
             <div class="mb-3">
                 <label for="inputPercentagem" class="form-label">Percentagem:</label>
-                <input type="number" class="form-control" id="percentagem" name="percentagem" required> %
+                <input type="number" class="form-control" id="inputPercentagem" name="percentagem" min="0" required>%
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputDescricao" class="form-label">Descrição:</label>
-                <input type="text" class="form-control" id="desc" name="desc" required>
+                <input type="text" class="form-control" id="inputDescricao" name="desc" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
