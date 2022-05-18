@@ -8,7 +8,7 @@ Class EmpresaController extends Base
     {
         if(isset($_POST["designacaoSocial"]) && isset($_POST["capitalSocial"]) && isset($_POST["email"]) && isset($_POST["tele"]) && isset($_POST["nif"]) && isset($_POST["morada"]) && isset($_POST["local"]) && isset($_POST["cod"]))
         {
-                $empresa = Empresa::find_by_id($_POST["id"]);
+                $empresa = Empresa::first();
                 $empresa->designacaosocial = $_POST["designacaoSocial"];
                 $empresa->capitalsocial = $_POST["capitalSocial"];
                 $empresa->email = $_POST["email"];
