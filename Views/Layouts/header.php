@@ -7,4 +7,4 @@
     <title><?=NOME_APP?></title>
 </head>
 <body>
-    <header></header>
+    <header>HEADER</header>
