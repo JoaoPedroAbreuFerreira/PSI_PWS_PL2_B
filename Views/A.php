@@ -12,4 +12,6 @@ Bem vindo <?= $_SESSION["username"]?> [Administrador]
 <br>
 <a href="index.php?r=load&p=updateCliente">Alterar Email / Password</a>
 <br>
+<a href="index.php?r=load&p=gestaoEmpresa">Gerir Empresa</a>
+<br>
 <a href='index.php?r=auth/logout'>Log Out</a>

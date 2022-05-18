@@ -1,17 +1,17 @@
 <div class="container">
-    <h2>Registar Cliente</h2>
-    <form action="index.php?r=register&t=user" method="post" class="needs-validation row justify-content-center" novalidate>
+    <h2>Registar Empresa</h2>
+    <form action="index.php?r=register&t=empresa" method="post" class="needs-validation row justify-content-center" novalidate>
         <div class="col col-6">
             <div class="mb-3">
-                <label for="inputUsername" class="form-label">Username:</label>
-                <input type="text" class="form-control" id="inputUsername" name="user" required>
+                <label for="inputUsername" class="form-label">Designacao Social:</label>
+                <input type="text" class="form-control" id="inputUsername" name="designacaoSocial" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label">Password:</label>
-                <input type="password" class="form-control" id="inputPassword" name="pass" required>
+                <label for="inputPassword" class="form-label">capitalSocial:</label>
+                <input type="number" class="form-control" id="inputPassword" name="capitalSocial" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
