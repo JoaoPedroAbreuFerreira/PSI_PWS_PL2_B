@@ -13,17 +13,17 @@ Class DBController extends Base{
             switch ($table)
             {
                 case "iva":
-                    $camp = Iva::find($id);
+                    $camp = Iva::find_by_id($id);
                     $camp->delete();
                     break;
                     
                 case "user":
-                    $camp = Utilizador::find($id);
+                    $camp = Utilizador::find_by_id($id);
                     $camp->delete();
                     break;
 
                 case "produto":
-                    $camp = Produto::find($id);
+                    $camp = Produto::find_by_id($id);
                     $camp->delete();
                     break;
 

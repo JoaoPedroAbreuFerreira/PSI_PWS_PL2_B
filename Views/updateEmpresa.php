@@ -33,7 +33,7 @@
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">morada:</label>
-                <input type="number" class="form-control" id="inputPassword" name="morada" required>
+                <input type="text" class="form-control" id="inputPassword" name="morada" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
@@ -47,7 +47,7 @@
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label">localidade:</label>
-                <input type="number" class="form-control" id="inputPassword" name="local" required>
+                <input type="text" class="form-control" id="inputPassword" name="local" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
