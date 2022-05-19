@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Numans');
+body{
+    background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
+    background-size:cover;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+.ok{
+    color: white;
+    text-align: center;
+    display: block;
+    font-size: 25px;
+}
+.ok3{
+    color: red;
+    text-align: center;
+    display: block;
+    font-size: 25px;
+}
+#coids{
+    color: black;
+    background-color: #FFC312; 
+    margin-top: 10px;
+}
+
+div.col{
+    padding: 0px 0px 0px 0px;
+}
