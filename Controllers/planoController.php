@@ -36,7 +36,7 @@ Class Plano extends Base
                     break;
                 
                 case "gestaoFuncionario":
-                    $funcionarios =  Utilizador::all(array('conditions' => 'role = "F"'));;
+                    $funcionarios =  Utilizador::all(array('conditions' => 'role = "F"'));
                     $this->renderView("gestaoFuncionario", ['funcionarios' => $funcionarios]);
                     break;
 
@@ -55,11 +55,16 @@ Class Plano extends Base
                     $this->renderView("registerUser", ['type' => "Funcionário"]);
                     break;
 
-                    case "gestaoEmpresa":
-                        case "updateEmpresa":  
-                            $empresa = Empresa::first();
-                            $this-> renderView($page, ['empresa' => $empresa]);
-                            break;
+                case "gestaoEmpresa": 
+                    $empresa = Empresa::first();
+                    $this->renderView($page, ['empresa' => $empresa]);
+                    break;
+
+                case "registerFatura":
+                    $clientes = Utilizador::all(array('conditions' => 'role = "C"'));
+                    $produtos = Produto::all();
+                    $this->renderView("registerFatura", ['clientes' => $clientes, 'produtos' => $produtos]);
+                    break;
 
                 default:
                     $this->renderView($page);

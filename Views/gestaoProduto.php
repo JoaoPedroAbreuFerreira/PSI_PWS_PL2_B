@@ -44,7 +44,7 @@
     <br>
     <br>
 
-    <a href="index.php?r=load&p=registerproduto"> Registar um Produto</a>
+    <a href="index.php?r=load&p=registerproduto">Registar um Produto</a>
     <br>
     <br>
     <a href="index.php">Voltar ao menu</a>

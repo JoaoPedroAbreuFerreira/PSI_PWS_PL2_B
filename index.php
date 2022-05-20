@@ -7,7 +7,7 @@ require_once("./controllers/IvaController.php");
 require_once("./controllers/ProdutoController.php");
 require_once("./controllers/DBController.php");
 require_once("./controllers/EmpresaController.php");
-
+require_once("./controllers/FaturaController.php");
 
 $authController = new AuthController();
 $planoController = new Plano();  
@@ -16,6 +16,7 @@ $ivaController = new IvaController();
 $produtoController = new ProdutoController();
 $dbController = new DBController();
 $empresaController = new EmpresaController();
+$faturaController = new FaturaController();
 
 $rota = '';
 $page = "";
@@ -52,11 +53,11 @@ switch ($rota)
     case "register":
         switch ($table)
         {
-            case "Cliente":
+            case "cliente":
                 $userController->clienteRegister();
                 break;
             
-            case "Funcionário":
+            case "funcionário":
                 $userController->funcionarioRegister();
                 break;
 
@@ -65,9 +66,12 @@ switch ($rota)
                 break;
 
             case "produto":
-                $produtoController->registerproduto();
+                $produtoController->registerProduto();
                 break;
-
+                
+            case "fatura":
+                $faturaController->registerFatura();
+                break;
         }
         break;
 
@@ -89,6 +93,7 @@ switch ($rota)
             case "funcionario":
                 $userController->funcionarioUpdate();
                 break;
+
              case "empresa":
                  $empresaController->updateEmpresa();
                 break;

@@ -8,5 +8,7 @@ Bem vindo <?= $_SESSION["username"]?> [Funcionário]
 <br>
 <a href="index.php?r=load&p=updateC">Alterar Email / Password</a>
 <br>
+<a href="index.php?r=load&p=registerFatura">Emitir Fatura</a>
+<br>
 <a href='index.php?r=auth/logout'>Log Out</a>
 
