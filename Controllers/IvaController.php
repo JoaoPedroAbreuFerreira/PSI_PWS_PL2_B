@@ -4,48 +4,71 @@ require_once("./controllers/BaseController.php");
 
 Class IvaController extends Base{
 
-    public function registerIva()
-    {
-        $auth = new Auth();
+    public function index(){
+        $ivas = Iva::all();
+        $this->renderView("gestaoiva", ['ivas' => $ivas]);
 
-        if($auth->isLoggedIn())
-        {     
-            if(isset($_POST["percentagem"]) && isset($_POST["vigor"]) && isset($_POST["desc"]))
-            {
-                $iva = new Iva();
-                $iva->percentagem = $_POST["percentagem"];
-                $iva->vigor = $_POST["vigor"];
-                $iva->descricao = $_POST["desc"];
-
-                $iva->save();
-                $this->redirectToRoute("load&p=gestaoiva");
-            }
-            else
-            {
-                $this->redirectToRoute(ROTA_LOGIN);
-            }
-        }
-        else
-        {
-            $this->redirectToRoute(ROTA_LOGIN);
-        }
     }
 
-    public function updateIva()
-    {
-        if(isset($_POST["vigor"]) && isset($_POST["desc"]) && isset($_POST["percentagem"]) && isset($_POST["id"]))
-        {
-            $iva = Iva::find_by_id($_POST["id"]);
-            $iva->percentagem = $_POST["percentagem"];
-            $iva->vigor = $_POST["vigor"];
-            $iva->descricao = $_POST["desc"];
+    public function show(){
+        $this->renderView("registeriva");
+    }
 
+    public function create(){
+        $iva = new Iva();
+        $dados = [
+            "percentagem" => $_POST["percentagem"],
+            "vigor" => $_POST["vigor"],
+            "descricao" => $_POST["desc"]
+        ];
+
+
+        if($iva->verificarDados($dados)){
+            $iva::create($dados);
             $iva->save();
-            $this->redirectToRoute("load&p=gestaoiva");
+            $this->redirectToRoute("iva/index");
+
+        }else{
+            echo "erro aos registar";
+            $this->redirectToRoute("iva/show");
+
         }
-        else
-        {
-            $this->redirectToRoute(ROTA_LOGIN);
+        
+
+    }
+
+    public function edit($id){
+        $dados = [
+            "percentagem" => $_POST["percentagem"],
+            "vigor" => $_POST["vigor"],
+            "descricao" => $_POST["desc"]
+        ];
+
+        $iva = Iva::find_by_id($id);
+        if($iva->verificarDados($dados)){
+            extract($dados);
+            $iva->update_attributes(array("percentagem" => $percentagem, "vigor" => $vigor, "descricao" => $descricao));
+            $iva->save();
+            $this->redirectToRoute("iva/index");
         }
+        else{
+            $this->redirectToRoute("iva/index");
+        }
+        
+    }
+
+    public function update($id){
+        $iva = Iva::find_by_id($id);
+        $this->renderView("updateiva", ['iva' => $iva]);
+
+    }
+
+    public function delete($id){
+
+        $iva = Iva::find_by_id($id);
+        $iva->delete();
+        $this->redirectToRoute("iva/index");
+
+
     }
 }

@@ -1,4 +1,4 @@
-<form action="index.php?r=register&t=produto" method="post" class="needs-validation row justify-content-center" novalidate>
+<form action="index.php?r=produto/create" method="post" class="needs-validation row justify-content-center" novalidate>
         <div class="col col-6">
             <div class="mb-3">
                 <label for="inputReferencia" class="form-label">Referencia:</label>

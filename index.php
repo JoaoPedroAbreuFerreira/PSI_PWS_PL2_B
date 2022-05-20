@@ -25,15 +25,11 @@ if(isset($_GET["r"]))
     $rota = $_GET["r"];
 }
 
-if(isset($_GET["p"]))
+if(isset($_GET["i"]))
 {
-    $page = $_GET["p"];
+    $index = $_GET["i"];
 }
 
-if(isset($_GET["t"]))
-{
-    $table = $_GET["t"];
-}
 
 switch ($rota)
 {
@@ -49,55 +45,58 @@ switch ($rota)
         $planoController->load($page);
         break;
 
-    case "register":
-        switch ($table)
-        {
-            case "Cliente":
-                $userController->clienteRegister();
-                break;
-            
-            case "Funcionário":
-                $userController->funcionarioRegister();
-                break;
+        //funçoes de iva
 
-            case "iva":
-                $ivaController->registerIva();
-                break;
-
-            case "produto":
-                $produtoController->registerproduto();
-                break;
-
-        }
+    case "iva/index":
+        $ivaController->index();
         break;
 
-    case "update":
-        switch ($table)
-        {
-            case "user":
-                $userController->changeAcc();
-                break;
-
-            case "iva":
-                $ivaController->updateIva();
-                break;
-
-            case "produto":
-                $produtoController->updateproduto();
-                break;
-            
-            case "funcionario":
-                $userController->funcionarioUpdate();
-                break;
-             case "empresa":
-                 $empresaController->updateEmpresa();
-                break;
-        }
+    case "iva/show":
+        $ivaController->show();
         break;
 
-    case"db/delete":
-        $dbController->deleteData();
+    case "iva/create":
+        $ivaController->create();
         break;
+
+    case "iva/delete":
+        $ivaController->delete($index);
+        break;
+
+    case "iva/update":
+        $ivaController->update($index);
+        break;
+
+    case "iva/edit":
+        $ivaController->edit($index);
+        break;
+
+     //funçoes de produtos
+
+     case "produto/index":
+        $produtoController->index();
+        break;
+
+    case "produto/show":
+        $produtoController->show();
+        break;
+
+    case "produto/create":
+        $produtoController->create();
+        break;
+
+    case "produto/delete":
+        $produtoController->delete($index);
+        break;
+
+    case "produto/update":
+        $produtoController->update($index);
+        break;
+
+    case "produto/edit":
+        $produtoController->edit($index);
+        break;
+    
 
     default:
         $planoController->index();

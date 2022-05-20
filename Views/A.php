@@ -10,9 +10,9 @@
 <br>
 <a href="index.php?r=load&p=gestaoFuncionario" class="btn btn-light"id="coids">Gestão de funcionário</a>
 <br>
-<a href="index.php?r=load&p=gestaoproduto" class="btn btn-info"id="coids">Gerir Produtos</a>
+<a href="index.php?r=produto/index" class="btn btn-info"id="coids">Gerir Produtos</a>
 <br>
-<a href="index.php?r=load&p=gestaoiva" class="btn btn-warning"id="coids">Gerir Taxas de Iva</a>
+<a href="index.php?r=iva/index" class="btn btn-warning"id="coids">Gerir Taxas de Iva</a>
 <br>
 <a href="index.php?r=load&p=registerC" class="btn btn-danger"id="coids">Registar um Cliente</a>
 <br>

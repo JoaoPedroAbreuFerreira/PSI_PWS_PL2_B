@@ -1,31 +1,30 @@
 <h2>Lista de Produtos Registados</h2>
-    <form action="index.php?r=update&t=produto" method="post" class="needs-validation row justify-content-center" novalidate>
-    <input type="hidden" name="id" value="<?= $_GET["i"]?>">
+    <form action="index.php?r=produto/edit&i=<?= $_GET["i"]?>" method="post" class="needs-validation row justify-content-center" novalidate>
     <div class="col col-6">
             <div class="mb-3">
                 <label for="inputReferencia" class="form-label">Referencia:</label>
-                <input type="text" class="form-control" id="inputReferencia" name="referencia" required>
+                <input type="text" class="form-control" id="inputReferencia" name="referencia" value="<?=$produto->referencia?>" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputDescricao" class="form-label">Descrição:</label>
-                <input type="text" class="form-control" id="inputDescricao" name="desc" required>
+                <input type="text" class="form-control" id="inputDescricao" name="desc" value="<?=$produto->descricao?>" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputPreco" class="form-label">Preço:</label>
-                <input type="number" class="form-control" id="inputPreco" name="preco" min="0" required>€
+                <input type="number" class="form-control" id="inputPreco" name="preco" min="0" value="<?=$produto->preco?>" required>€
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputStock" class="form-label">Stock:</label>
-                <input type="number" class="form-control" id="inputStock" name="stock" min="0" required>
+                <input type="number" class="form-control" id="inputStock" name="stock" min="0" value="<?=$produto->stock?>" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>

@@ -23,9 +23,9 @@
                     <td><?=$iva->descricao?></td>
                     <td><?=$iva->vigor?></td>
                     <td>
-                        <a href="index.php?r=load&p=updateiva&i=<?=$iva->id?>" class="btn btn-info"
+                        <a href="index.php?r=iva/update&i=<?=$iva->id?>" class="btn btn-info"
                             role="button">Editar</a>
-                        <a href="index.php?r=db/delete&t=iva&i=<?=$iva->id?>" class="btn btn-warning"
+                        <a href="index.php?r=iva/delete&i=<?=$iva->id?>" class="btn btn-warning"
                             role="button">Delete</a>
                     </td>
                 </tr>
@@ -35,7 +35,7 @@
         <br>
         <br>
 
-        <a href="index.php?r=load&p=registeriva"> Registar um taxa de Iva</a>
+        <a href="index.php?r=iva/show"> Registar um taxa de Iva</a>
         <br>
         <br>
         <a href="index.php">Voltar ao menu</a>

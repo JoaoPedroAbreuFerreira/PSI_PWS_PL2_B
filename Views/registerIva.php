@@ -1,4 +1,4 @@
-<form action="index.php?r=register&t=iva" method="post" class="needs-validation row justify-content-center" novalidate>
+<form action="index.php?r=iva/create" method="post" class="needs-validation row justify-content-center" novalidate>
         <div class="col col-6">
             <div class="mb-3">
                 <label for="inputPercentagem" class="form-label">Percentagem:</label>
