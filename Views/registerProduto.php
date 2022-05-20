@@ -53,7 +53,7 @@
                 <td><?=$iva->descricao?></td>
                 <td><?=$iva->vigor?></td>
                 <td>
-                    <input type="radio" id="iva" name="iva" value="<?=$iva->id?> ">
+                    <input type="radio" id="iva" name="iva" value="<?= $iva->id ?>">
                 </td>
             </tr>
             <?php } ?>

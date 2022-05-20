@@ -36,7 +36,7 @@ Class Plano extends Base
                     break;
                 
                 case "gestaoFuncionario":
-                    $funcionarios =  Utilizador::all(array('conditions' => 'role = "F"'));;
+                    $funcionarios =  Utilizador::all(array('conditions' => 'role = "F"'));
                     $this->renderView("gestaoFuncionario", ['funcionarios' => $funcionarios]);
                     break;
 

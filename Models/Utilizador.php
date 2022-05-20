@@ -14,4 +14,15 @@ Class Utilizador extends ActiveRecord\Model
             return false;
         } 
     }
+
+    public function verificarDados($dados){
+        if(isset($dados)){
+            extract($dados);
+            if(empty($username) && empty($pass) && empty($nif) && empty($email) && empty($morada)){
+                return false;
+            }
+
+        }
+        return true;
+    }
 }

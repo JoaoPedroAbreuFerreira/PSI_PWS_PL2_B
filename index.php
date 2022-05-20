@@ -96,6 +96,32 @@ switch ($rota)
     case "produto/edit":
         $produtoController->edit($index);
         break;
+
+     //funçoes de utilizador
+
+     case "user/index":
+        $userController->index();
+        break;
+
+    case "user/show":
+    $userController->show($index/* user type*/);
+        break;
+
+    case "user/create":
+        $userController->create($index/* user type*/);
+        break;
+
+    case "user/delete":
+        $userController->delete($index);
+        break;
+
+    case "user/update":
+        $userController->update($index);
+        break;
+
+    case "user/edit":
+        $userController->edit($index);
+        break;
     
 
     default:

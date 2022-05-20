@@ -6,14 +6,21 @@ Class Produto extends ActiveRecord\Model
     public function verificarDados($dados){
         if(isset($dados)){
             extract($dados);
-            if(isset($preco) && isset($referencia) && isset($stock)){
-                return true;
+            if(empty($preco) && empty($stock) && empty($referencia) && empty($iva)){
+                return false;
             }
 
         }
-        else{
+        return true;
+    }
+
+    public function verificarIvas(){
+        $iva = Iva::all();
+        if(empty($iva)){
             return false;
         }
-
+        return true;
+        
+        
     }
 }

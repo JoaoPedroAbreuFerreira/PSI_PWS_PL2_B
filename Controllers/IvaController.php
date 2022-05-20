@@ -25,12 +25,11 @@ Class IvaController extends Base{
 
         if($iva->verificarDados($dados)){
             $iva::create($dados);
-            $iva->save();
             $this->redirectToRoute("iva/index");
 
         }else{
             echo "erro aos registar";
-            $this->redirectToRoute("iva/show");
+            $this->redirectToRoute("iva/index");
 
         }
         
@@ -48,7 +47,6 @@ Class IvaController extends Base{
         if($iva->verificarDados($dados)){
             extract($dados);
             $iva->update_attributes(array("percentagem" => $percentagem, "vigor" => $vigor, "descricao" => $descricao));
-            $iva->save();
             $this->redirectToRoute("iva/index");
         }
         else{

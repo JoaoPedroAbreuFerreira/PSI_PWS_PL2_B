@@ -6,15 +6,15 @@
 <label class="ok">BEM VINDO <?= $_SESSION["username"]?></label><label class="ok3">[Administrador]</label>
 <br>
 <div align="center">
-<a href="index.php?r=load&p=registerF" class="btn btn-dark" id="coids">Registar funcionário</a>
+<a href="index.php?r=user/show&i=funcionario" class="btn btn-dark" id="coids">Registar funcionário</a>
 <br>
-<a href="index.php?r=load&p=gestaoFuncionario" class="btn btn-light"id="coids">Gestão de funcionário</a>
+<a href="index.php?r=user/index" class="btn btn-light"id="coids">Gestão de funcionário</a>
 <br>
 <a href="index.php?r=produto/index" class="btn btn-info"id="coids">Gerir Produtos</a>
 <br>
 <a href="index.php?r=iva/index" class="btn btn-warning"id="coids">Gerir Taxas de Iva</a>
 <br>
-<a href="index.php?r=load&p=registerC" class="btn btn-danger"id="coids">Registar um Cliente</a>
+<a href="index.php?r=user/show&i=cliente" class="btn btn-danger"id="coids">Registar um Cliente</a>
 <br>
 <a href="index.php?r=load&p=updateCliente" class="btn btn-success"id="coids">Alterar Email / Password</a>
 <br>

@@ -6,8 +6,17 @@ Class ProdutoController extends Base
 {
     
     public function index(){
-        $produtos = Produto::all();
-        $this->renderView("gestaoproduto", ['produtos' => $produtos]);
+        $produto = new Produto();
+        if($produto->verificarIvas()){
+            $produtos = Produto::all();
+            $this->renderView("gestaoproduto", ['produtos' => $produtos]);
+        }
+        else{
+            $this->redirectToRoute("iva/index");
+            //echo "Registe um iva primeiro!!";
+        }
+        
+        
 
     }
 
@@ -29,7 +38,6 @@ Class ProdutoController extends Base
 
         if($produto->verificarDados($dados)){
             $produto::create($dados);
-            $produto->save();
             $this->redirectToRoute("produto/index");
 
         }else{
@@ -43,7 +51,7 @@ Class ProdutoController extends Base
 
     public function edit($id){
         $dados = [
-            "iva_id" => (int)$_POST["iva"],
+            'iva_id' => (int)$_POST["iva"],
             "referencia" => $_POST["referencia"],
             "preco" => $_POST["preco"],
             "descricao" => $_POST["desc"],
@@ -54,7 +62,6 @@ Class ProdutoController extends Base
         if($produto->verificarDados($dados)){
             extract($dados);
             $produto->update_attributes(array("referencia" => $referencia, "iva_id" => $iva_id, "descricao" => $descricao, "stock" => $stock, "preco" => $preco));
-            $produto->save();
             $this->redirectToRoute("produto/index");
         }
         else{

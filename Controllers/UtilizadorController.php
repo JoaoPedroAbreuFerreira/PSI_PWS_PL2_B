@@ -4,6 +4,104 @@ require_once("./controllers/BaseController.php");
 
 Class UtilizadorController extends Base
 {
+    public function index(){
+        $funcionarios = Utilizador::all(array('conditions' => 'role = "F"'));
+        $this->renderView("gestaofuncionario", ['funcionarios' => $funcionarios]);
+
+    }
+
+    public function show($type){
+        if($type == "cliente"){
+            $this->renderView("registerUser", ['type' => "Cliente"]);
+        }else if($type == "funcionario"){
+            $this->renderView("registerUser", ['type' => "Funcionário"]);
+        }else{
+            $this->redirectToRoute("");
+        }
+        
+    }
+
+    public function create($type){
+        $user = new Utilizador();
+
+        if($type == "Funcionário"){
+            $type = "F";
+        }else{
+            $type = "C";
+        }
+
+        $dados = [
+            "username" => $_POST["user"],
+            "pass" => $_POST["pass"],
+            "email" => $_POST["email"],
+            "telefone" => $_POST["tele"],
+            "nif" => $_POST["nif"],
+            "morada" => $_POST["morada"],
+            "localidade" => $_POST["local"],
+            "codigopostal" => $_POST["cod"],
+            "role" => $type
+        ];
+
+        if($user->verificarDados($dados)){
+            $user::create($dados);
+
+            if($type == "F"){
+                $this->redirectToRoute("user/index");
+            }else{
+                $this->redirectToRoute("");
+            }
+
+        }else{  
+            $this->redirectToRoute("");
+
+        }
+        
+
+    }
+
+    public function edit($id){
+        $dados = [
+            "username" => $_POST["user"],
+            "pass" => $_POST["pass"],
+            "email" => $_POST["email"],
+            "telefone" => $_POST["tele"],
+            "nif" => $_POST["nif"],
+            "morada" => $_POST["morada"],
+            "localidade" => $_POST["local"],
+            "codigopostal" => $_POST["cod"]
+
+        ];
+
+        $user = Utilizador::find_by_id($id);
+        if($user->verificarDados($dados)){
+            extract($dados);
+            $user->update_attributes(array("username" => $username, "pass" => $pass, "email" => $email,
+             "telefone" => $telefone, "nif" => $nif, "morada" => $morada, "localidade" => $localidade, "codigopostal" => $codigopostal));
+            $this->redirectToRoute("user/index");
+        }
+        else{
+            $this->redirectToRoute("");
+        }
+        
+    }
+
+    public function update($id){
+        $user = Utilizador::find_by_id($id);
+        $this->renderView("updatefuncionario", ['user' => $user]);
+
+    }
+
+    public function delete($id){
+
+        $produto = Produto::find_by_id($id);
+        $produto->delete();
+        $this->redirectToRoute("produto/index");
+
+
+    }
+
+
+    /*
     public function changeAcc()
     {
         $auth = new Auth();
@@ -118,5 +216,7 @@ Class UtilizadorController extends Base
             $this->redirectToRoute(ROTA_LOGIN);
         }
     }
+
+    */
 
 }

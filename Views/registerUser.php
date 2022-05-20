@@ -1,6 +1,7 @@
 <div class="container">
     <h2>Registar <?= $type ?></h2>
-    <form action="index.php?r=register&t=<?= $type?>" method="post" class="needs-validation row justify-content-center" novalidate>
+    <form action="index.php?r=user/create&i=<?= $type?>" method="post" class="needs-validation row justify-content-center" novalidate>
+        <input type="hidden">
         <div class="col col-6">
             <div class="mb-3">
                 <label for="inputUsername" class="form-label">Username:</label>
