@@ -4,8 +4,27 @@ require_once("./controllers/BaseController.php");
 
 Class EmpresaController extends Base
 {
-    public function updateEmpresa()
+    public function index()
     {
+        $empresa = Empresa::first();
+        $this->renderView("gestaoempresa", ['empresa' => $empresa]);
+    }
+
+    public function edit()
+    {
+        $dados = [
+            "designacaosocial" => $_POST["designacaoSocial"],
+            "capitalsocial" => $_POST["capitalSocial"],
+            "email" => $_POST["email"],
+            "telefone" => $_POST["tele"],
+            "morada" => $_POST["morada"],
+            "localidade" => $_POST["local"],
+            "codigopostal" => $_POST["cod"]
+        ];
+
+        
+
+
         if(isset($_POST["designacaoSocial"]) && isset($_POST["capitalSocial"]) && isset($_POST["email"]) && isset($_POST["tele"]) && isset($_POST["nif"]) && isset($_POST["morada"]) && isset($_POST["local"]) && isset($_POST["cod"]))
         {
                 $empresa = Empresa::first();
@@ -26,4 +45,11 @@ Class EmpresaController extends Base
             $this->redirectToRoute(ROTA_LOGIN);
         }
     }
+
+    public function update()
+    {
+        $empresa = Empresa::first();
+        $this->renderView("updateempresa", ['empresa' => $empresa]);
+    }
+
 }

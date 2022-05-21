@@ -16,9 +16,9 @@
 <br>
 <a href="index.php?r=user/show&i=cliente" class="btn btn-danger"id="coids">Registar um Cliente</a>
 <br>
-<a href="index.php?r=load&p=updateCliente" class="btn btn-success"id="coids">Alterar Email / Password</a>
+<a href="index.php?r=user/show&i=update" class="btn btn-success"id="coids">Alterar Email / Password</a>
 <br>
-<a href="index.php?r=load&p=gestaoEmpresa" class="btn btn-secundary"id="coids">Gerir Empresa</a>
+<a href="index.php?r=empresa/index" class="btn btn-secundary"id="coids">Gerir Empresa</a>
 <br>
 <a href='index.php?r=auth/logout' class="btn btn-primary" role="button"id="coids">Log Out</a>   
 </div>

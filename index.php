@@ -99,7 +99,7 @@ switch ($rota)
 
      //funçoes de utilizador
 
-     case "user/index":
+    case "user/index":
         $userController->index();
         break;
 
@@ -119,10 +119,27 @@ switch ($rota)
         $userController->update($index);
         break;
 
+    case "user/change":
+        $userController->change();
+        break;
+
     case "user/edit":
         $userController->edit($index);
         break;
-    
+
+    //funçoes de empresa
+
+    case "empresa/index":
+        $empresaController->index();
+        break;
+
+    case "empresa/edit":
+        $empresaController->edit();
+        break;
+
+    case "empresa/update":
+        $empresaController->update();
+        break;
 
     default:
         $planoController->index();

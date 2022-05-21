@@ -18,11 +18,12 @@ Class Utilizador extends ActiveRecord\Model
     public function verificarDados($dados){
         if(isset($dados)){
             extract($dados);
-            if(empty($username) && empty($pass) && empty($nif) && empty($email) && empty($morada)){
+            if(empty($username) || empty($pass) || empty($nif) || empty($email) || empty($morada)){
                 return false;
             }
 
         }
         return true;
     }
+
 }

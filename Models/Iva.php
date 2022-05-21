@@ -6,7 +6,7 @@ Class Iva extends ActiveRecord\Model
     public function verificarDados($dados){
         if(isset($dados)){
             extract($dados);
-            if(isset($percentagem) && isset($vigor)){
+            if(isset($percentagem) || isset($vigor)){
                 return true;
             }
 

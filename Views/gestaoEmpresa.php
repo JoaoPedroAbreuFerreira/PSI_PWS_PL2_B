@@ -38,7 +38,7 @@
                 <td><?=$empresa->localidade?></td>
                 <td><?=$empresa->capitalsocial?></td>
                 <td>
-                    <a href="index.php?r=load&p=updateEmpresa" class="btn btn-info"
+                    <a href="index.php?r=empresa/update" class="btn btn-info"
                         role="button">Editar</a>
                 </td>
             </tr>

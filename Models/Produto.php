@@ -6,7 +6,7 @@ Class Produto extends ActiveRecord\Model
     public function verificarDados($dados){
         if(isset($dados)){
             extract($dados);
-            if(empty($preco) && empty($stock) && empty($referencia) && empty($iva)){
+            if(empty($preco) || empty($stock) || empty($referencia) || empty($iva_id)){
                 return false;
             }
 
