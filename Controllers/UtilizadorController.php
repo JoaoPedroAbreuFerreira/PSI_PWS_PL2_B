@@ -4,8 +4,25 @@ require_once("./controllers/BaseController.php");
 
 Class UtilizadorController extends Base
 {
-    public function index(){
-        $funcionarios = Utilizador::all(array('conditions' => 'role = "F"'));
+    public function index()
+    {
+        $auth = new Auth();
+
+        if($auth->isLoggedIn())
+        {  
+            $user = Utilizador::find_by_username($_SESSION["username"]);
+            
+            $type = $user->role;
+            $this->renderView($type);
+        }
+        else
+        {
+            $this->redirectToRoute(ROTA_LOGIN);
+        }
+    }
+
+    public function gestao(){
+        $funcionarios = Utilizador::all(array('conditions' => 'role = "funcionario"'));
         $this->renderView("gestaofuncionario", ['funcionarios' => $funcionarios]);
 
     }
@@ -27,9 +44,9 @@ Class UtilizadorController extends Base
         $user = new Utilizador();
 
         if($type == "Funcionário"){
-            $type = "F";
+            $type = "funcionario";
         }else{
-            $type = "C";
+            $type = "cliente";
         }
 
         $dados = [
@@ -48,7 +65,7 @@ Class UtilizadorController extends Base
             $user::create($dados);
 
             if($type == "F"){
-                $this->redirectToRoute("user/index");
+                $this->redirectToRoute("user/gestao");
             }else{
                 $this->redirectToRoute("");
             }
@@ -80,7 +97,7 @@ Class UtilizadorController extends Base
             $user->update_attributes(array("username" => $username, "pass" => $pass, "email" => $email,
              "telefone" => $telefone, "nif" => $nif, "morada" => $morada, "localidade" => $localidade, "codigopostal" => $codigopostal));
 
-            $this->redirectToRoute("user/index");
+            $this->redirectToRoute("user/gestao");
         }
         else{
             $this->redirectToRoute("");

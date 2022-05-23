@@ -40,11 +40,6 @@ switch ($rota)
     case "auth/logout":
         $authController->logout();
         break;
-
-    case "load":
-        $planoController->load($page);
-        break;
-
         //funçoes de iva
 
     case "iva/index":
@@ -98,9 +93,12 @@ switch ($rota)
         break;
 
      //funçoes de utilizador
-
-    case "user/index":
+     case "user/index":
         $userController->index();
+        break;
+
+    case "user/gestao":
+        $userController->gestao();
         break;
 
     case "user/show":
@@ -142,5 +140,6 @@ switch ($rota)
         break;
 
     default:
-        $planoController->index();
+        $userController->index();
+        
 }

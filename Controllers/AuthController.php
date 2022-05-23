@@ -10,7 +10,7 @@ Class AuthController extends Base
 
         if($auth->isLoggedIn())
         {
-            $this->redirectToRoute("");
+            $this->redirectToRoute("user/index");
         }
 
         if(isset($_POST["user"]) && isset($_POST["pass"]))
@@ -23,7 +23,7 @@ Class AuthController extends Base
             }
             else
             {
-                $this->redirectToRoute("");
+                $this->redirectToRoute("user/index");
             } 
         }
 
