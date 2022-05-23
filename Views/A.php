@@ -18,7 +18,10 @@
 <br>
 <a href="index.php?r=user/show&i=update" class="btn btn-success"id="coids">Alterar Email / Password</a>
 <br>
+<a href="index.php?r=fatura/show" class="btn btn-warning" id="coids">Emitir Fatura</a>
+<br>
 <a href="index.php?r=empresa/index" class="btn btn-secundary"id="coids">Gerir Empresa</a>
 <br>
 <a href='index.php?r=auth/logout' class="btn btn-primary" role="button"id="coids">Log Out</a>   
 </div>
+

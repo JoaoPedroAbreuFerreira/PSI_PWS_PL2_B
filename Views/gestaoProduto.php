@@ -43,7 +43,6 @@
     </table>
     <br>
     <br>
-
     <a href="index.php?r=produto/show"> Registar um Produto</a>
     <br>
     <br>

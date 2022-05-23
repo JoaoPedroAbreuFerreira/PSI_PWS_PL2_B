@@ -20,7 +20,15 @@ Class Produto extends ActiveRecord\Model
             return false;
         }
         return true;
-        
-        
+    }
+
+    public static function getProduto($id)
+    {
+        $produto = Produto::find_by_id($id);
+
+        if($produto)
+        {
+            return $produto;
+        }
     }
 }

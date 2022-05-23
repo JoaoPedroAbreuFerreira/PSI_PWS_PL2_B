@@ -5,13 +5,14 @@ require_once("./controllers/UtilizadorController.php");
 require_once("./controllers/IvaController.php");
 require_once("./controllers/ProdutoController.php");
 require_once("./controllers/EmpresaController.php");
-
+require_once("./controllers/FaturaController.php");
 
 $authController = new AuthController();
 $userController = new UtilizadorController();
 $ivaController = new IvaController();
 $produtoController = new ProdutoController();
 $empresaController = new EmpresaController();
+$faturaController = new FaturaController();
 
 $rota = '';
 $page = "";
