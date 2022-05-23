@@ -6,12 +6,17 @@ Class LinhaFatura extends ActiveRecord\Model
     public static function createLinha($fatura, $produto, $iva, $cliente, $quantidade, $total)
     {
         $linha = new LinhaFatura();
-        $linha->Fatura_id = $fatura;
-        $linha->Produto_id = $produto;
-        $linha->Produto_Iva_id = $iva;
-        $linha->Fatura_Utilizador_id = $cliente;
-        $linha->quantidade = $quantidade;
-        $linha->valor = $total;
-        $linha->save();
+
+        $dados = 
+        [
+            "Fatura_id" => $fatura,
+            "Produto_id" => $produto,
+            "Produto_Iva_id" => $iva,
+            "Fatura_Utilizador_id" => $cliente,
+            "quantidade" => $quantidade,
+            "valor" => $total
+        ];
+
+        $linha::create($dados);
     } 
 }

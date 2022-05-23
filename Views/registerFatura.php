@@ -100,7 +100,7 @@
         {
             totalIva += parseFloat(iva.innerText);
         });
-        //console.log(subTotals, ivas, total, totalIva);
+        
         document.getElementById("total").value = total.toFixed(2);
         document.querySelector(`span[data-total]`).innerText = total.toFixed(2);
         
