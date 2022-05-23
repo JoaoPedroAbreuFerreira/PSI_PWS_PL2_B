@@ -1,20 +1,16 @@
 <?php
 require_once("./startup/boot.php");
 require_once("./controllers/AuthController.php");
-require_once("./controllers/PlanoController.php");
 require_once("./controllers/UtilizadorController.php");
 require_once("./controllers/IvaController.php");
 require_once("./controllers/ProdutoController.php");
-require_once("./controllers/DBController.php");
 require_once("./controllers/EmpresaController.php");
 
 
 $authController = new AuthController();
-$planoController = new Plano();  
 $userController = new UtilizadorController();
 $ivaController = new IvaController();
 $produtoController = new ProdutoController();
-$dbController = new DBController();
 $empresaController = new EmpresaController();
 
 $rota = '';
