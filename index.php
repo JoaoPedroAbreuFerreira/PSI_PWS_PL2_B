@@ -138,6 +138,10 @@ switch ($rota)
 
     //funçoes de fatura
 
+    case "fatura/index":
+    $faturaController->index($index /* username*/);
+        break;
+
     case "fatura/show":
         $faturaController->show();
         break;
@@ -145,6 +149,8 @@ switch ($rota)
     case "fatura/create":
         $faturaController->create();
         break;
+
+    
 
     default:
         $userController->index();

@@ -23,4 +23,18 @@ Class Fatura extends ActiveRecord\Model
             $fatura->update_attributes(array("estado" => "Emitida"));
         }
     }
+
+    public function getRole($username)
+    {
+        $auth = new Auth();
+
+        if($username == $_SESSION["username"])
+        {
+            $user = Utilizador::find_by_username($username);
+            return $user->role;
+        }
+
+        return false;
+
+    }
 }

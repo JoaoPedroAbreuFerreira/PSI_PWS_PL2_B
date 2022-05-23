@@ -4,6 +4,34 @@ require_once("./controllers/BaseController.php");
 
 Class FaturaController extends Base
 {
+    public function index($username)
+    {
+        $faturas = new Fatura();
+        $role = $faturas->getRole($username);
+
+        if($role == false){
+            $this->redirectToRoute("");
+        }
+
+        $user = Utilizador::find_by_username($username);
+
+        switch ($role){
+            case "funcionario":
+            case "administrador":
+                $faturas = Fatura::all();
+                break;
+            case "cliente":
+                $faturas = Fatura::all(array('conditions' => 'utilizador_id = '.$user->id));
+                break;
+            default:
+                $this->redirectToRoute("");
+            
+        }
+
+
+        $this->renderView("gestaofatura", ["faturas" => $faturas]);
+    }
+
     public function show(){
         $produtos = Produto::all();
         $clientes = Utilizador::all(array('conditions' => 'role = "cliente"'));
@@ -80,4 +108,7 @@ Class FaturaController extends Base
         $this->redirectToRoute("");
 
     }
+
+
+
 }
