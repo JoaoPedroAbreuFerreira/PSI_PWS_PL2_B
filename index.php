@@ -7,7 +7,7 @@ require_once("./controllers/IvaController.php");
 require_once("./controllers/ProdutoController.php");
 require_once("./controllers/DBController.php");
 require_once("./controllers/EmpresaController.php");
-
+require_once("./controllers/FaturaController.php");
 
 $authController = new AuthController();
 $planoController = new Plano();  
@@ -16,6 +16,7 @@ $ivaController = new IvaController();
 $produtoController = new ProdutoController();
 $dbController = new DBController();
 $empresaController = new EmpresaController();
+$faturaController = new FaturaController();
 
 $rota = '';
 $page = "";

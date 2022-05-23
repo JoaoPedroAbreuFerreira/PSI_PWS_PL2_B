@@ -26,4 +26,12 @@ Class Utilizador extends ActiveRecord\Model
         return true;
     }
 
+    public static function getUserRole($user, $pass)
+    {
+        $user = Utilizador::find_by_username_and_pass($user, $pass);
+        if($user) 
+        {  
+            return $user->role; 
+        }
+    }
 }
