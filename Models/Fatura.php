@@ -37,4 +37,17 @@ Class Fatura extends ActiveRecord\Model
         return false;
 
     }
+
+    public function verificarProdutosClientes(){
+        $produtos = Produto::all();
+        $clientes = Utilizador::all(array('conditions' => 'role = "cliente"'));
+        if(empty($produtos)){
+            return "produto";
+        }else if(empty($clientes)){
+            return "user";
+        }else{
+            return true;
+        }
+        
+    }
 }

@@ -7,7 +7,10 @@ Class FaturaController extends Base
     public function index($username)
     {
         $faturas = new Fatura();
-        $role = $faturas->getRole($username);
+        $cause = $faturas->verificarProdutosClientes();
+
+        if($cause === true){
+            $role = $faturas->getRole($username);
 
         if($role == false){
             $this->redirectToRoute("");
@@ -27,15 +30,28 @@ Class FaturaController extends Base
                 $this->redirectToRoute("");
             
         }
-
-
         $this->renderView("gestaofatura", ["faturas" => $faturas]);
+        }else{
+            $this->redirectToRoute($cause."/show&i=cliente");
+            
+        }
+        
     }
 
     public function show(){
-        $produtos = Produto::all();
-        $clientes = Utilizador::all(array('conditions' => 'role = "cliente"'));
-        $this->renderView("registerfatura", ['produtos' => $produtos, "clientes" => $clientes]);
+        $faturas = new Fatura();
+        $cause = $faturas->verificarProdutosClientes();
+        echo $cause;
+
+        if($cause === true){
+            $produtos = Produto::all();
+            $clientes = Utilizador::all(array('conditions' => 'role = "cliente"'));
+            $this->renderView("registerfatura", ['produtos' => $produtos, "clientes" => $clientes]);
+        }else{
+            $this->redirectToRoute($cause."/show&i=cliente");
+        }
+
+        
 
     }
 
