@@ -136,6 +136,16 @@ switch ($rota)
         $empresaController->update();
         break;
 
+    //funçoes de fatura
+
+    case "fatura/show":
+        $faturaController->show();
+        break;
+
+    case "fatura/create":
+        $faturaController->create();
+        break;
+
     default:
         $userController->index();
         

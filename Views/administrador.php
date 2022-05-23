@@ -8,7 +8,7 @@
 <div align="center">
 <a href="index.php?r=user/show&i=funcionario" class="btn btn-dark" id="coids">Registar funcionário</a>
 <br>
-<a href="index.php?r=user/gestao" class="btn btn-light"id="coids">Gestão de funcionário</a>
+<a href="index.php?r=user/index" class="btn btn-light"id="coids">Gestão de funcionário</a>
 <br>
 <a href="index.php?r=produto/index" class="btn btn-info"id="coids">Gerir Produtos</a>
 <br>
@@ -17,6 +17,8 @@
 <a href="index.php?r=user/show&i=cliente" class="btn btn-danger"id="coids">Registar um Cliente</a>
 <br>
 <a href="index.php?r=user/show&i=update" class="btn btn-success"id="coids">Alterar Email / Password</a>
+<br>
+<a href="index.php?r=fatura/show" class="btn btn-warning" id="coids">Emitir Fatura</a>
 <br>
 <a href="index.php?r=empresa/index" class="btn btn-secundary"id="coids">Gerir Empresa</a>
 <br>

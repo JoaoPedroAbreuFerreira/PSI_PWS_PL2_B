@@ -3,22 +3,16 @@ Class Fatura extends ActiveRecord\Model
 {
     static $table_name = 'fatura';
 
-    public static function createFatura($utilizador, $total, $totalIva)
-    {
-        $fatura = new Fatura();
+    public function verificarDados($dados){
+        if(isset($dados)){
+            extract($dados);
+            if(empty($utilizador_id) || empty($valorTotal) || empty($ivaTotal)){
+                return false;
+            }
 
-        $dados =
-        [
-            "Utilizador_id" => $utilizador,
-            "valorTotal" => $total,
-            "ivaTotal" => $totalIva,
-            "estado" => "Em Lancamento"
-        ];
-
-        $fatura = $fatura::create($dados);
-
-        return $fatura->id;
-    } 
+        }
+        return true;
+    }
 
     public static function changeEstado($id)
     {

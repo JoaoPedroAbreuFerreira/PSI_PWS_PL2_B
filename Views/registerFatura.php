@@ -5,7 +5,7 @@
 
 <h2>Lista de Produtos Registados</h2>
 
-<form action="index.php?r=register&t=fatura" method="post" class="needs-validation row justify-content-center">
+<form action="index.php?r=fatura/create" method="post" class="needs-validation row justify-content-center">
     <table class="table tablestriped">
         <thead>
             <th>Id</th> <th>Username</th> <th>Email</th> <th>Morada</th> <th>Telefone</th> <th>NIF</th> <th>CodPostal</th> <th>Localidade</th>  
