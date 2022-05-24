@@ -24,7 +24,7 @@ Class FaturaController extends Base
                 $faturas = Fatura::all();
                 break;
             case "cliente":
-                $faturas = Fatura::all(array('conditions' => 'utilizador_id = '.$user->id));
+                $faturas = Fatura::all(array('conditions' => 'cliente_id = '.$user->id));
                 break;
             default:
                 $this->redirectToRoute("");

@@ -10,9 +10,11 @@ Class UtilizadorController extends Base
 
         if($auth->isLoggedIn())
         {  
+            
             $user = Utilizador::find_by_username($_SESSION["username"]);
             
             $type = $user->role;
+            
             $this->renderView($type);
         }
         else

@@ -8,7 +8,7 @@
 <div align="center">
 <a href="index.php?r=user/show&i=funcionario" class="btn btn-primary" id="coids">Registar funcionário</a>
 <br>
-<a href="index.php?r=user/index" class="btn btn-primary"id="coids">Gestão de funcionário</a>
+<a href="index.php?r=user/gestao" class="btn btn-primary"id="coids">Gestão de funcionário</a>
 <br>
 <a href="index.php?r=produto/index" class="btn btn-primary"id="coids">Gerir Produtos</a>
 <br>

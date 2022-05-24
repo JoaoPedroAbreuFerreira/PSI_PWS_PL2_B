@@ -139,10 +139,6 @@ switch ($rota)
         $faturaController->index($index);
         break;
 
-    case "fatura/index":
-    $faturaController->index($index /* username*/);
-        break;
-
     case "fatura/show":
         $faturaController->show();
         break;
