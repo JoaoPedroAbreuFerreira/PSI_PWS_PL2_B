@@ -4,15 +4,15 @@
     </div>
     <div>
         <h2>Fatura</h2>
-        <p>#<?=$fatura->id?></p>
-        <p><?=$fatura->datafatura->format('d/m/Y H:i:s')?></p>
+        <p>Fatura Nº: #<?=$fatura->id?></p>
+        <p>Data: <?=$fatura->datafatura->format('d/m/Y H:i:s')?></p>
     </div>
 </div>
 <hr>
 <div>
     <div>
         <h4>Cliente</h4>
-        <p><?=$cliente->username?> #<?=$cliente->id?></p>
+        <p>Nome Cliente: <?=$cliente->username?> #<?=$cliente->id?></p>
     </div>
     <br>
     <div>
@@ -22,9 +22,9 @@
     <br>
     <div>
         <h4>Morada</h4>
-        <p><?=$cliente->morada?></p>
-        <p><?=$cliente->codigopostal?></p>
-        <p><?=$cliente->localidade?></p>
+        <p>Morada: <?=$cliente->morada?></p>
+        <p>Codigo Postal: <?=$cliente->codigopostal?></p>
+        <p>Localidade: <?=$cliente->localidade?></p>
     </div>
     <br>
     <div>
@@ -70,7 +70,7 @@
 <hr>
 <div>
     <h5>Fatura emitida por</h5>
-    <p><?=Utilizador::find_by_id($fatura->utilizador_id)->username?></p>
+    <p>Nome: <?=Utilizador::find_by_id($fatura->utilizador_id)->username?></p>
     <p>NIF: <?=Utilizador::find_by_id($fatura->utilizador_id)->nif?></p>
     <p>Tel. <?=Utilizador::find_by_id($fatura->utilizador_id)->telefone?></p>
 </div>
