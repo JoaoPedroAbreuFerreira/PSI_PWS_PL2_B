@@ -136,7 +136,7 @@ switch ($rota)
 
     //funçoes de fatura
     case "fatura/index":
-        $faturaController->index();
+        $faturaController->index($index);
         break;
 
     case "fatura/index":
