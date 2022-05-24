@@ -2182,7 +2182,7 @@ progress {
 
 .form-control {
   display: block;
-  width: 100%;
+  width: 80%;
   padding: 0.375rem 0.75rem;
   font-size: 1rem;
   font-weight: 400;
@@ -2304,7 +2304,7 @@ progress {
 
 .form-control-plaintext {
   display: block;
-  width: 100%;
+  width: 80%;
   padding: 0.375rem 0;
   margin-bottom: 0;
   line-height: 1.5;
@@ -2397,7 +2397,7 @@ textarea.form-control-lg {
 
 .form-select {
   display: block;
-  width: 100%;
+  width: 80%;
   padding: 0.375rem 2.25rem 0.375rem 0.75rem;
   -moz-padding-start: calc(0.75rem - 3px);
   font-size: 1rem;

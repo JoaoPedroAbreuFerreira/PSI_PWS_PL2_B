@@ -11,6 +11,12 @@ body{
     display: block;
     font-size: 25px;
 }
+.ok2{
+    color: white;
+    text-align: center;
+    display: block;
+    font-size: 15px;
+}   
 .ok3{
     color: red;
     text-align: center;
@@ -25,4 +31,11 @@ body{
 
 div.col{
     padding: 0px 0px 0px 0px;
+}
+
+td {
+    color:white;
+}
+th{
+    color:white;
 }
