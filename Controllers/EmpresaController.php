@@ -43,6 +43,8 @@ Class EmpresaController extends Base
         else
         {
             $this->redirectToRoute(ROTA_LOGIN);
+            $this->renderView("erro", ["error" => "Erro nos parametros fornecidos", "route" => "", "type" => ""]);
+
         }
     }
 
@@ -50,6 +52,7 @@ Class EmpresaController extends Base
     {
         $empresa = Empresa::first();
         $this->renderView("updateempresa", ['empresa' => $empresa]);
+
     }
 
 }

@@ -3,6 +3,21 @@ Class Utilizador extends ActiveRecord\Model
 {
     static $table_name = 'utilizador';
 
+    
+    public static function searchUsername($user)
+    {          
+        if(Utilizador::find_by_username($user)) 
+        { 
+            return FALSE;
+        }
+        else
+        {
+            return true;
+        } 
+    }
+        
+    
+
     public static function searchUtilizador($user, $pass)
     {          
         if(Utilizador::find_by_username_and_pass($user, $pass)) 
@@ -15,6 +30,7 @@ Class Utilizador extends ActiveRecord\Model
         } 
     }
 
+    
     public function verificarDados($dados)
     {
         if(isset($dados))
@@ -46,4 +62,5 @@ Class Utilizador extends ActiveRecord\Model
             return $user; 
         }
     }
+
 }

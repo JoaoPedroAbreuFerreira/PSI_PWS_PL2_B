@@ -27,8 +27,8 @@ Class IvaController extends Base{
             $this->redirectToRoute("iva/index");
 
         }else{
-            echo "erro aos registar";
-            $this->redirectToRoute("iva/index");
+            $this->renderView("erro", ["error" => "Erro nos paramentros fornecidos", "route" => "iva/index", "type" => ""]);
+
 
         }
         
@@ -49,7 +49,7 @@ Class IvaController extends Base{
             $this->redirectToRoute("iva/index");
         }
         else{
-            $this->redirectToRoute("iva/index");
+            $this->renderView("erro", ["error" => "Erro nos paramentros fornecidos", "route" => "iva/index", "type" => ""]);
         }
         
     }

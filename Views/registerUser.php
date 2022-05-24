@@ -4,7 +4,7 @@
 
 <div class="container" align="center">
     <label class="ok3"><h2>Registar <?= $type ?></h2></label>
-    <form action="index.php?r=user/create&i=<?= $type?>" method="post" class="needs-validation row justify-content-center" novalidate>
+    <form action="index.php?r=user/create&i=<?= $type?>" method="post" class="needs-validation row justify-content-center">
         <input type="hidden">
         <div class="col col-6">
             <div class="mb-3">

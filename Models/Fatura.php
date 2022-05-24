@@ -52,4 +52,11 @@ Class Fatura extends ActiveRecord\Model
         }
         
     }
+
+    public function verificarTotal($valor){
+        if((int)$valor > 0){
+            return true;
+        }
+        return false;
+    }
 }
