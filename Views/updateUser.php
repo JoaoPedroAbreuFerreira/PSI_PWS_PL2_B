@@ -13,6 +13,10 @@
             </div>
         </div>
 </form>
+<div>
+ <button type="submit" class="btn btn-primary" role="button" id="coids">Alterar Email</button>
+</div>
+<br>
 <form action="index.php?r=user/change" method="post" class="needs-validation row justify-content-center" novalidate>
     <div class="col col-6">
         <div class="mb-3">
@@ -23,7 +27,6 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary" role="button" id="coids">Alterar Password</button>
-        <button type="submit" class="btn btn-primary" role="button" id="coids">Alterar Email</button>
         <a href="index.php" class="btn btn-primary" role="button" id="coids">Voltar ao menu</a>
     </div>
 </form> 
