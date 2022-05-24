@@ -1,4 +1,4 @@
-<div>
+<div align="center">
     <div>
         <h1><?=$empresa->designacaosocial?></h1>
     </div>
@@ -9,7 +9,7 @@
     </div>
 </div>
 <hr>
-<div>
+<div align="center">
     <div>
         <h4>Cliente</h4>
         <p>Nome Cliente: <?=$cliente->username?> #<?=$cliente->id?></p>
@@ -38,7 +38,7 @@
     </div>
 </div>
 <hr>
-<div>
+<div align="center">
     <h4>Produtos</h4>
     <table class="table tablestriped">
     <thead>
@@ -68,7 +68,7 @@
 </table>
 </div>
 <hr>
-<div>
+<div align="center">
     <h5>Fatura emitida por</h5>
     <p>Nome: <?=Utilizador::find_by_id($fatura->utilizador_id)->username?></p>
     <p>NIF: <?=Utilizador::find_by_id($fatura->utilizador_id)->nif?></p>
