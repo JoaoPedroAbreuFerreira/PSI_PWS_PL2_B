@@ -4,10 +4,17 @@ Class Utilizador extends ActiveRecord\Model
     static $table_name = 'utilizador';
 
     
-    static $validates_uniqueness_of = array(
-        array('username', "message" => "Username já utilizado")
-        
-    );
+    public static function searchUsername($user)
+    {          
+        if(Utilizador::find_by_username($user)) 
+        { 
+            return FALSE;
+        }
+        else
+        {
+            return true;
+        } 
+    }
         
     
 

@@ -67,7 +67,8 @@ Class FaturaController extends Base
         
         $fatura = new Fatura();
 
-        $dados =
+        if($fatura->verificarTotal($_POST["total"])){
+            $dados =
         [
             "utilizador_id" => (int)Utilizador::find_by_username_and_pass($_SESSION["username"], $_SESSION["password"])->id,
             "cliente_id" => (int)$_POST["cliente"],
@@ -112,15 +113,15 @@ Class FaturaController extends Base
             {
                 $linha::create($linhadados);               
             }
-        }
-
-        if($quantidadeTotal == 0){
-            $this->renderView("erro", ["error" => "Erro nos parametros fornecidos yes", "route" => "fatura/show", "type" => ""]);
-
-        }
-        $fatura->changeEstado($fatura->id);
+            $fatura->changeEstado($fatura->id);
         
-        $this->redirectToRoute("");
+            $this->redirectToRoute("");
+        }
+        }
+        else{
+            $this->renderView("erro", ["error" => "Erro adicione associe artigos a fatura", "route" => "fatura/show", "type" => ""]);
+        }
+        
     }
 
     public function print($id)

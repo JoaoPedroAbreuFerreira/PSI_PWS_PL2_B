@@ -6,6 +6,9 @@
                 Id
             </th>
             <th>
+                Funcionário
+            </th>
+            <th>
                 Cliente
             </th>
             <th>
@@ -23,6 +26,7 @@
             <tr>
                 <td><?=$fatura->id?></td>
                 <td><?=$fatura->utilizador_id?></td>
+                <td><?=$fatura->cliente_id?></td>
                 <td><?=$fatura->datafatura->format('d/m/Y H:i:s')?></td>
                 <td><?=$fatura->valortotal?></td>
                 <td><?=$fatura->ivatotal?></td>            

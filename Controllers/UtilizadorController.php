@@ -75,7 +75,7 @@ Class UtilizadorController extends Base
             "role" => $type
         ];
 
-        if($user->is_valid()){
+        if($user->searchUsername($_POST["user"])){
 
        
         if($user->verificarDados($dados))
@@ -93,12 +93,12 @@ Class UtilizadorController extends Base
         }
         else
         {  
-            $this->renderView("error", ["erro" => "Erro nos parametros fornecidos", "route" => "user/show", "type" => $type]); 
+            $this->renderView("erro", ["error" => "Erro nos parametros fornecidos", "route" => "user/show", "type" => $type]); 
         }
     }
     else
         {  
-            $this->renderView("error", ["erro" => "Erro Username em uso", "route" => "user/show", "type" => $type]); 
+            $this->renderView("erro", ["error" => "Erro Username em uso", "route" => "user/show", "type" => $type]); 
         }
 }
 
