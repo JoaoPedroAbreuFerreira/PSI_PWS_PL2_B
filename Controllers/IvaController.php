@@ -7,7 +7,6 @@ Class IvaController extends Base{
     public function index(){
         $ivas = Iva::all();
         $this->renderView("gestaoiva", ['ivas' => $ivas]);
-
     }
 
     public function show(){
