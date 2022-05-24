@@ -4,7 +4,7 @@ USE `projeto_php`;
 --
 -- Host: localhost    Database: projeto_php
 -- ------------------------------------------------------
--- Server version	5.7.31
+-- Server version	5.7.36
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -35,7 +35,7 @@ CREATE TABLE `empresa` (
   `localidade` varchar(45) NOT NULL,
   `capitalSocial` decimal(10,2) unsigned NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,16 +57,17 @@ DROP TABLE IF EXISTS `fatura`;
 CREATE TABLE `fatura` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Utilizador_id` int(10) unsigned NOT NULL,
+  `Cliente_id` int(10) unsigned NOT NULL,
   `dataFatura` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `valorTotal` decimal(10,2) unsigned NOT NULL,
   `ivaTotal` decimal(10,2) unsigned NOT NULL,
   `estado` enum('Emitida','Em Lancamento') NOT NULL,
-  PRIMARY KEY (`id`,`Utilizador_id`),
+  PRIMARY KEY (`id`,`Utilizador_id`,`Cliente_id`),
   KEY `Fatura_FKIndex1` (`Utilizador_id`),
-  KEY `Fatura_FKIndex2` (`Utilizador_id`),
+  KEY `Fatura_FKIndex2` (`Cliente_id`),
   CONSTRAINT `fatura_ibfk_1` FOREIGN KEY (`Utilizador_id`) REFERENCES `utilizador` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `fatura_ibfk_2` FOREIGN KEY (`Utilizador_id`) REFERENCES `utilizador` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  CONSTRAINT `fatura_ibfk_2` FOREIGN KEY (`Cliente_id`) REFERENCES `utilizador` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,7 +92,7 @@ CREATE TABLE `iva` (
   `descricao` varchar(45) NOT NULL,
   `vigor` tinyint(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,16 +115,15 @@ CREATE TABLE `linhafatura` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `Fatura_id` int(10) unsigned NOT NULL,
   `Produto_id` int(10) unsigned NOT NULL,
-  `Produto_Iva_id` int(10) unsigned NOT NULL,
-  `Fatura_Utilizador_id` int(10) unsigned NOT NULL,
   `quantidade` int(10) unsigned NOT NULL,
-  `valor` int(10) unsigned NOT NULL,
-  PRIMARY KEY (`id`,`Fatura_id`,`Produto_id`,`Produto_Iva_id`,`Fatura_Utilizador_id`),
-  KEY `LinhaFatura_FKIndex1` (`Fatura_id`,`Fatura_Utilizador_id`),
-  KEY `LinhaFatura_FKIndex2` (`Produto_id`,`Produto_Iva_id`),
-  CONSTRAINT `linhafatura_ibfk_1` FOREIGN KEY (`Fatura_id`, `Fatura_Utilizador_id`) REFERENCES `fatura` (`id`, `Utilizador_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `linhafatura_ibfk_2` FOREIGN KEY (`Produto_id`, `Produto_Iva_id`) REFERENCES `produto` (`id`, `Iva_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `valor` decimal(10,2) unsigned NOT NULL,
+  `valorIva` decimal(10,2) unsigned NOT NULL,
+  PRIMARY KEY (`id`,`Fatura_id`,`Produto_id`),
+  KEY `LinhaFatura_FKIndex1` (`Fatura_id`),
+  KEY `LinhaFatura_FKIndex2` (`Produto_id`),
+  CONSTRAINT `linhafatura_ibfk_1` FOREIGN KEY (`Fatura_id`) REFERENCES `fatura` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `linhafatura_ibfk_2` FOREIGN KEY (`Produto_id`) REFERENCES `produto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -147,13 +147,13 @@ CREATE TABLE `produto` (
   `Iva_id` int(10) unsigned NOT NULL,
   `referencia` varchar(45) NOT NULL,
   `descricao` varchar(45) NOT NULL,
-  `preco` int(10) unsigned NOT NULL,
+  `preco` decimal(10,2) unsigned NOT NULL,
   `stock` int(10) unsigned NOT NULL,
   PRIMARY KEY (`id`,`Iva_id`),
   UNIQUE KEY `referencia_UNIQUE` (`referencia`),
   KEY `Produto_FKIndex1` (`Iva_id`),
   CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`Iva_id`) REFERENCES `iva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -181,12 +181,12 @@ CREATE TABLE `utilizador` (
   `nif` int(10) NOT NULL,
   `morada` varchar(45) NOT NULL,
   `codigoPostal` varchar(45) NOT NULL,
-  `role` enum('funcionario','cliente','administrador') NOT NULL,
+  `role` enum('funcioario','cliente','administrador') NOT NULL,
   `localidade` varchar(45) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`),
   UNIQUE KEY `nif_UNIQUE` (`nif`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -207,4 +207,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-05-23 15:27:44
+-- Dump completed on 2022-05-24  3:02:28
