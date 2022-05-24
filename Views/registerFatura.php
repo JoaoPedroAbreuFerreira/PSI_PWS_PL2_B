@@ -66,7 +66,7 @@
     </div> 
     </form>
     <div>
-        <button type="submit" class="btn btn-primary" role="button" id="coids">Registar</button>  
+    <button type="submit" class="btn btn-primary" role="button" id="coids">Registar</button>
         <br>
         <a href="index.php" class="btn btn-primary" role="button" id="coids">Voltar ao menu</a>    
     </div>      

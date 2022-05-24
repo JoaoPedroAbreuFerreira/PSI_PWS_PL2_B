@@ -170,8 +170,8 @@ Class UtilizadorController extends Base
 
     public function delete($id)
     {
-        $produto = Produto::find_by_id($id);
-        $produto->delete();
-        $this->redirectToRoute("produto/index");
+        $utilizador = Utilizador::find_by_id($id);
+        $utilizador->delete();
+        $this->redirectToRoute("user/gestao");
     }
 }
