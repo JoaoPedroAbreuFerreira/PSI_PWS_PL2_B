@@ -12,7 +12,8 @@ Class ProdutoController extends Base
             $this->renderView("gestaoproduto", ['produtos' => $produtos]);
         }
         else{
-            $this->redirectToRoute("iva/index");
+            $this->renderView("erro", ["error" => "Erro não existem ivas registados", "route" => "iva/index", "type" => ""]);
+            
             //echo "Registe um iva primeiro!!";
         }
         
@@ -27,7 +28,7 @@ Class ProdutoController extends Base
             $this->renderView("registerproduto", ['ivas' => $ivas]);       
         }
         else{
-            $this->redirectToRoute("iva/index");
+            $this->renderView("erro", ["error" => "Erro não existem ivas registados", "route" => "iva/index", "type" => ""]);
             //echo "Registe um iva primeiro!!";
         }
       
@@ -49,8 +50,8 @@ Class ProdutoController extends Base
             $this->redirectToRoute("produto/index");
 
         }else{
+            $this->renderView("erro", ["error" => "Erro nos paramentros fornecidos", "route" => "produto/show", "type" => ""]);
             
-            $this->redirectToRoute("produto/show");
 
         }
         
@@ -73,7 +74,8 @@ Class ProdutoController extends Base
             $this->redirectToRoute("produto/index");
         }
         else{
-            $this->redirectToRoute("produto/index");
+            $this->renderView("erro", ["error" => "Erro nos paramentros fornecidos", "route" => "produto/index", "type" => ""]);
+
         }
         
     }

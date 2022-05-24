@@ -13,7 +13,7 @@ Class FaturaController extends Base
             $role = $faturas->getRole($username);
 
         if($role == false){
-            $this->redirectToRoute("");
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
         }
 
         $user = Utilizador::find_by_username($username);
@@ -32,8 +32,8 @@ Class FaturaController extends Base
         }
         $this->renderView("gestaofatura", ["faturas" => $faturas]);
         }else{
-            $this->redirectToRoute($cause."/show&i=cliente");
-            
+            $this->renderView("erro", ["error" => "Não existe nenhum $cause registado", "route" => "$cause/show", "type" => "cliente"]);
+
         }
         
     }
@@ -47,7 +47,7 @@ Class FaturaController extends Base
             $clientes = Utilizador::all(array('conditions' => 'role = "cliente"'));
             $this->renderView("registerfatura", ['produtos' => $produtos, "clientes" => $clientes]);
         }else{
-            $this->redirectToRoute($cause."/show&i=cliente");
+            $this->renderView("erro", ["error" => "Não existe nenhum $cause registado", "route" => "$cause/show", "type" => "cliente"]);
         }
 
         
@@ -57,12 +57,12 @@ Class FaturaController extends Base
     public function create()
     {
         $auth = new Auth();
-
+        $quantidadeTotal = 0;
         $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
         
         if($role != "funcionario" && $role != "administrador") 
         { 
-            $this->redirectToRoute(ROTA_LOGIN); 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
         }
         
         $fatura = new Fatura();
@@ -84,22 +84,26 @@ Class FaturaController extends Base
         }
         else
         {
-            $this->redirectToRoute("fatura/show");
+            $this->renderView("erro", ["error" => "Erro nos parametros fornecidos fatura", "route" => "fatura/show", "type" => ""]);
+
         }
                 
         for($i = 0; $i < count($_POST["produto"]); $i++) 
         {    
-            
+
+            $quantidadeTotal = $_POST["quantidade"][$i] + $quantidadeTotal;
             $produto = Produto::getProduto($_POST["produto"][$i]);
             $totalLinha = $produto->preco * $_POST["quantidade"][$i];
+            $iva=Iva::getIvaValue($produto->iva_id);
+            $ivalinha= $totalLinha * $iva / 100;
 
             $linhadados = 
             [
                 "Fatura_id" => $fatura->id,
                 "Produto_id" => $produto->id,
                 "quantidade" => $_POST["quantidade"][$i],
-                "valor" => $produto->preco,
-                "valorIva" => $_POST["totalIva"]
+                "valor" => $totalLinha,
+                "valorIva" => $ivalinha
             ];
 
             $linha = new LinhaFatura();
@@ -108,13 +112,14 @@ Class FaturaController extends Base
             {
                 $linha::create($linhadados);               
             }
-            else
-            {              
-                $this->redirectToRoute("fatura/show");
-            }
         }
 
+        if($quantidadeTotal == 0){
+            $this->renderView("erro", ["error" => "Erro nos parametros fornecidos yes", "route" => "fatura/show", "type" => ""]);
+
+        }
         $fatura->changeEstado($fatura->id);
+        
         $this->redirectToRoute("");
     }
 
