@@ -3,6 +3,14 @@ Class Utilizador extends ActiveRecord\Model
 {
     static $table_name = 'utilizador';
 
+    
+    static $validates_uniqueness_of = array(
+        array('username', "message" => "Username já utilizado")
+        
+    );
+        
+    
+
     public static function searchUtilizador($user, $pass)
     {          
         if(Utilizador::find_by_username_and_pass($user, $pass)) 
@@ -15,6 +23,7 @@ Class Utilizador extends ActiveRecord\Model
         } 
     }
 
+    
     public function verificarDados($dados)
     {
         if(isset($dados))
@@ -46,4 +55,5 @@ Class Utilizador extends ActiveRecord\Model
             return $user; 
         }
     }
+
 }

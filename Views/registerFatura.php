@@ -33,7 +33,7 @@
             <tr id="<?=$produto->id?>">
                 <td><?=$produto->id?></td>
                 <input type="hidden" name="produto[]" value="<?=$produto->id?>">
-                <td data-iva-value="<?=Iva::getIvaValue($produto->iva_id)?>"><a href="index.php?r=load&p=gestaoiva" class="btn btn-info" role="button"><?=$produto->iva_id?></a></td>
+                <td data-iva-value="<?=Iva::getIvaValue($produto->iva_id)?>"><a href="index.php?r=iva/index" class="btn btn-info" role="button"><?=$produto->iva_id?></a></td>
                 <td><?=$produto->referencia?></td>
                 <td><?=$produto->descricao?></td>
                 <td data-preco-uni><?=$produto->preco?></td>
@@ -78,7 +78,7 @@
         var ivaValue = document.querySelector(`tr[id='${e.composedPath()[2].id}'] td[data-iva-value]`);
 
         var subTotal = e.target.value * precoUni.innerText;
-        var iva = subTotal / ivaValue.dataset.ivaValue;
+        var iva = subTotal * ivaValue.dataset.ivaValue / 100;
 
         subTotalSpan.innerText = subTotal.toFixed(2);
         ivaSpan.innerText = iva.toFixed(2);

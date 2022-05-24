@@ -23,7 +23,7 @@
             <tr>
                 <td><?=$fatura->id?></td>
                 <td><?=$fatura->utilizador_id?></td>
-                <td><?=$fatura->datafatura?></td>
+                <td><?=$fatura->datafatura->format('d/m/Y H:i:s')?></td>
                 <td><?=$fatura->valortotal?></td>
                 <td><?=$fatura->ivatotal?></td>            
                 <td>

@@ -21,8 +21,16 @@ Class ProdutoController extends Base
     }
 
     public function show(){
-        $ivas = Iva::all();
-        $this->renderView("registerproduto", ['ivas' => $ivas]);
+        $produto = new Produto();
+        if($produto->verificarIvas()){
+            $ivas = Iva::all();
+            $this->renderView("registerproduto", ['ivas' => $ivas]);       
+        }
+        else{
+            $this->redirectToRoute("iva/index");
+            //echo "Registe um iva primeiro!!";
+        }
+      
     }
 
     public function create(){

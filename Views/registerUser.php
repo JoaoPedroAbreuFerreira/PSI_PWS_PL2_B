@@ -1,6 +1,6 @@
 <div class="container">
     <h2>Registar <?= $type ?></h2>
-    <form action="index.php?r=user/create&i=<?= $type?>" method="post" class="needs-validation row justify-content-center" novalidate>
+    <form action="index.php?r=user/create&i=<?= $type?>" method="post" class="needs-validation row justify-content-center">
         <input type="hidden">
         <div class="col col-6">
             <div class="mb-3">
@@ -26,7 +26,7 @@
             </div>
             <div class="mb-3">
                 <label for="inputTelefone" class="form-label">Telefone:</label>
-                <input type="number" class="form-control" id="inputTelefone" name="tele" min="0" pattern="{9}" required>
+                <input type="number" class="form-control" id="inputTelefone" name="tele"  pattern="{9}" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>

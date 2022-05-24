@@ -41,7 +41,6 @@ Class FaturaController extends Base
     public function show(){
         $faturas = new Fatura();
         $cause = $faturas->verificarProdutosClientes();
-        echo $cause;
 
         if($cause === true){
             $produtos = Produto::all();
@@ -77,6 +76,7 @@ Class FaturaController extends Base
             "estado" => "Em Lancamento"
         ];
 
+        
         if($fatura->verificarDados($dados))
         {
             $fatura::create($dados); 

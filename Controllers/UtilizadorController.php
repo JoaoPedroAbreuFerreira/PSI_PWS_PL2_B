@@ -19,7 +19,7 @@ Class UtilizadorController extends Base
         }
         else
         {
-            $this->redirectToRoute(ROTA_LOGIN);
+            $this->renderView("error", ["error" => "Erro não esta autenticado", "route" => "",]); 
         }
     }
 
@@ -75,6 +75,9 @@ Class UtilizadorController extends Base
             "role" => $type
         ];
 
+        if($user->is_valid()){
+
+       
         if($user->verificarDados($dados))
         {
             $user::create($dados);
@@ -90,9 +93,16 @@ Class UtilizadorController extends Base
         }
         else
         {  
-            $this->redirectToRoute("");
+            $this->renderView("error", ["error" => "Erro nos parametros fornecidos", "route" => "user/show", "type" => $type]); 
         }
     }
+    else
+        {  
+            $this->renderView("error", ["error" => "Erro Username em uso", "route" => "user/show", "type" => $type]); 
+        }
+}
+
+
 
     public function edit($id)
     {
@@ -121,7 +131,7 @@ Class UtilizadorController extends Base
         }
         else
         {
-            $this->redirectToRoute("");
+            $this->renderView("error", ["error" => "Erro nos parametros fornecidos", "route" => "user/show"]);  
         }  
     }
 
