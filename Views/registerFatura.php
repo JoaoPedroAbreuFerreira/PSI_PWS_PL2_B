@@ -1,9 +1,14 @@
-<h2>Registar Fatura</h2>
+<link rel="stylesheet" type="text/css" href="public/css/afc.css">	
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+<div class="container" align="center">
+<label class="ok3"><h2>Registar Fatura</h2></label>
 
 <form action="index.php?r=fatura/create" method="post" class="needs-validation row justify-content-center">
     <table class="table tablestriped">
         <thead>
-            <th>Id</th> <th>Username</th> <th>Email</th> <th>Morada</th> <th>Telefone</th> <th>NIF</th> <th>CodPostal</th> <th>Localidade</th>  
+            <th>Id</th> <th>Username</th> <th>Email</th> <th>Morada</th> <th>Telefone</th> <th>NIF</th> <th>CodPostal</th> <th>Localidade</th> <th></th> 
         </thead>
         <tbody>
             <?php foreach ($clientes as $cliente) { ?>
@@ -23,10 +28,10 @@
             <?php } ?>
         </tbody>
     </table>
-
+    
     <table class="table tablestriped">
         <thead>
-            <th>Id</th> <th>Id Iva</th> <th>Referencia</th> <th>Descricao</th> <th>Preço</th> <th>Stock</th> 
+            <th>Id</th> <th>Id Iva</th> <th>Referencia</th> <th>Descricao</th> <th>Preço</th> <th>Stock</th><th></th><th></th><th></th>
         </thead>
         <tbody>
             <?php foreach ($produtos as $produto) { ?>
@@ -40,24 +45,34 @@
                 <td><?=$produto->stock?></td>
                 <td>
                     <input type="number" name="quantidade[]" value="0" min="0" max="<?=$produto->stock?>">
-                    Subtotal: <span data-subtotal>0.00</span>€
-                    IVA: <span data-iva>0.00</span>€
+                    <td>Subtotal: <span data-subtotal>0.00</span>€</td>
+                    <td>IVA: <span data-iva>0.00</span>€</td>
                 </td>
             </tr>
             <?php } ?>          
         </tbody>
-    </table>      
-    Subtotal: <span data-total-sem-iva>0.00</span>€
+    </table> 
+    <div>
+    <label style="color:white">Subtotal: <span data-total-sem-iva>0.00</span>€</label>
     <input type="hidden" id="totalSemIva" name="totalSemIva" value="0"><br>
-    Total IVA: <span data-total-iva>0.00</span>€
+    </div>
+    <div>
+    <label style="color:white">Total IVA: <span data-total-iva>0.00</span>€</label>
     <input type="hidden" id="totalIva" name="totalIva" value="0"><br>
-    Total: <span data-total>0.00</span>€
-    <input type="hidden" id="total" name="total" value="0"><br>    
-    <button type="submit" class="btn btn-primary">Registar</button>            
-</form>
+    </div>
+    <div>
+    <label style="color:white">Total: <span data-total>0.00</span>€</label>
+    <input type="hidden" id="total" name="total" value="0"><br>
+    </div> 
+    </form>
+    <div>
+        <button type="submit" class="btn btn-primary" role="button" id="coids">Registar</button>  
+        <br>
+        <a href="index.php" class="btn btn-primary" role="button" id="coids">Voltar ao menu</a>    
+    </div>      
+</div> 
 <br>
 <br>
-<a href="index.php">Voltar ao menu</a>
 
 <script>
     var inputs = document.querySelectorAll("input[type='number']");

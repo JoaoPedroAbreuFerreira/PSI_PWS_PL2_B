@@ -66,6 +66,6 @@
             <button type="submit" class="btn btn-primary" role="button" id="coids">Registar</button>
             <a href="index.php" class="btn btn-primary" role="button" id="coids">Voltar ao menu</a> 
         </div>
-        
+    </div>
     </form>
 </div>
