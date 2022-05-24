@@ -37,8 +37,8 @@ switch ($rota)
     case "auth/logout":
         $authController->logout();
         break;
-        //funçoes de iva
 
+        //funçoes de iva
     case "iva/index":
         $ivaController->index();
         break;
@@ -64,7 +64,6 @@ switch ($rota)
         break;
 
      //funçoes de produtos
-
      case "produto/index":
         $produtoController->index();
         break;
@@ -99,7 +98,7 @@ switch ($rota)
         break;
 
     case "user/show":
-    $userController->show($index/* user type*/);
+        $userController->show($index/* user type*/);
         break;
 
     case "user/create":
@@ -123,7 +122,6 @@ switch ($rota)
         break;
 
     //funçoes de empresa
-
     case "empresa/index":
         $empresaController->index();
         break;
@@ -137,6 +135,9 @@ switch ($rota)
         break;
 
     //funçoes de fatura
+    case "fatura/index":
+        $faturaController->index();
+        break;
 
     case "fatura/show":
         $faturaController->show();
@@ -144,6 +145,10 @@ switch ($rota)
 
     case "fatura/create":
         $faturaController->create();
+        break;
+
+    case "fatura/print":
+        $faturaController->print($index);
         break;
 
     default:

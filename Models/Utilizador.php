@@ -15,10 +15,13 @@ Class Utilizador extends ActiveRecord\Model
         } 
     }
 
-    public function verificarDados($dados){
-        if(isset($dados)){
+    public function verificarDados($dados)
+    {
+        if(isset($dados))
+        {
             extract($dados);
-            if(empty($username) || empty($pass) || empty($nif) || empty($email) || empty($morada)){
+            if(empty($username) || empty($pass) || empty($nif) || empty($email) || empty($morada))
+            {
                 return false;
             }
 
@@ -32,6 +35,15 @@ Class Utilizador extends ActiveRecord\Model
         if($user) 
         {  
             return $user->role; 
+        }
+    }
+
+    public static function getUser($id)
+    {
+        $user = Utilizador::find_by_id($id);
+        if($user) 
+        {  
+            return $user; 
         }
     }
 }

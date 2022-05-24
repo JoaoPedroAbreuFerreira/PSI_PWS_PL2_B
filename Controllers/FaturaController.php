@@ -4,11 +4,17 @@ require_once("./controllers/BaseController.php");
 
 Class FaturaController extends Base
 {
-    public function show(){
+    public function index()
+    {
+        $faturas = Fatura::all();
+        $this->renderView("gestaoFatura", ["faturas" => $faturas]);
+    }
+    
+    public function show()
+    {
         $produtos = Produto::all();
         $clientes = Utilizador::all(array('conditions' => 'role = "cliente"'));
         $this->renderView("registerfatura", ['produtos' => $produtos, "clientes" => $clientes]);
-
     }
 
     public function create()
@@ -19,29 +25,28 @@ Class FaturaController extends Base
         
         if($role != "funcionario" && $role != "administrador") 
         { 
-            
             $this->redirectToRoute(ROTA_LOGIN); 
         }
         
-
         $fatura = new Fatura();
 
         $dados =
         [
-            "utilizador_id" => (int)$_POST["cliente"],
+            "utilizador_id" => (int)Utilizador::find_by_username_and_pass($_SESSION["username"], $_SESSION["password"])->id,
+            "cliente_id" => (int)$_POST["cliente"],
             "valorTotal" => $_POST["total"],
             "ivaTotal" => $_POST["totalIva"],
             "estado" => "Em Lancamento"
         ];
 
-
-        if($fatura->verificarDados($dados)){
+        if($fatura->verificarDados($dados))
+        {
             $fatura::create($dados); 
             $fatura = Fatura::last();
-            
-        }else{
+        }
+        else
+        {
             $this->redirectToRoute("fatura/show");
-
         }
                 
         for($i = 0; $i < count($_POST["produto"]); $i++) 
@@ -50,34 +55,38 @@ Class FaturaController extends Base
             $produto = Produto::getProduto($_POST["produto"][$i]);
             $totalLinha = $produto->preco * $_POST["quantidade"][$i];
 
-
             $linhadados = 
             [
                 "Fatura_id" => $fatura->id,
                 "Produto_id" => $produto->id,
-                "Produto_Iva_id" => $produto->iva_id,
-                "Fatura_Utilizador_id" => $_POST["cliente"],
                 "quantidade" => $_POST["quantidade"][$i],
-                "valor" => $totalLinha
+                "valor" => $produto->preco,
+                "valorIva" => $_POST["totalIva"]
             ];
-
 
             $linha = new LinhaFatura();
             
-            if($linha->verificarDados($linhadados)){
-                $linha::create($linhadados);
-                
-                
-            }else{
-                
-                $this->redirectToRoute("fatura/show");
-    
+            if($linha->verificarDados($linhadados))
+            {
+                $linha::create($linhadados);               
             }
-
+            else
+            {              
+                $this->redirectToRoute("fatura/show");
+            }
         }
 
         $fatura->changeEstado($fatura->id);
         $this->redirectToRoute("");
+    }
 
+    public function print($id)
+    {
+        $empresa = Empresa::first();
+        $fatura = Fatura::find_by_id($id);
+        $cliente = Utilizador::find_by_id($fatura->cliente_id);
+        $linhas = LinhaFatura::all(array('conditions' => 'Fatura_id = '.$fatura->id));
+        
+        $this->renderView("imprimirFatura", ["empresa" => $empresa, "fatura" => $fatura, "cliente" => $cliente, "linhas" => $linhas]);
     }
 }

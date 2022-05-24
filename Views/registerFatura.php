@@ -1,9 +1,4 @@
-<?php
-    require_once("./models/Iva.php");
-    $iva = new Iva();
-?>
-
-<h2>Lista de Produtos Registados</h2>
+<h2>Registar Fatura</h2>
 
 <form action="index.php?r=fatura/create" method="post" class="needs-validation row justify-content-center">
     <table class="table tablestriped">
@@ -38,7 +33,7 @@
             <tr id="<?=$produto->id?>">
                 <td><?=$produto->id?></td>
                 <input type="hidden" name="produto[]" value="<?=$produto->id?>">
-                <td data-iva-value="<?=$iva->getIvaValue($produto->iva_id)?>"><a href="index.php?r=load&p=gestaoiva" class="btn btn-info" role="button"><?=$produto->iva_id?></a></td>
+                <td data-iva-value="<?=Iva::getIvaValue($produto->iva_id)?>"><a href="index.php?r=load&p=gestaoiva" class="btn btn-info" role="button"><?=$produto->iva_id?></a></td>
                 <td><?=$produto->referencia?></td>
                 <td><?=$produto->descricao?></td>
                 <td data-preco-uni><?=$produto->preco?></td>
@@ -52,10 +47,12 @@
             <?php } ?>          
         </tbody>
     </table>      
-    Total: <span data-total>0.00</span>€
-    <input type="hidden" id="total" name="total" value="0"><br>
+    Subtotal: <span data-total-sem-iva>0.00</span>€
+    <input type="hidden" id="totalSemIva" name="totalSemIva" value="0"><br>
     Total IVA: <span data-total-iva>0.00</span>€
-    <input type="hidden" id="totalIva" name="totalIva" value="0"><br>  
+    <input type="hidden" id="totalIva" name="totalIva" value="0"><br>
+    Total: <span data-total>0.00</span>€
+    <input type="hidden" id="total" name="total" value="0"><br>    
     <button type="submit" class="btn btn-primary">Registar</button>            
 </form>
 <br>
@@ -88,6 +85,7 @@
 
         var subTotals = document.querySelectorAll(`span[data-subtotal]`);
         var ivas = document.querySelectorAll(`span[data-iva]`);
+
         var total = 0;
         var totalIva = 0;
 
@@ -101,11 +99,14 @@
             totalIva += parseFloat(iva.innerText);
         });
         
-        document.getElementById("total").value = total.toFixed(2);
-        document.querySelector(`span[data-total]`).innerText = total.toFixed(2);
+        document.getElementById("totalSemIva").value = total.toFixed(2);
+        document.querySelector(`span[data-total-sem-iva]`).innerText = total.toFixed(2);
         
         document.getElementById("totalIva").value = totalIva.toFixed(2);
         document.querySelector(`span[data-total-iva]`).innerText = totalIva.toFixed(2);
+
+        document.getElementById("total").value = (total + totalIva).toFixed(2);
+        document.querySelector(`span[data-total]`).innerText = (total + totalIva).toFixed(2);
     }
 </script>
     

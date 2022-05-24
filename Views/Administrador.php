@@ -14,6 +14,8 @@
 <br>
 <a href="index.php?r=iva/index" class="btn btn-warning"id="coids">Gerir Taxas de Iva</a>
 <br>
+<a href="index.php?r=fatura/index" class="btn btn-warning"id="coids">Histórico Faturas</a>
+<br>
 <a href="index.php?r=user/show&i=cliente" class="btn btn-danger"id="coids">Registar um Cliente</a>
 <br>
 <a href="index.php?r=user/show&i=update" class="btn btn-success"id="coids">Alterar Email / Password</a>
