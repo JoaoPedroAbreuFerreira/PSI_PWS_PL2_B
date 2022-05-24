@@ -4,17 +4,55 @@ require_once("./controllers/BaseController.php");
 
 Class FaturaController extends Base
 {
-    public function index()
+    public function index($username)
     {
-        $faturas = Fatura::all();
-        $this->renderView("gestaoFatura", ["faturas" => $faturas]);
+        $faturas = new Fatura();
+        $cause = $faturas->verificarProdutosClientes();
+
+        if($cause === true){
+            $role = $faturas->getRole($username);
+
+        if($role == false){
+            $this->redirectToRoute("");
+        }
+
+        $user = Utilizador::find_by_username($username);
+
+        switch ($role){
+            case "funcionario":
+            case "administrador":
+                $faturas = Fatura::all();
+                break;
+            case "cliente":
+                $faturas = Fatura::all(array('conditions' => 'utilizador_id = '.$user->id));
+                break;
+            default:
+                $this->redirectToRoute("");
+            
+        }
+        $this->renderView("gestaofatura", ["faturas" => $faturas]);
+        }else{
+            $this->redirectToRoute($cause."/show&i=cliente");
+            
+        }
+        
     }
-    
-    public function show()
-    {
-        $produtos = Produto::all();
-        $clientes = Utilizador::all(array('conditions' => 'role = "cliente"'));
-        $this->renderView("registerfatura", ['produtos' => $produtos, "clientes" => $clientes]);
+
+    public function show(){
+        $faturas = new Fatura();
+        $cause = $faturas->verificarProdutosClientes();
+        echo $cause;
+
+        if($cause === true){
+            $produtos = Produto::all();
+            $clientes = Utilizador::all(array('conditions' => 'role = "cliente"'));
+            $this->renderView("registerfatura", ['produtos' => $produtos, "clientes" => $clientes]);
+        }else{
+            $this->redirectToRoute($cause."/show&i=cliente");
+        }
+
+        
+
     }
 
     public function create()
@@ -89,4 +127,7 @@ Class FaturaController extends Base
         
         $this->renderView("imprimirFatura", ["empresa" => $empresa, "fatura" => $fatura, "cliente" => $cliente, "linhas" => $linhas]);
     }
+
+
+
 }
