@@ -53,21 +53,26 @@
         </tbody>
     </table> 
     <div>
-    <label style="color:white">Subtotal: <span data-total-sem-iva>0.00</span>€</label>
-    <input type="hidden" id="totalSemIva" name="totalSemIva" value="0"><br>
+        <div>
+            <div>
+                <label style="color:white">Subtotal: <span data-total-sem-iva>0.00</span>€</label>
+                <input type="hidden" id="totalSemIva" name="totalSemIva" value="0"><br>
+            </div>
+            <div>
+                <label style="color:white">Total IVA: <span data-total-iva>0.00</span>€</label>
+                <input type="hidden" id="totalIva" name="totalIva" value="0"><br>
+            </div>
+            <div>
+                <label style="color:white">Total: <span data-total>0.00</span>€</label>
+                <input type="hidden" id="total" name="total" value="0"><br>
+            </div>
+        </div>
+        <div> 
+            <button style="margin-right:"type="submit" class="btn btn-primary" role="button" id="coids">Registar</button>
+        </div>
     </div>
-    <div>
-    <label style="color:white">Total IVA: <span data-total-iva>0.00</span>€</label>
-    <input type="hidden" id="totalIva" name="totalIva" value="0"><br>
-    </div>
-    <div>
-    <label style="color:white">Total: <span data-total>0.00</span>€</label>
-    <input type="hidden" id="total" name="total" value="0"><br>
-    </div> 
     </form>
     <div>
-    <button type="submit" class="btn btn-primary" role="button" id="coids">Registar</button>
-        <br>
         <a href="index.php" class="btn btn-primary" role="button" id="coids">Voltar ao menu</a>    
     </div>      
 </div> 

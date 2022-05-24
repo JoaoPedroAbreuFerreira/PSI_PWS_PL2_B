@@ -5,6 +5,7 @@
 <div class="container" align="center">
 <label class="ok3"><h2>UPDATE PASSWORD E EMAIL</h2></label>
 <form action="index.php?r=user/change" method="post" class="needs-validation row justify-content-center" novalidate>
+    <div class="col col-6">
         <div class="mb-3">
             <label for="inputEmail" class="form-label ok2">Novo Email:</label>
             <input type="email" class="form-control" id="inputEmail" name="email" required>
@@ -12,10 +13,9 @@
                 Campo obrigatório!
             </div>
         </div>
-</form>
-<div>
- <button type="submit" class="btn btn-primary" role="button" id="coids">Alterar Email</button>
+        <button type="submit" class="btn btn-primary" role="button" id="coids">Alterar Email</button>
 </div>
+</form>
 <br>
 <form action="index.php?r=user/change" method="post" class="needs-validation row justify-content-center" novalidate>
     <div class="col col-6">
