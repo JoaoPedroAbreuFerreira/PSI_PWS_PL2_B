@@ -72,12 +72,12 @@ Class Utilizador extends ActiveRecord\Model
         {
             if($fatura->utilizador_id == $id)
             {
-                return true;
+                return false;
             }
         }
 
 
-        return false;
+        return true;
 
     }
 

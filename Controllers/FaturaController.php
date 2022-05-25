@@ -131,7 +131,7 @@ Class FaturaController extends Base
         $cliente = Utilizador::find_by_id($fatura->cliente_id);
         $linhas = LinhaFatura::all(array('conditions' => 'Fatura_id = '.$fatura->id));
         
-        $this->renderView("imprimirFatura", ["empresa" => $empresa, "fatura" => $fatura, "cliente" => $cliente, "linhas" => $linhas]);
+        $this->renderFatura(["empresa" => $empresa, "fatura" => $fatura, "cliente" => $cliente, "linhas" => $linhas]);
     }
 
 

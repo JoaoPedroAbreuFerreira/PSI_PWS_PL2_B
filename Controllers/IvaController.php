@@ -65,10 +65,11 @@ Class IvaController extends Base{
         $iva = Iva::find_by_id($id);
 
         if($iva->isUsed($id)){
-            $this->renderView("erro", ["error" => "Erro Iva foi usado no registo de um Produto", "route" => "iva/index", "type" => ""]);
+            $iva->delete();
+            $this->redirectToRoute("iva/index");
         }
-        $iva->delete();
-        $this->redirectToRoute("iva/index");
+
+        $this->renderView("erro", ["error" => "Erro Iva não pode ser eliminado pois foi usado no registo de um Produto", "route" => "iva/index", "type" => ""]);
 
 
     }

@@ -33,12 +33,12 @@ Class Iva extends ActiveRecord\Model
         {
             if($produto->iva_id == $id)
             {
-                return true;
+                return false;
             }
         }
 
 
-        return false;
+        return true;
 
     }
 }

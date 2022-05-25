@@ -91,11 +91,12 @@ Class ProdutoController extends Base
         $produto = Produto::find_by_id($id);
 
         if($produto->isUsed($id)){
-            $this->renderView("erro", ["error" => "Erro produto foi usado no registo de uma fatura", "route" => "produto/index", "type" => ""]);
+            $produto->delete();
+            $this->redirectToRoute("produto/index");
         }
     
-        $produto->delete();
-        $this->redirectToRoute("produto/index");
+        $this->renderView("erro", ["error" => "Erro produto não pode ser eliminado pois foi usado no registo de uma fatura", "route" => "produto/index", "type" => ""]);
+
 
     }
 

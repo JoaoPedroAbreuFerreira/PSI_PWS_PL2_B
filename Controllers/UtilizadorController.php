@@ -19,7 +19,7 @@ Class UtilizadorController extends Base
         }
         else
         {
-            $this->renderView("error", ["erro" => "Erro não esta autenticado", "route" => "",]); 
+            $this->renderView("login");
         }
     }
 
@@ -173,10 +173,10 @@ Class UtilizadorController extends Base
         $utilizador = Utilizador::find_by_id($id);
 
         if($utilizador->isUsed($id)){
-            $this->renderView("erro", ["error" => "Erro Utilizador foi usado no registo de uma fatura", "route" => "user/gestao", "type" => ""]);
+            $utilizador->delete();
+            $this->redirectToRoute("user/gestao");
         }
 
-        $utilizador->delete();
-        $this->redirectToRoute("user/gestao");
+        $this->renderView("erro", ["error" => "Erro Utilizador não pode ser eliminado pois foi de uma fatura", "route" => "user/gestao", "type" => ""]);
     }
 }

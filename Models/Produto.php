@@ -46,12 +46,12 @@ Class Produto extends ActiveRecord\Model
         {
             if($linha->produto_id == $id)
             {
-                return true;
+                return false;
             }
         }
 
 
-        return false;
+        return true;
 
     }
 }
