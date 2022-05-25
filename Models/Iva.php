@@ -23,4 +23,22 @@ Class Iva extends ActiveRecord\Model
         $iva = Iva::find_by_id($id);
         return $iva->percentagem;
     }
+
+    public function isUsed($id)
+    {
+        
+        $produtos = Produto::all();
+
+        foreach($produtos as $produto)
+        {
+            if($produto->iva_id == $id)
+            {
+                return true;
+            }
+        }
+
+
+        return false;
+
+    }
 }

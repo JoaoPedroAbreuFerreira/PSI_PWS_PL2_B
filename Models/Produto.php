@@ -36,4 +36,22 @@ Class Produto extends ActiveRecord\Model
             return $produto;
         }
     }
+
+    public function isUsed($id)
+    {
+        
+        $linhas = LinhaFatura::all();
+
+        foreach($linhas as $linha)
+        {
+            if($linha->produto_id == $id)
+            {
+                return true;
+            }
+        }
+
+
+        return false;
+
+    }
 }

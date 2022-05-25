@@ -171,6 +171,11 @@ Class UtilizadorController extends Base
     public function delete($id)
     {
         $utilizador = Utilizador::find_by_id($id);
+
+        if($utilizador->isUsed($id)){
+            $this->renderView("erro", ["error" => "Erro Utilizador foi usado no registo de uma fatura", "route" => "user/gestao", "type" => ""]);
+        }
+
         $utilizador->delete();
         $this->redirectToRoute("user/gestao");
     }

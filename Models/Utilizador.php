@@ -63,4 +63,22 @@ Class Utilizador extends ActiveRecord\Model
         }
     }
 
+    public function isUsed($id)
+    {
+        
+        $faturas = Fatura::all();
+
+        foreach($faturas as $fatura)
+        {
+            if($fatura->utilizador_id == $id)
+            {
+                return true;
+            }
+        }
+
+
+        return false;
+
+    }
+
 }
