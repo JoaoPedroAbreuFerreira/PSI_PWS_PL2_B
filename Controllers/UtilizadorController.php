@@ -65,7 +65,7 @@ Class UtilizadorController extends Base
         $dados = 
         [
             "username" => $_POST["user"],
-            "pass" => $_POST["pass"],
+            "pass" => hash("sha256", $_POST["pass"]),
             "email" => $_POST["email"],
             "telefone" => $_POST["tele"],
             "nif" => $_POST["nif"],
@@ -109,7 +109,7 @@ Class UtilizadorController extends Base
         $dados = 
         [
             "username" => $_POST["user"],
-            "pass" => $_POST["pass"],
+            "pass" => hash("sha256", $_POST["pass"]),
             "email" => $_POST["email"],
             "telefone" => $_POST["tele"],
             "nif" => $_POST["nif"],
@@ -150,7 +150,7 @@ Class UtilizadorController extends Base
 
             if(isset($_POST["pass"]))
             {
-                $user->pass = $_POST["pass"];
+                $user->pass = hash("sha256", $_POST["pass"]);
             }
     
             if(isset($_POST["email"]))

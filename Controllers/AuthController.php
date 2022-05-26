@@ -15,7 +15,7 @@ Class AuthController extends Base
 
         if(isset($_POST["user"]) && isset($_POST["pass"]))
         { 
-            $valid = $auth->login($_POST["user"], $_POST["pass"]);
+            $valid = $auth->login($_POST["user"], hash("sha256", $_POST["pass"]));
         
             if($valid == false) 
             { 
