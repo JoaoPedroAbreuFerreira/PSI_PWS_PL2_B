@@ -1,5 +1,3 @@
-
-
 <label class="ok">BEM VINDO <?= $_SESSION["username"]?></label><label class="ok3">[Administrador]</label>
 <br>
 <div align="center">

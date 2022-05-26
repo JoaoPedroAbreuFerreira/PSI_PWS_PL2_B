@@ -10,5 +10,5 @@
 
     <title><?=NOME_APP?></title>
 </head>
-<body>
+<body style="background-image: url('https://getwallpapers.com/wallpaper/full/b/b/d/17221.jpg');">
     <header></header>
