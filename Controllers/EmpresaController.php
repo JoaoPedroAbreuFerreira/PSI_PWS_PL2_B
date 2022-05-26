@@ -6,12 +6,35 @@ Class EmpresaController extends Base
 {
     public function index()
     {
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }
+        else{
+
+        
         $empresa = Empresa::first();
         $this->renderView("gestaoempresa", ['empresa' => $empresa]);
+        }
     }
 
     public function edit()
     {
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }
+        else{
+
+        
         $dados = [
             "designacaosocial" => $_POST["designacaoSocial"],
             "capitalsocial" => $_POST["capitalSocial"],
@@ -47,12 +70,24 @@ Class EmpresaController extends Base
 
         }
     }
+    }
 
     public function update()
     {
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }
+        else{
+
+        
         $empresa = Empresa::first();
         $this->renderView("updateempresa", ['empresa' => $empresa]);
-
+        }
     }
 
 }

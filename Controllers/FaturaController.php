@@ -6,6 +6,21 @@ Class FaturaController extends Base
 {
     public function index($username)
     {
+        $auth = new auth();
+        $user = new Utilizador();
+
+        if($user->searchUsername($username)){
+            $this->renderView("erro", ["error" => "Utilizador não encontrado", "route" => "", "type" => ""]);
+        }else{
+        $user = Utilizador::find_by_username($username);
+
+
+        if($user->username != $_SESSION["username"]){
+
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+
+        }else{
+
         $faturas = new Fatura();
         $cause = $faturas->verificarProdutosClientes();
 
@@ -34,11 +49,21 @@ Class FaturaController extends Base
         }else{
             $this->renderView("erro", ["error" => "Não existe nenhum $cause registado", "route" => "$cause/show", "type" => "cliente"]);
 
+      
         }
-        
+    }
+}
     }
 
     public function show(){
+
+        $auth = new auth();
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);  
+
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
         $faturas = new Fatura();
         $cause = $faturas->verificarProdutosClientes();
 
@@ -50,14 +75,21 @@ Class FaturaController extends Base
             $this->renderView("erro", ["error" => "Não existe nenhum $cause registado", "route" => "$cause/show", "type" => "cliente"]);
         }
 
-        
+    }
 
     }
 
     public function create()
     {
-        $auth = new Auth();
-        $quantidadeTotal = 0;
+        $auth = new auth();
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+
+        
         $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
         
         if($role != "funcionario" && $role != "administrador") 
@@ -66,7 +98,7 @@ Class FaturaController extends Base
         }
         
         $fatura = new Fatura();
-
+        $quantidadeTotal = 0;
         if($fatura->verificarTotal($_POST["total"])){
             $dados =
         [
@@ -121,11 +153,20 @@ Class FaturaController extends Base
         else{
             $this->renderView("erro", ["error" => "Erro adicione associe artigos a fatura", "route" => "fatura/show", "type" => ""]);
         }
-        
+    }
     }
 
     public function print($id)
     {
+        
+        $userId = Utilizador::getUserId($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($id != $userId) 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+
+        
         $empresa = Empresa::first();
         $fatura = Fatura::find_by_id($id);
         $cliente = Utilizador::find_by_id($fatura->cliente_id);
@@ -133,7 +174,7 @@ Class FaturaController extends Base
         
         $this->renderFatura(["empresa" => $empresa, "fatura" => $fatura, "cliente" => $cliente, "linhas" => $linhas]);
     }
-
+    }
 
 
 }

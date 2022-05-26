@@ -5,15 +5,44 @@ require_once("./controllers/BaseController.php");
 Class IvaController extends Base{
 
     public function index(){
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+
+        
         $ivas = Iva::all();
         $this->renderView("gestaoiva", ['ivas' => $ivas]);
+        }
     }
 
     public function show(){
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
         $this->renderView("registeriva");
+        }
     }
 
     public function create(){
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+
         $iva = new Iva();
         $dados = [
             "percentagem" => $_POST["percentagem"],
@@ -32,10 +61,20 @@ Class IvaController extends Base{
 
         }
         
-
+    }
     }
 
     public function edit($id){
+
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else
+        {
         $dados = [
             "percentagem" => $_POST["percentagem"],
             "vigor" => $_POST["vigor"],
@@ -51,16 +90,33 @@ Class IvaController extends Base{
         else{
             $this->renderView("erro", ["error" => "Erro nos paramentros fornecidos", "route" => "iva/index", "type" => ""]);
         }
-        
+    }
     }
 
     public function update($id){
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
         $iva = Iva::find_by_id($id);
         $this->renderView("updateiva", ['iva' => $iva]);
+        }
 
     }
 
     public function delete($id){
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
 
         $iva = Iva::find_by_id($id);
 
@@ -71,6 +127,6 @@ Class IvaController extends Base{
 
         $this->renderView("erro", ["error" => "Erro Iva não pode ser eliminado pois foi usado no registo de um Produto", "route" => "iva/index", "type" => ""]);
 
-
+    }
     }
 }

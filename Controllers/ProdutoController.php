@@ -6,6 +6,16 @@ Class ProdutoController extends Base
 {
     
     public function index(){
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+
+        
         $produto = new Produto();
         if($produto->verificarIvas()){
             $produtos = Produto::all();
@@ -17,11 +27,21 @@ Class ProdutoController extends Base
             //echo "Registe um iva primeiro!!";
         }
         
-        
+    }
 
     }
 
     public function show(){
+
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else
+        {
         $produto = new Produto();
         if($produto->verificarIvas()){
             $ivas = Iva::all();
@@ -31,10 +51,20 @@ Class ProdutoController extends Base
             $this->renderView("erro", ["error" => "Erro não existem ivas registados", "route" => "iva/index", "type" => ""]);
             //echo "Registe um iva primeiro!!";
         }
-      
+    }
     }
 
     public function create(){
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+
+        
         $produto = new Produto();
 
         $dados = [
@@ -54,11 +84,22 @@ Class ProdutoController extends Base
             
 
         }
-        
+    }
 
     }
 
     public function edit($id){
+
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+
+        
         $dados = [
             'iva_id' => (int)$_POST["iva"],
             "referencia" => $_POST["referencia"],
@@ -77,17 +118,42 @@ Class ProdutoController extends Base
             $this->renderView("erro", ["error" => "Erro nos paramentros fornecidos", "route" => "produto/index", "type" => ""]);
 
         }
+
+    }
         
     }
 
     public function update($id){
+
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+
         $produto = Produto::find_by_id($id);
         $ivas = Iva::all();
         $this->renderView("updateproduto", ['produto' => $produto, "ivas" => $ivas]);
 
+        }
     }
 
     public function delete($id){
+
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else
+        {
+
+        
         $produto = Produto::find_by_id($id);
 
         if($produto->isUsed($id)){
@@ -100,4 +166,5 @@ Class ProdutoController extends Base
 
     }
 
+}
 }

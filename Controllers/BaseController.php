@@ -21,4 +21,6 @@ Class Base
         require_once("./views/imprimirFatura.php");
         require_once("./views/layouts/footerfatura.php");
     }
+
+    
 }

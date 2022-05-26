@@ -81,4 +81,11 @@ Class Utilizador extends ActiveRecord\Model
 
     }
 
+    public static function getUserId($user, $pass){
+        $utilizador = Utilizador::find_by_username_and_pass($user, $pass);
+
+        $id = $utilizador->id;
+
+        return $id;
+    }
 }

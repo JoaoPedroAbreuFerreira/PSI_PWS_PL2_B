@@ -25,12 +25,31 @@ Class UtilizadorController extends Base
 
     public function gestao()
     {
-        $funcionarios = Utilizador::all(array('conditions' => 'role = "funcionario"'));
-        $this->renderView("gestaofuncionario", ['funcionarios' => $funcionarios]);
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+            $funcionarios = Utilizador::all(array('conditions' => 'role = "funcionario"'));
+            $this->renderView("gestaofuncionario", ['funcionarios' => $funcionarios]);
+        }
+        
     }
 
     public function show($type)
     {
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+
         if($type == "cliente")
         {
             $this->renderView("registerUser", ['type' => "Cliente"]);
@@ -47,13 +66,25 @@ Class UtilizadorController extends Base
         {
             $this->redirectToRoute("");
         }
+
+    }
     }
 
     public function create($type)
     {
         $user = new Utilizador();
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
 
-        if($type == "Funcionário")
+        
+
+        if($role == "administrador" && $type == "Funcionário")
         {
             $type = "funcionario";
         }
@@ -100,12 +131,23 @@ Class UtilizadorController extends Base
         {  
             $this->renderView("erro", ["error" => "Erro Username em uso", "route" => "user/show", "type" => $type]); 
         }
+
+    }
 }
 
 
 
     public function edit($id)
     {
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+
         $dados = 
         [
             "username" => $_POST["user"],
@@ -134,15 +176,36 @@ Class UtilizadorController extends Base
             $this->renderView("error", ["erro" => "Erro nos parametros fornecidos", "route" => "user/show"]);  
         }  
     }
+    }
 
     public function update($id)
     {
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+
+        
         $user = Utilizador::find_by_id($id);
         $this->renderView("updatefuncionario", ['user' => $user]);
+        }
     }
 
     public function change(){
         $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "funcionario" && $role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }else{
+
+        
 
         if($auth->isLoggedIn())
         {
@@ -167,9 +230,23 @@ Class UtilizadorController extends Base
             $this->redirectToRoute("");
         }
     }
+    }
 
     public function delete($id)
     {
+        $auth = new Auth();
+        
+        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
+        
+        if($role != "administrador") 
+        { 
+            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
+        }
+        else
+        {
+
+        
+
         $utilizador = Utilizador::find_by_id($id);
 
         if($utilizador->isUsed($id)){
@@ -179,4 +256,7 @@ Class UtilizadorController extends Base
 
         $this->renderView("erro", ["error" => "Erro Utilizador não pode ser eliminado pois foi de uma fatura", "route" => "user/gestao", "type" => ""]);
     }
+
+}
+
 }

@@ -28,7 +28,6 @@ Class Fatura extends ActiveRecord\Model
 
     public function getRole($username)
     {
-        $auth = new Auth();
 
         if($username == $_SESSION["username"])
         {
