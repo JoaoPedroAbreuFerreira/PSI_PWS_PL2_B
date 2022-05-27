@@ -3,7 +3,7 @@
     <div>
         <h5>Cliente</h5>
         <br>
-        <p>Nome: <?=$cliente->username?> #<?=$cliente->id?></p>
+        <p>Nome: <?=$cliente->username?></p>
         <p>NIF: <?=$cliente->nif?></p>
         <p>Telefone: <?=$cliente->telefone?></p>
         <p><?=$cliente->localidade?>, <?=$cliente->morada?> <?=$cliente->codigopostal?></p>
