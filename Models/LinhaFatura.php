@@ -12,7 +12,16 @@ Class LinhaFatura extends ActiveRecord\Model
             {
                 return false;
             }
-            return true;
+            
+            //DONT WORK PLZ HELP
+            $produto = Produto::find_by_id($Produto_id);
+            $stock = $produto->stock;            
+            if($stock < $quantidade || $quantidade < 0)
+            {
+                return false;
+            }
+            //
         }
+        return true;
     }
 }

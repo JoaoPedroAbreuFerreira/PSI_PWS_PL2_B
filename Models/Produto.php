@@ -12,8 +12,12 @@ Class Produto extends ActiveRecord\Model
             {
                 return false;
             }
+            if($preco < 0 && $stock < 0)
+            {
+                return false;
+            }
         }
-        return true;
+        return true; 
     }
 
     public function verificarIvas()

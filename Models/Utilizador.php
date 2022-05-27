@@ -40,6 +40,18 @@ Class Utilizador extends ActiveRecord\Model
             {
                 return false;
             }
+            if(strlen((string)$nif) < 9 && strlen((string)$nif) > 9)
+            {
+                return false;
+            }
+            if(filter_var($email, FILTER_VALIDATE_EMAIL))
+            {
+                
+            }
+            else
+            {
+                return false;
+            }
 
         }
         return true;
