@@ -111,15 +111,17 @@ Class FaturaController extends Base
             
             if($linha->verificarDados($linhadados))
             {
-                $linha::create($linhadados);               
+                $linha::create($linhadados); 
+                $fatura->changeEstado($fatura->id);
+                $this->redirecttoroute("");
             }
             else
             {
+                $fatura->delete();
                 $this->renderView("erro", ["error" => "Erro Quantidade Inválida", "route" => "fatura/show", "type" => ""]);
-            }
-            $fatura->changeEstado($fatura->id);
-        
-            $this->redirectToRoute("");
+               
+            }    
+
         }
         }
         else{
