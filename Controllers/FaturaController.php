@@ -113,6 +113,7 @@ Class FaturaController extends Base
             {
                 $linha::create($linhadados); 
                 $fatura->changeEstado($fatura->id);
+                $produto->changeStock($produto, $_POST["quantidade"][$i]);
                 $this->redirecttoroute("");
             }
             else

@@ -58,4 +58,9 @@ Class Produto extends ActiveRecord\Model
         return true;
 
     }
+
+    public function changeStock($produto, $quantidade)
+    {
+        $produto->update_attributes(array("stock" => $produto->stock - $quantidade));
+    }
 }
