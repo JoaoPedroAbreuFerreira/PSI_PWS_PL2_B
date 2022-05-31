@@ -2,6 +2,7 @@
 <div class="container" align="center">
 <label class="ok3"><h2>Lista de Produtos registados</h2></label>
 <?php require_once("./views/layouts/searchbarProdutos.php"); ?>
+<br>
 <table class="table tablestriped">
         <thead>
             <th>

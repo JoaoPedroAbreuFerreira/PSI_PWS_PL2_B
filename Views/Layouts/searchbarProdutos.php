@@ -1,4 +1,4 @@
-<input id="searchBarProdutos" class="form-control mr-sm-2 mx-4" type="search" placeholder="Search" aria-label="Search" />
+<input style="margin-left: 0rem!important" id="searchBarProdutos" class="form-control mr-sm-2 mx-4" type="search" placeholder="Search" aria-label="Search" />
 
 <script>
     $("#searchBarProdutos").keyup(search);

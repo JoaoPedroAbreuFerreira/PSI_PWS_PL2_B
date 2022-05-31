@@ -3,6 +3,7 @@
 <label class="ok3"><h2>Lista de Funcionários registados</h2></label>
 <br>
 <?php require_once("./views/layouts/searchbarUsers.php"); ?>
+<br>
 <table class="table tablestriped">
         <thead>
             <th>
