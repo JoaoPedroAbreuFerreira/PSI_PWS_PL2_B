@@ -1,7 +1,7 @@
 
 <div class="container" align="center">
 <label class="ok3"><h2>Lista de Produtos registados</h2></label>
-
+<?php require_once("./views/layouts/searchbarProdutos.php"); ?>
 <table class="table tablestriped">
         <thead>
             <th>
@@ -25,7 +25,7 @@
             <th>
             </th>
         </thead>
-        <tbody>
+        <tbody class="listProdutos">
             <?php foreach ($produtos as $produto) { ?>
             <tr>
                 <td><?=$produto->id?></td>

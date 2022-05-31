@@ -3,11 +3,12 @@
 <label class="ok3"><h2>Registar Fatura</h2></label>
 
 <form action="index.php?r=fatura/create" method="post" class="needs-validation row justify-content-center">
+    <?php require_once("./views/layouts/searchbarUsers.php"); ?>
     <table class="table tablestriped">
         <thead>
             <th>Id</th> <th>Username</th> <th>Email</th> <th>Morada</th> <th>Telefone</th> <th>NIF</th> <th>CodPostal</th> <th>Localidade</th> <th></th> 
         </thead>
-        <tbody>
+        <tbody class="listUsers">
             <?php foreach ($clientes as $cliente) { ?>
             <tr>
                 <td><?=$cliente->id?></td>
@@ -26,11 +27,12 @@
         </tbody>
     </table>
     
+    <?php require_once("./views/layouts/searchbarProdutos.php"); ?>
     <table class="table tablestriped">
         <thead>
             <th>Id</th> <th>Id Iva</th> <th>Referencia</th> <th>Descricao</th> <th>Preço</th> <th>Stock</th><th></th><th></th><th></th>
         </thead>
-        <tbody>
+        <tbody class="listProdutos">
             <?php foreach ($produtos as $produto) { ?>
             <tr id="<?=$produto->id?>">
                 <td><?=$produto->id?></td>

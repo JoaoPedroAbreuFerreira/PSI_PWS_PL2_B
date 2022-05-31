@@ -1,7 +1,8 @@
 
 <div class="container" align="center">
-<label class="ok3"><h2>Lista de utilizadores registados</h2></label>
+<label class="ok3"><h2>Lista de Funcionários registados</h2></label>
 <br>
+<?php require_once("./views/layouts/searchbarUsers.php"); ?>
 <table class="table tablestriped">
         <thead>
             <th>
@@ -31,7 +32,7 @@
             <th>
             </th>
         </thead>
-        <tbody>
+        <tbody class="listUsers">
             <?php foreach ($funcionarios as $funcionario) { ?>
             <tr>
                 <td><?=$funcionario->id?></td>
