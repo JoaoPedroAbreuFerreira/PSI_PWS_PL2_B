@@ -36,11 +36,19 @@ Class Utilizador extends ActiveRecord\Model
         if(isset($dados))
         {
             extract($dados);
-            if(empty($username) || empty($pass) || empty($nif) || empty($email) || empty($morada))
+            if(empty($username) || empty($pass) || empty($nif) || empty($email) || empty($morada) || empty($telefone))
             {
                 return false;
             }
-            if(strlen((string)$nif) < 9 && strlen((string)$nif) > 9)
+            if(trim($username) == "" || trim($email) == "")
+            {
+                return false;
+            }
+            if(strlen((string)$nif) < 9 || strlen((string)$nif) > 9)
+            {
+                return false;
+            }
+            if(strlen((string)$telefone) < 9 || strlen((string)$telefone) > 9)
             {
                 return false;
             }
