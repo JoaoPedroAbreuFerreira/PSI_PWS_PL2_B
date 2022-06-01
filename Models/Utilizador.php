@@ -8,7 +8,7 @@ Class Utilizador extends ActiveRecord\Model
     {          
         if(Utilizador::find_by_username($user)) 
         { 
-            return FALSE;
+            return false;
         }
         else
         {
@@ -36,11 +36,11 @@ Class Utilizador extends ActiveRecord\Model
         if(isset($dados))
         {
             extract($dados);
-            if(empty($username) || empty($pass) || empty($nif) || empty($email) || empty($morada) || empty($telefone))
+            if(empty($username) || empty($pass) || empty($nif) || empty($email) || empty($morada) || empty($telefone) || empty($localidade) || empty($codigopostal))
             {
                 return false;
             }
-            if(trim($username) == "" || trim($email) == "")
+            if(trim($username) == "" || trim($pass) == "" || trim($nif) == "" || trim($email) == "" || trim($morada) == "" || trim($telefone) == "" || trim($localidade) == "" || trim($codigopostal) == "")
             {
                 return false;
             }
@@ -52,15 +52,14 @@ Class Utilizador extends ActiveRecord\Model
             {
                 return false;
             }
-            if(filter_var($email, FILTER_VALIDATE_EMAIL))
+            if(!filter_var($email, FILTER_VALIDATE_EMAIL))
             {
-                
-            }
-            else
+                return false;
+            }   
+            if(!preg_match("/^([1-9]{4})-([1-9]{3})$/", $codigopostal))
             {
                 return false;
             }
-
         }
         return true;
     }
