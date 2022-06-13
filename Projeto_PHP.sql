@@ -222,3 +222,22 @@ INSERT INTO `utilizador` (`id`, `username`, `pass`, `email`, `telefone`, `nif`, 
 
 INSERT INTO `utilizador` (`id`, `username`, `pass`, `email`, `telefone`, `nif`, `morada`, `codigoPostal`, `role`, `localidade`) VALUES
 (6, 'eduardo', 'A60B85D409A01D46023F90741E01B79543A3CB1BA048EAEFBE5D7A63638043BF', 'eduardo@gmail.com', '912999666', '219678968', 'Avenida Columbano Bordalo Pinheiro', '1500-173', 'cliente', 'Lisboa');
+
+-- Empresa 
+INSERT INTO `empresa` (`id`, `designacaoSocial`, `email`, `telefone`, `nif`, `morada`, `codigoPostal`, `localidade`, `capitalSocial`) VALUES
+(1, 'Amazon', 'amazon@gmail.com', '945873456', '211134231', 'Rua de Silva', '4250-472', 'Porto', 10000000);
+
+-- Ivas 
+INSERT INTO `iva` (`id`, `percentagem`, `descricao`, `vigor`) VALUES
+(1, '23', 'Taxo Normal', 1);
+
+INSERT INTO `iva` (`id`, `percentagem`, `descricao`, `vigor`) VALUES
+(2, '13', 'Taxo Intermédia', 1);
+
+INSERT INTO `iva` (`id`, `percentagem`, `descricao`, `vigor`) VALUES
+(3, '6', 'Taxo Reduzida', 1);
+
+INSERT INTO `iva` (`id`, `percentagem`, `descricao`, `vigor`) VALUES
+(4, '50', 'Taxo Alta', 0);
+
+-- Produtos
