@@ -1,27 +1,5 @@
--- phpMyAdmin SQL Dump
--- version 5.2.0
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1
--- Tempo de geração: 09-Jun-2022 às 17:40
--- Versão do servidor: 10.4.24-MariaDB
--- versão do PHP: 8.1.6
-
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
-
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
-
---
--- Banco de dados: `projeto_php`
---
-
--- --------------------------------------------------------
+CREATE database if NOT EXISTS projeto_php;
+USE projeto_php;
 
 --
 -- Estrutura da tabela `empresa`
@@ -118,17 +96,6 @@ CREATE TABLE `utilizador` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Extraindo dados da tabela `utilizador`
---
-
-INSERT INTO `utilizador` (`id`, `username`, `pass`, `email`, `telefone`, `nif`, `morada`, `codigoPostal`, `role`, `localidade`) VALUES
-(7, 'jj', '8C6976E5B5410415BDE908BD4DEE15DFB167A9C873FC4BB8A81F6F2AB448A918', 'asdad@gmail.com', 960110361, 123456789, 'adsasd', 'asd', 'administrador', 'Anadia');
-
---
--- Índices para tabelas despejadas
---
-
---
 -- Índices para tabela `empresa`
 --
 ALTER TABLE `empresa`
@@ -213,10 +180,6 @@ ALTER TABLE `utilizador`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- Restrições para despejos de tabelas
---
-
---
 -- Limitadores para a tabela `fatura`
 --
 ALTER TABLE `fatura`
@@ -237,6 +200,25 @@ ALTER TABLE `produto`
   ADD CONSTRAINT `produto_ibfk_1` FOREIGN KEY (`Iva_id`) REFERENCES `iva` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+-- DADOS TESTE 
+-- ADMIN PASS = admin
+INSERT INTO `utilizador` (`id`, `username`, `pass`, `email`, `telefone`, `nif`, `morada`, `codigoPostal`, `role`, `localidade`) VALUES
+(1, 'admin', '8C6976E5B5410415BDE908BD4DEE15DFB167A9C873FC4BB8A81F6F2AB448A918', 'admin@gmail.com', '980123567', '213056483', 'Largo Jose lucio', '2400-823', 'administrador', 'Leiria');
+
+-- Funcionarios PASS = funcionario
+INSERT INTO `utilizador` (`id`, `username`, `pass`, `email`, `telefone`, `nif`, `morada`, `codigoPostal`, `role`, `localidade`) VALUES
+(2, 'joao', '24D96A103E8552CB162117E5B94B1EAD596B9C0A94F73BC47F7D244D279CACF2', 'joao@gmail.com', '920450634', '213356342', 'Largo da Fonte', '3780-566', 'funcionario', 'Anadia');
+
+INSERT INTO `utilizador` (`id`, `username`, `pass`, `email`, `telefone`, `nif`, `morada`, `codigoPostal`, `role`, `localidade`) VALUES
+(3, 'rodrigo', '24D96A103E8552CB162117E5B94B1EAD596B9C0A94F73BC47F7D244D279CACF2', 'rodrigo@gmail.com', '945056456', '219986456', 'Rua do agueiro', '2480-057', 'funcionario', 'Leiria');
+
+-- Clientes PASS = cliente
+INSERT INTO `utilizador` (`id`, `username`, `pass`, `email`, `telefone`, `nif`, `morada`, `codigoPostal`, `role`, `localidade`) VALUES
+(4, 'marco', 'A60B85D409A01D46023F90741E01B79543A3CB1BA048EAEFBE5D7A63638043BF', 'marco@gmail.com', '946023123', '21007693', 'Rua de cabo verde', '2430-399', 'cliente', 'Marinha Grande');
+
+INSERT INTO `utilizador` (`id`, `username`, `pass`, `email`, `telefone`, `nif`, `morada`, `codigoPostal`, `role`, `localidade`) VALUES
+(5, 'fernando', 'A60B85D409A01D46023F90741E01B79543A3CB1BA048EAEFBE5D7A63638043BF', 'fernando@gmail.com', '994324567', '219455434', 'Travessa Manuel Leal', '2400-711', 'cliente', 'Leiria');
+
+INSERT INTO `utilizador` (`id`, `username`, `pass`, `email`, `telefone`, `nif`, `morada`, `codigoPostal`, `role`, `localidade`) VALUES
+(6, 'eduardo', 'A60B85D409A01D46023F90741E01B79543A3CB1BA048EAEFBE5D7A63638043BF', 'eduardo@gmail.com', '912999666', '219678968', 'Avenida Columbano Bordalo Pinheiro', '1500-173', 'cliente', 'Lisboa');
