@@ -10,7 +10,7 @@ Class Iva extends ActiveRecord\Model
             extract($dados);
             if(isset($percentagem) || isset($vigor))
             {
-                if($percentagem > 0 && $percentagem < 100)
+                if($percentagem > 0 && $percentagem <= 100)
                 {
                     return true;  
                 }

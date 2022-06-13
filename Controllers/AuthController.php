@@ -19,7 +19,7 @@ Class AuthController extends Base
         
             if($valid == false) 
             { 
-                echo "Dados Incorretos";
+                echo "<h5 style=color:red;text-align:center>Dados Incorretos</h5>";
             }
             else
             {

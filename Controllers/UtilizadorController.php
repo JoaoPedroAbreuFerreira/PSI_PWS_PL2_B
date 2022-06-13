@@ -55,7 +55,9 @@ Class UtilizadorController extends Base
 
         if($type == "Funcionário")
         {
+           
             $type = "funcionario";
+             
         }
         else
         {
