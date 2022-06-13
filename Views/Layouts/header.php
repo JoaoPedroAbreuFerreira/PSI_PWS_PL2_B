@@ -10,5 +10,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" referrerpolicy="no-referrer"></script>
     <title><?=NOME_APP?></title>
 </head>
-<body style="background-color: black">
+<body style="background-color: #343434">
     <header></header>

@@ -56,10 +56,11 @@ Class Utilizador extends ActiveRecord\Model
             {
                 return false;
             }   
-            if(!preg_match("/^([1-9]{4})-([1-9]{3})$/", $codigopostal))
+            if(!preg_match("/^([0-9]{4})-([0-9]{3})$/", $codigopostal))
             {
                 return false;
             }
+            
         }
         return true;
     }

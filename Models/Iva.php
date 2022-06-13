@@ -8,9 +8,9 @@ Class Iva extends ActiveRecord\Model
         if(isset($dados))
         {
             extract($dados);
-            if(isset($percentagem) || isset($vigor))
+            if(isset($percentagem) && isset($vigor))
             {
-                if($percentagem > 0 && $percentagem <= 100)
+                if($percentagem > 0 && $percentagem <= 100 && is_numeric($percentagem))
                 {
                     return true;  
                 }
