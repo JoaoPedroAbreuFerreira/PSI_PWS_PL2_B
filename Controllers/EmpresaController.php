@@ -4,14 +4,27 @@ require_once("./controllers/BaseController.php");
 
 Class EmpresaController extends Base
 {
-    public function index()
+    public function index()   
     {
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($role == "cliente" || $role == false){
+            $this->redirectToRoute("");
+        }else{
         $empresa = Empresa::first();
         $this->renderView("gestaoempresa", ['empresa' => $empresa]);
+        }
     }
 
     public function edit()
     {
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($role == "cliente" || $role == false){
+            $this->redirectToRoute("");
+        }else{
+
+        
         $dados = [
             "designacaosocial" => $_POST["designacaoSocial"],
             "capitalsocial" => $_POST["capitalSocial"],
@@ -47,11 +60,18 @@ Class EmpresaController extends Base
 
         }
     }
+    }
 
     public function update()
     {
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($role == "cliente" || $role == false){
+            $this->redirectToRoute("");
+        }else{
         $empresa = Empresa::first();
         $this->renderView("updateempresa", ['empresa' => $empresa]);
+        }
 
     }
 

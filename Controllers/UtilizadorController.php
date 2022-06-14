@@ -25,21 +25,27 @@ Class UtilizadorController extends Base
 
     public function gestao()
     {
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($role != "administrador"){ $this->redirectToRoute("");}
+
         $funcionarios = Utilizador::all(array('conditions' => 'role = "funcionario"'));
         $this->renderView("gestaofuncionario", ['funcionarios' => $funcionarios]);
     }
 
     public function show($type)
     {
-        if($type == "cliente")
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($type == "cliente" && $role == "administrador" || $role == "funcionario")
         {
             $this->renderView("registerUser", ['type' => "Cliente"]);
         }
-        else if($type == "funcionario")
+        else if($type == "funcionario" && $role == "administrador")
         {
             $this->renderView("registerUser", ['type' => "Funcionário"]);
         }
-        else if($type == "update")
+        else if($type == "update" && $role == "administrador")
         {
             $this->renderView("updateuser");
         }
@@ -52,14 +58,14 @@ Class UtilizadorController extends Base
     public function create($type)
     {
         $user = new Utilizador();
+        $auth = new Auth();
+        $role = $auth->getRole();
 
-        if($type == "Funcionário")
-        {
-           
-            $type = "funcionario";
-             
+        if($type == "Funcionário" && $role == "administrador")
+        {         
+            $type = "funcionario";        
         }
-        else
+        else if($role == "administrador" || $role == "funcionario")
         {
             $type = "cliente";
         }
@@ -108,6 +114,11 @@ Class UtilizadorController extends Base
 
     public function edit($id)
     {
+        $auth = new Auth();
+        $role = $auth->getRole();
+
+        if($role == "administrador"){
+
         $dados = 
         [
             "username" => $_POST["user"],
@@ -134,13 +145,26 @@ Class UtilizadorController extends Base
         else
         {
             $this->renderView("error", ["erro" => "Erro nos parametros fornecidos", "route" => "user/show"]);  
-        }  
+        }
+    }else{
+        $this->redirectToRoute("");
+    }
+    
     }
 
     public function update($id)
     {
-        $user = Utilizador::find_by_id($id);
-        $this->renderView("updatefuncionario", ['user' => $user]);
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($role == "administrador"){
+            $user = Utilizador::find_by_id($id);
+            $this->renderView("updatefuncionario", ['user' => $user]);
+        }
+        else{
+            $this->redirectToRoute("");
+        }
+
+        
     }
 
     public function change(){
@@ -172,13 +196,23 @@ Class UtilizadorController extends Base
 
     public function delete($id)
     {
-        $utilizador = Utilizador::find_by_id($id);
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($role == "administrador"){
+            $utilizador = Utilizador::find_by_id($id);
+            if($utilizador->role == "administrador"){
+                $this->redirectToRoute("");
+            }else{
 
-        if($utilizador->isUsed($id)){
-            $utilizador->delete();
-            $this->redirectToRoute("user/gestao");
+            if($utilizador->isUsed($id)){
+                $utilizador->delete();
+                $this->redirectToRoute("user/gestao");
+            }
         }
+    
+            $this->renderView("erro", ["error" => "Erro Utilizador não pode ser eliminado pois foi de uma fatura", "route" => "user/gestao", "type" => ""]);
+        }
+        $this->redirectToRoute("");
 
-        $this->renderView("erro", ["error" => "Erro Utilizador não pode ser eliminado pois foi de uma fatura", "route" => "user/gestao", "type" => ""]);
     }
 }

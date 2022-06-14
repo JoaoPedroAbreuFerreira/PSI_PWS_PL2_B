@@ -6,15 +6,17 @@ Class FaturaController extends Base
 {
     public function index($username)
     {
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($role == false){
+            $this->redirectToRoute("");
+        }else{
+
+        
         $faturas = new Fatura();
         $cause = $faturas->verificarProdutosClientes();
 
         if($cause === true){
-            $role = $faturas->getRole($username);
-
-        if($role == false){
-            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
-        }
 
         $user = Utilizador::find_by_username($username);
 
@@ -24,7 +26,11 @@ Class FaturaController extends Base
                 $faturas = Fatura::all();
                 break;
             case "cliente":
-                $faturas = Fatura::all(array('conditions' => 'cliente_id = '.$user->id));
+                if($username == $_SESSION["username"]){
+                    $faturas = Fatura::all(array('conditions' => 'cliente_id = '.$user->id));
+                }else{
+                    $this->redirectToRoute("");
+                }
                 break;
             default:
                 $this->redirectToRoute("");
@@ -35,10 +41,16 @@ Class FaturaController extends Base
             $this->renderView("erro", ["error" => "Não existe nenhum $cause registado", "route" => "$cause/show", "type" => "cliente"]);
 
         }
-        
+    }
     }
 
     public function show(){
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($role == "cliente" || $role == false){
+            $this->redirectToRoute("");
+        }else{
+
         $faturas = new Fatura();
         $cause = $faturas->verificarProdutosClientes();
 
@@ -50,12 +62,19 @@ Class FaturaController extends Base
             $this->renderView("erro", ["error" => "Não existe nenhum $cause registado", "route" => "$cause/show", "type" => "cliente"]);
         }
 
-        
+    }
 
     }
 
     public function create()
     {
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($role == "cliente" || $role == false){
+            $this->redirectToRoute("");
+        }else{
+
+        
         $auth = new Auth();
         $quantidadeTotal = 0;
         $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
@@ -128,14 +147,23 @@ Class FaturaController extends Base
         else{
             $this->renderView("erro", ["error" => "Erro adicione associe artigos a fatura", "route" => "fatura/show", "type" => ""]);
         }
+    }
         
     }
 
     public function print($id)
     {
+        $auth = new Auth();
         $empresa = Empresa::first();
         $fatura = Fatura::find_by_id($id);
+        if($fatura == null){
+            $this->redirecttoroute("");
+        }
         $cliente = Utilizador::find_by_id($fatura->cliente_id);
+        if($cliente->username != $_SESSION["username"]){
+            $this->redirecttoroute("");
+        }
+
         $linhas = LinhaFatura::all(array('conditions' => 'Fatura_id = '.$fatura->id));
         
         $this->renderFatura(["empresa" => $empresa, "fatura" => $fatura, "cliente" => $cliente, "linhas" => $linhas]);
