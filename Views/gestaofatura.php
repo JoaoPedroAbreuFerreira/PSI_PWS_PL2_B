@@ -36,6 +36,8 @@
                 <td>
                     <a href="index.php?r=fatura/print&i=<?=$fatura->id?>" class="btn btn-info"
                         role="button">Imprimir</a>
+                   <?php if($fatura->estado == "Em Lancamento"){ echo "<a href='index.php?r=fatura/update&i=$fatura->id' class='btn btn-info'
+                        role='button'>Emitir</a>"; } ?>
                 </td>
             </tr>
             <?php } ?>

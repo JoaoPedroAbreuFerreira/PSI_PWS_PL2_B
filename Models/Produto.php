@@ -45,10 +45,11 @@ Class Produto extends ActiveRecord\Model
     {
         $produto = Produto::find_by_id($id);
 
-        if($produto)
+        if($produto == null)
         {
-            return $produto;
+            return false;
         }
+        return $produto;
     }
 
     public function isUsed($id)
