@@ -8,7 +8,7 @@ Class LinhaFatura extends ActiveRecord\Model
         if(isset($dados))
         {
             extract($dados);
-            if(empty($Fatura_id) || empty($Produto_id) || empty($quantidade) || empty($valor) || empty($valorIva))
+            if(empty($Fatura_id) && empty($Produto_id) && empty($quantidade) && empty($valor) && empty($valorIva))
             {
                 return false;
             }
