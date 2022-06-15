@@ -12,7 +12,7 @@ Class Produto extends ActiveRecord\Model
             {
                 return false;
             }
-            if($preco < 0 && $stock < 0)
+            if($preco < 0 && $stock < 0 && is_numeric($preco) && is_numeric($stock))
             {
                 return false;
             }
