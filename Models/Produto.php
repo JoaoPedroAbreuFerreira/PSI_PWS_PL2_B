@@ -8,11 +8,19 @@ Class Produto extends ActiveRecord\Model
         if(isset($dados))
         {
             extract($dados);
-            if(empty($preco) || empty($stock) || empty($referencia) || empty($iva_id))
+            if(empty($preco) && empty($stock) && empty($referencia) && empty($iva_id))
             {
                 return false;
             }
-            if($preco < 0 && $stock < 0 && is_numeric($preco) && is_numeric($stock))
+            if($preco < 0 && $stock < 0)
+            {
+                return false;
+            }
+            if(is_numeric($preco) && is_numeric($stock))
+            {
+                return true;
+            }
+            else
             {
                 return false;
             }
