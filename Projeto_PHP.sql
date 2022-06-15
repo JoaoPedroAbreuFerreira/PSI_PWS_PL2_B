@@ -229,15 +229,50 @@ INSERT INTO `empresa` (`id`, `designacaoSocial`, `email`, `telefone`, `nif`, `mo
 
 -- Ivas 
 INSERT INTO `iva` (`id`, `percentagem`, `descricao`, `vigor`) VALUES
-(1, '23', 'Taxo Normal', 1);
+(1, '23', 'Taxa Normal', 1);
 
 INSERT INTO `iva` (`id`, `percentagem`, `descricao`, `vigor`) VALUES
-(2, '13', 'Taxo Intermédia', 1);
+(2, '13', 'Taxa Intermédia', 1);
 
 INSERT INTO `iva` (`id`, `percentagem`, `descricao`, `vigor`) VALUES
-(3, '6', 'Taxo Reduzida', 1);
+(3, '6', 'Taxa Reduzida', 1);
 
 INSERT INTO `iva` (`id`, `percentagem`, `descricao`, `vigor`) VALUES
-(4, '50', 'Taxo Alta', 0);
+(4, '50', 'Taxa Alta', 0);
 
 -- Produtos
+INSERT INTO `produto` (`id`, `Iva_id`, `referencia`, `descricao`, `preco`, `stock`) VALUES
+(1, 1, '100-100000063WOF', 'Ryzen 7 5800x', 329.90, 3);
+
+INSERT INTO `produto` (`id`, `Iva_id`, `referencia`, `descricao`, `preco`, `stock`) VALUES
+(2, 2, '100-100000025BOX', 'Ryzen 7 3800x', 279.90, 2);
+
+INSERT INTO `produto` (`id`, `Iva_id`, `referencia`, `descricao`, `preco`, `stock`) VALUES
+(3, 3, '100-100000065BOX', 'Ryzen 5 5600x', 239.90, 5);
+
+INSERT INTO `produto` (`id`, `Iva_id`, `referencia`, `descricao`, `preco`, `stock`) VALUES
+(4, 3, 'BX8071512900K', 'Intel i9-12900K', 669.90, 1);
+
+INSERT INTO `produto` (`id`, `Iva_id`, `referencia`, `descricao`, `preco`, `stock`) VALUES
+(5, 2, 'BX8071512700KF', 'Intel i7-12700KF', 412.90, 10);
+
+INSERT INTO `produto` (`id`, `Iva_id`, `referencia`, `descricao`, `preco`, `stock`) VALUES
+(6, 1, 'BX8071512400F', 'Intel i5-12400F', 185.90, 4);
+
+INSERT INTO `produto` (`id`, `Iva_id`, `referencia`, `descricao`, `preco`, `stock`) VALUES
+(7, 3, 'ZT-A30800D-10PLHR', 'Zotac RTX 3080 10GB', 873.90, 2);
+
+INSERT INTO `produto` (`id`, `Iva_id`, `referencia`, `descricao`, `preco`, `stock`) VALUES
+(8, 2, '912-V397-431', 'MSI RTX 3050 8GB', 439.90, 6);
+
+INSERT INTO `produto` (`id`, `Iva_id`, `referencia`, `descricao`, `preco`, `stock`) VALUES
+(9, 1, '912-V502-039', 'MSI RX 6600 8GB', 419.90, 6);
+
+INSERT INTO `produto` (`id`, `Iva_id`, `referencia`, `descricao`, `preco`, `stock`) VALUES
+(10, 3, 'GV-R69XTGAMMING OC-16GD', 'Gigabyte RX 6900XT 16GB', 1749, 7);
+
+INSERT INTO `produto` (`id`, `Iva_id`, `referencia`, `descricao`, `preco`, `stock`) VALUES
+(11, 1, 'F4-3200C16D-16GTZR', 'G.Skill Trident Z 16GB DDR4', 84.90, 2);
+
+INSERT INTO `produto` (`id`, `Iva_id`, `referencia`, `descricao`, `preco`, `stock`) VALUES
+(12, 2, 'CMG32GX4M2E3200C16', 'Corsair Vengeance 32GB DDR4', 142.90, 4);
