@@ -1,6 +1,7 @@
 
 <div class="container" align="center">
 <label class="ok3"><h2>Lista de Funcionários registados</h2></label>
+<label class="ok3"><?php if(isset($error)){echo $error;}?></label>
 <br>
 <?php require_once("./views/layouts/searchbarUsers.php"); ?>
 <br>

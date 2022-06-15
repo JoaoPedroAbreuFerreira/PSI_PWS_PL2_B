@@ -5,28 +5,28 @@
 <table class="table tablestriped">
         <thead>
             <th>
-                designacaoSocial
+                Designão Social
             </th>
             <th>
-                email
+                Email
             </th> 
             <th>
-                telefone
+                Telefone
             </th> 
             <th>
-                nif
+                NIF
             </th> 
             <th>
-                morada
+                Morada
             </th> 
             <th>
-                codigo postal
+                Codigo postal
             </th> 
             <th>
-                localidade
+                Localidade
             </th> 
             <th>
-                capitalSocial
+                Capital Social
             </th>
             <th>
             </th> 

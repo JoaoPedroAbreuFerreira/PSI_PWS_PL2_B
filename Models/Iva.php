@@ -8,15 +8,22 @@ Class Iva extends ActiveRecord\Model
         if(isset($dados))
         {
             extract($dados);
-            if(isset($percentagem) && isset($vigor))
+            if(empty($percentagem) || empty($descricao))
             {
-                if($percentagem > 0 && $percentagem <= 100 && is_numeric($percentagem))
-                {
-                    return true;  
-                }
+                return "Preencha todos os campos";
+            }
+            if(trim($descricao) == ""){
+                return "Preencha a descrição";
+            }
+            if($percentagem <= 0 || $percentagem >= 100){
+                return "Percentagem Inválida";
+            }
+            if(!is_numeric($vigor)){
+                return "Vigor Inválido";
             }
         }
-        return false;
+        return true;
+        
     }
     
     public static function getIvaValue($id)

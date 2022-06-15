@@ -8,23 +8,33 @@ Class Produto extends ActiveRecord\Model
         if(isset($dados))
         {
             extract($dados);
-            if(empty($preco) || empty($stock) || empty($referencia) || empty($iva_id))
+            $ivaValid = Produto::IvaExistValid($iva_id);
+            if(empty($preco) || empty($stock) || empty($referencia) || empty($iva_id) || empty($descricao))
             {
-                return false;
+                return "Preencha todos os campos";
             }
-            if($preco < 0 && $stock < 0)
+            if($preco <= 0 || $preco > 99999999 || !is_numeric($preco))
             {
-                return false;
+                return "Preço inválido";
             }
+            if($stock < 0 || $stock > 99999999 || !is_numeric($preco))
+            {
+                return "Stock inválido";
+            }
+            if($ivaValid){
+                return "Iva inválido";
+            }
+
         }
         return true; 
     }
 
     public function verificarIvas()
     {
-        $iva = Iva::all();
+        $ivas = Iva::all(array('conditions' => 'vigor = 1'));
+
         
-        if(empty($iva))
+        if(empty($ivas))
         {
             return false;
         }
@@ -62,5 +72,17 @@ Class Produto extends ActiveRecord\Model
     public function changeStock($produto, $quantidade)
     {
         $produto->update_attributes(array("stock" => $produto->stock - $quantidade));
+    }
+
+    public function IvaExistValid($id){
+        $ivas = Iva::all(array('conditions' => 'vigor = 1'));
+
+        foreach($ivas as $iva){
+            if($iva->id == $id){
+                return false;
+            }
+        }
+
+        return true;
     }
 }

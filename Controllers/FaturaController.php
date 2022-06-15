@@ -75,7 +75,6 @@ Class FaturaController extends Base
         }else{
 
         
-        $auth = new Auth();
         $quantidadeTotal = 0;
         $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
         

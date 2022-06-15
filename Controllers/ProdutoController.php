@@ -17,9 +17,8 @@ Class ProdutoController extends Base
             $this->renderView("gestaoproduto", ['produtos' => $produtos]);
         }
         else{
-            $this->renderView("erro", ["error" => "Erro não existem ivas registados", "route" => "iva/index", "type" => ""]);
+            $this->renderView("erro", ["error" => "Erro não existem ivas registados ou Ativos", "route" => "iva/index", "type" => ""]);
             
-            //echo "Registe um iva primeiro!!";
         }
     }
         
@@ -34,7 +33,7 @@ Class ProdutoController extends Base
         }else{
         $produto = new Produto();
         if($produto->verificarIvas()){
-            $ivas = Iva::all();
+            $ivas = Iva::all(array('conditions' => 'vigor = 1'));
             $this->renderView("registerproduto", ['ivas' => $ivas]);       
         }
         else{
@@ -53,20 +52,34 @@ Class ProdutoController extends Base
 
         $produto = new Produto();
 
+        if(isset($_POST["iva"])){
+            if($_POST["iva"] == null || $_POST["iva"] < 0){
+                $iva_id = 0;
+            }else{
+                $iva_id = $_POST["iva"];
+            }
+        }else{
+            $iva_id = 0;
+        }
+
         $dados = [
-            "iva_id" => (int)$_POST["iva"],
+            "iva_id" => $iva_id,
             "referencia" => $_POST["referencia"],
             "preco" => $_POST["preco"],
             "descricao" => $_POST["desc"],
             "stock" => $_POST["stock"]
         ];
 
-        if($produto->verificarDados($dados)){
+        $error = $produto->verificarDados($dados);
+        
+        if($error === true){
             $produto::create($dados);
             $this->redirectToRoute("produto/index");
 
         }else{
-            $this->renderView("erro", ["error" => "Erro nos paramentros fornecidos", "route" => "produto/show", "type" => ""]);
+            $ivas = Iva::all(array('conditions' => 'vigor = 1'));
+
+            $this->renderView("registerproduto", ["error" => $error, "alteracao" => $dados, "ivas" => $ivas]);
             
 
         }
@@ -81,22 +94,37 @@ Class ProdutoController extends Base
             $this->redirectToRoute("");
         }else{
 
-        $dados = [
-            'iva_id' => (int)$_POST["iva"],
-            "referencia" => $_POST["referencia"],
-            "preco" => $_POST["preco"],
-            "descricao" => $_POST["desc"],
-            "stock" => $_POST["stock"]
-        ];
+
+            if(isset($_POST["iva"])){
+                if($_POST["iva"] == null || $_POST["iva"] < 0){
+                    $iva_id = 0;
+                }else{
+                    $iva_id = $_POST["iva"];
+                }
+            }else{
+                $iva_id = 0;
+            }
+
+            $dados = [
+                "iva_id" => $iva_id,
+                "referencia" => $_POST["referencia"],
+                "preco" => $_POST["preco"],
+                "descricao" => $_POST["desc"],
+                "stock" => $_POST["stock"]
+            ];
 
         $produto = Produto::find_by_id($id);
-        if($produto->verificarDados($dados)){
+            $error = $produto->verificarDados($dados);
+
+        if($error === true){
             extract($dados);
             $produto->update_attributes(array("referencia" => $referencia, "iva_id" => $iva_id, "descricao" => $descricao, "stock" => $stock, "preco" => $preco));
             $this->redirectToRoute("produto/index");
         }
         else{
-            $this->renderView("erro", ["error" => "Erro nos paramentros fornecidos", "route" => "produto/index", "type" => ""]);
+            $ivas = Iva::all(array('conditions' => 'vigor = 1'));
+
+            $this->renderView("updateproduto", ["error" => $error, "alteracao" => $dados, "ivas" => $ivas, "produto" => $produto]);
 
         }
     }
@@ -123,6 +151,11 @@ Class ProdutoController extends Base
             $this->redirectToRoute("");
         }else{
         $produto = Produto::find_by_id($id);
+
+        if($produto  == null){
+            $this->renderView("erro", ["error" => "Produto inexistente", "route" => "produto/index", "type" => ""]);
+            return;
+        }
 
         if($produto->isUsed($id)){
             $produto->delete();

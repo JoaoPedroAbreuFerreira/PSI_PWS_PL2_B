@@ -12,6 +12,7 @@ Class IvaController extends Base{
         }else{
 
         $ivas = Iva::all();
+
         $this->renderView("gestaoiva", ['ivas' => $ivas]);
         }
     }
@@ -33,20 +34,34 @@ Class IvaController extends Base{
             $this->redirectToRoute("");
         }else{
         $iva = new Iva();
+
+        if(isset($_POST["vigor"])){
+            if($_POST["vigor"] == null || $_POST["vigor"] > 1 || $_POST["vigor"] < 0){
+                $vigor = 0;
+            }else{
+                $vigor = $_POST["vigor"];
+            }
+        }else{
+            $vigor = 0;
+        }
+
+
         $dados = [
             "percentagem" => $_POST["percentagem"],
-            "vigor" => $_POST["vigor"],
+            "vigor" => $vigor,
             "descricao" => $_POST["desc"]
         ];
 
+        
 
-        if($iva->verificarDados($dados)){
+        $error = $iva->verificarDados($dados);
+
+        if($error === true){
             $iva::create($dados);
             $this->redirectToRoute("iva/index");
 
         }else{
-            $this->renderView("erro", ["error" => "Erro nos paramentros fornecidos", "route" => "iva/index", "type" => ""]);
-
+            $this->renderView("registeriva", ["error" => $error, "iva" => $dados]);
 
         }
     }
@@ -60,20 +75,35 @@ Class IvaController extends Base{
         if($role == "cliente" || $role == false){
             $this->redirectToRoute("");
         }else{
+
+        if(isset($_POST["vigor"])){
+            if($_POST["vigor"] == null || $_POST["vigor"] > 1 || $_POST["vigor"] < 0){
+                $vigor = 0;
+            }else{
+                $vigor = $_POST["vigor"];
+            }
+        }else{
+            $vigor = 0;
+        }
+
+
         $dados = [
             "percentagem" => $_POST["percentagem"],
-            "vigor" => $_POST["vigor"],
+            "vigor" => $vigor,
             "descricao" => $_POST["desc"]
         ];
 
         $iva = Iva::find_by_id($id);
-        if($iva->verificarDados($dados)){
+        $error = $iva->verificarDados($dados);
+
+      
+        if($error === true){
             extract($dados);
             $iva->update_attributes(array("percentagem" => $percentagem, "vigor" => $vigor, "descricao" => $descricao));
             $this->redirectToRoute("iva/index");
         }
         else{
-            $this->renderView("erro", ["error" => "Erro nos paramentros fornecidos", "route" => "iva/index", "type" => ""]);
+            $this->renderView("updateiva", ["error" => $error, "alteracao" => $dados, "iva" => $iva]);
         }
     }
     }
@@ -85,6 +115,9 @@ Class IvaController extends Base{
             $this->redirectToRoute("");
         }else{
         $iva = Iva::find_by_id($id);
+        if($iva == null){
+            $this->redirectToRoute("");
+        }
         $this->renderView("updateiva", ['iva' => $iva]);
         }
     }
@@ -97,6 +130,10 @@ Class IvaController extends Base{
         }else{
 
         $iva = Iva::find_by_id($id);
+        if($iva == null){
+            $this->renderView("erro", ["error" => "Iva inexistente", "route" => "iva/index", "type" => ""]);
+            return;
+        }
 
         if($iva->isUsed($id)){
             $iva->delete();

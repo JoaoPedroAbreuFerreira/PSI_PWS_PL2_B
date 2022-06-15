@@ -73,7 +73,7 @@ Class UtilizadorController extends Base
         $dados = 
         [
             "username" => $_POST["user"],
-            "pass" => hash("sha256", $_POST["pass"]),
+            "pass" => $_POST["pass"],
             "email" => $_POST["email"],
             "telefone" => $_POST["tele"],
             "nif" => $_POST["nif"],
@@ -83,11 +83,20 @@ Class UtilizadorController extends Base
             "role" => $type
         ];
 
-        if($user->searchUsername($_POST["user"])){
+        if($type == "funcionario"){
+            $type = "Funcionário";
+        }else{
+            $type = "Cliente";
+        }
 
-       
-        if($user->verificarDados($dados))
+        if($user->searchUsername($_POST["user"])){
+            if($user->nifInUse($_POST["nif"])){
+
+        $error = $user->verificarDados($dados);
+
+        if($error === true)
         {
+            $dados["pass"] = hash("sha256", $dados["pass"]);
             $user::create($dados);
 
             if($type == "funcionario")
@@ -101,12 +110,15 @@ Class UtilizadorController extends Base
         }
         else
         {  
-            $this->renderView("erro", ["error" => "Erro nos parametros fornecidos", "route" => "user/show", "type" => $type]); 
+
+            $this->renderView("registeruser", ["user" => $dados, "type" => $type, "error" => $error]); 
         }
+    }
+
     }
     else
         {  
-            $this->renderView("erro", ["error" => "Erro Username em uso", "route" => "user/show", "type" => $type]); 
+            $this->renderView("registeruser", ["user" => $dados, "type" => $type, "error" => "Username em Uso"]); 
         }
 }
 
@@ -117,12 +129,12 @@ Class UtilizadorController extends Base
         $auth = new Auth();
         $role = $auth->getRole();
 
-        if($role == "administrador"){
+
 
         $dados = 
         [
             "username" => $_POST["user"],
-            "pass" => hash("sha256", $_POST["pass"]),
+            "pass" => $_POST["pass"],
             "email" => $_POST["email"],
             "telefone" => $_POST["tele"],
             "nif" => $_POST["nif"],
@@ -132,11 +144,17 @@ Class UtilizadorController extends Base
 
         ];
 
+        
         $user = Utilizador::find_by_id($id);
 
-        if($user->verificarDados($dados))
+    if($user->role == "funcionario" && $role == "administrador"){
+
+        $error = $user->verificarDados($dados);
+
+        if($error === true)
         {
             extract($dados);
+            $pass = hash("sha256", $pass);
             $user->update_attributes(array("username" => $username, "pass" => $pass, "email" => $email,
              "telefone" => $telefone, "nif" => $nif, "morada" => $morada, "localidade" => $localidade, "codigopostal" => $codigopostal));
 
@@ -144,8 +162,10 @@ Class UtilizadorController extends Base
         }
         else
         {
-            $this->renderView("error", ["erro" => "Erro nos parametros fornecidos", "route" => "user/show"]);  
+            
+            $this->renderView("updatefuncionario", ["user" => $dados, "error" => $error, 'OriginUser' => $user]); 
         }
+    
     }else{
         $this->redirectToRoute("");
     }
@@ -156,9 +176,10 @@ Class UtilizadorController extends Base
     {
         $auth = new Auth();
         $role = $auth->getRole();
-        if($role == "administrador"){
-            $user = Utilizador::find_by_id($id);
-            $this->renderView("updatefuncionario", ['user' => $user]);
+        $user = Utilizador::find_by_id($id);
+        if($role == "administrador" && $user->role == "funcionario"){
+            
+            $this->renderView("updatefuncionario", ['OriginUser' => $user]);
         }
         else{
             $this->redirectToRoute("");
@@ -176,12 +197,23 @@ Class UtilizadorController extends Base
 
             if(isset($_POST["pass"]))
             {
-                $user->pass = hash("sha256", $_POST["pass"]);
+                if(trim($_POST["pass"]) != ""){
+                    $user->pass = hash("sha256", $_POST["pass"]);
+                }
+                else{
+                    $this->renderView("updateuser", ['error' => "Campo não preenchido"]);
+                    return;
+                }
             }
     
             if(isset($_POST["email"]))
             {
-                $user->email = $_POST["email"];
+                if($user->verifyEmail($_POST["email"])){
+                    $user->email = $_POST["email"];
+                }else{
+                    $this->renderView("updateuser", ['error' => "Email Inválido"]);
+                    return;
+                }
             }
 
             $user->save();
@@ -207,10 +239,14 @@ Class UtilizadorController extends Base
             if($utilizador->isUsed($id)){
                 $utilizador->delete();
                 $this->redirectToRoute("user/gestao");
+            }else{
+               
+                $this->renderView("erro", ["error" => "Erro Utilizador não pode ser eliminado pois foi de uma fatura", "route" => "user/gestao", "type" => ""]);
+                return;
             }
         }
     
-            $this->renderView("erro", ["error" => "Erro Utilizador não pode ser eliminado pois foi de uma fatura", "route" => "user/gestao", "type" => ""]);
+            
         }
         $this->redirectToRoute("");
 

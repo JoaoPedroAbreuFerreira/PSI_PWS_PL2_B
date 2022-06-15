@@ -35,30 +35,23 @@ Class EmpresaController extends Base
             "codigopostal" => $_POST["cod"]
         ];
 
-        
+        $empresa = Empresa::first();
+        $error = $empresa->verificarDados($dados);
 
-
-        if(isset($_POST["designacaoSocial"]) && isset($_POST["capitalSocial"]) && isset($_POST["email"]) && isset($_POST["tele"]) && isset($_POST["nif"]) && isset($_POST["morada"]) && isset($_POST["local"]) && isset($_POST["cod"]))
+        if($error === true)
         {
-                $empresa = Empresa::first();
-                $empresa->designacaosocial = $_POST["designacaoSocial"];
-                $empresa->capitalsocial = $_POST["capitalSocial"];
-                $empresa->email = $_POST["email"];
-                $empresa->telefone = $_POST["tele"];
-                $empresa->nif = $_POST["nif"];
-                $empresa->morada = $_POST["morada"];
-                $empresa->localidade = $_POST["local"];
-                $empresa->codigopostal = $_POST["cod"];
+            extract($dados);
+            $empresa->update_attributes(array("designacaosocial" => $designacaosocial, "capitalsocial" => $capitalsocial, "email" => $email,
+             "telefone" => $telefone, "morada" => $morada, "localidade" => $localidade, "codigopostal" => $codigopostal));
 
-                $empresa->save();
-                $this->redirectToRoute(ROTA_LOGIN);
+            $this->redirectToRoute("empresa/index");
         }
         else
         {
-            $this->redirectToRoute(ROTA_LOGIN);
-            $this->renderView("erro", ["error" => "Erro nos parametros fornecidos", "route" => "", "type" => ""]);
-
+            
+            $this->renderView("updateempresa", ["error" => $error, "alteracao" => $dados, 'empresa' => $empresa]); 
         }
+
     }
     }
 
