@@ -6,15 +6,17 @@ Class FaturaController extends Base
 {
     public function index($username)
     {
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($role == false){
+            $this->redirectToRoute("");
+        }else{
+
+        
         $faturas = new Fatura();
         $cause = $faturas->verificarProdutosClientes();
 
         if($cause === true){
-            $role = $faturas->getRole($username);
-
-        if($role == false){
-            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
-        }
 
         $user = Utilizador::find_by_username($username);
 
@@ -22,9 +24,21 @@ Class FaturaController extends Base
             case "funcionario":
             case "administrador":
                 $faturas = Fatura::all();
+                if($faturas == null){
+                    $this-> renderView("erro", ["error" => "Não existe nenhuma fatura emitida", "route" => "", "type" => ""]);
+                    return;
+                }
                 break;
             case "cliente":
-                $faturas = Fatura::all(array('conditions' => 'cliente_id = '.$user->id));
+                if($username == $_SESSION["username"]){
+                    $faturas = Fatura::all(array('conditions' => 'cliente_id = '.$user->id));
+                    if($faturas == null){
+                        $this-> renderView("erro", ["error" => "Não existe nenhuma fatura emitida", "route" => "", "type" => ""]);
+                        return;
+                    }
+                }else{
+                    $this->redirectToRoute("");
+                }
                 break;
             default:
                 $this->redirectToRoute("");
@@ -35,10 +49,16 @@ Class FaturaController extends Base
             $this->renderView("erro", ["error" => "Não existe nenhum $cause registado", "route" => "$cause/show", "type" => "cliente"]);
 
         }
-        
+    }
     }
 
     public function show(){
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($role == "cliente" || $role == false){
+            $this->redirectToRoute("");
+        }else{
+
         $faturas = new Fatura();
         $cause = $faturas->verificarProdutosClientes();
 
@@ -50,52 +70,80 @@ Class FaturaController extends Base
             $this->renderView("erro", ["error" => "Não existe nenhum $cause registado", "route" => "$cause/show", "type" => "cliente"]);
         }
 
-        
+    }
 
     }
 
     public function create()
     {
         $auth = new Auth();
-        $quantidadeTotal = 0;
-        $role = Utilizador::getUserRole($_SESSION["username"], $_SESSION["password"]);       
-        
-        if($role != "funcionario" && $role != "administrador") 
-        { 
-            $this->renderView("erro", ["error" => "Não tem permissões para aceder a esta página", "route" => "", "type" => ""]);
-        }
-        
-        $fatura = new Fatura();
+        $role = $auth->getRole();
+        if($role == "cliente" || $role == false){
+            $this->redirectToRoute("");
+        }else{
 
-        if($fatura->verificarTotal($_POST["total"])){
-            $dados =
+        $quantidadeTotal = 0;          
+        $fatura = new Fatura();       
+
+        if(isset($_POST["cliente"])){
+            if($_POST["cliente"] == null || $_POST["cliente"] < 0){
+                $cliente_id = 0;
+            }else{
+                $cliente_id = $_POST["cliente"];
+            }
+        }else{
+            $cliente_id = 0;
+        }
+
+        $dados =
         [
             "utilizador_id" => (int)Utilizador::find_by_username_and_pass($_SESSION["username"], $_SESSION["password"])->id,
-            "cliente_id" => (int)$_POST["cliente"],
+            "cliente_id" => (int)$cliente_id,
             "valorTotal" => $_POST["total"],
             "ivaTotal" => $_POST["totalIva"],
             "estado" => "Em Lancamento"
         ];
 
+        $error = $fatura->verificarDados($dados);
+
         
-        if($fatura->verificarDados($dados))
+        if($error === true)
         {
             $fatura::create($dados); 
             $fatura = Fatura::last();
         }
         else
         {
-            $this->renderView("erro", ["error" => "Erro nos parametros fornecidos fatura", "route" => "fatura/show", "type" => ""]);
-
+            $produtos = Produto::all();
+            $clientes = Utilizador::all(array('conditions' => 'role = "cliente"'));
+            $this->renderView("registerfatura", ["error" => $error, 'produtos' => $produtos, "clientes" => $clientes]);
+            return;
         }
                 
         for($i = 0; $i < count($_POST["produto"]); $i++) 
         {    
 
             $quantidadeTotal = $_POST["quantidade"][$i] + $quantidadeTotal;
+
             $produto = Produto::getProduto($_POST["produto"][$i]);
+            if($produto == false){
+                $fatura = Fatura::last();
+                $fatura->delete();
+                $this-> redirectToRoute("");
+                return;
+            }
+
             $totalLinha = $produto->preco * $_POST["quantidade"][$i];
             $iva=Iva::getIvaValue($produto->iva_id);
+
+            if($iva == false){
+                $fatura = Fatura::last();
+                $fatura->delete();
+                $this-> redirectToRoute("");
+                return;
+            }
+
+
             $ivalinha= $totalLinha * $iva / 100;
 
             $linhadados = 
@@ -112,33 +160,66 @@ Class FaturaController extends Base
             if($linha->verificarDados($linhadados))
             {
                 $linha::create($linhadados); 
-                $fatura->changeEstado($fatura->id);
                 $produto->changeStock($produto, $_POST["quantidade"][$i]);
                 $this->redirecttoroute("");
             }
             else
             {
                 $fatura->delete();
-                $this->renderView("erro", ["error" => "Erro Quantidade Inválida", "route" => "fatura/show", "type" => ""]);
+                $produtos = Produto::all();
+                $clientes = Utilizador::all(array('conditions' => 'role = "cliente"'));
+                $this->renderView("registerfatura", ["error" => "Quantidade Inválida", 'produtos' => $produtos, "clientes" => $clientes]);
                
             }    
 
         }
+
+    }
+    $this->redirectToRoute("fatura/index&i=".$_SESSION["username"]);
+    }
+
+    public function update($id){
+        $auth = new Auth();
+        $fatura = Fatura::find_by_id($id);
+        if($fatura == null || $fatura->estado != "Em Lancamento"){
+            $this->renderView("erro", ["error" => "Fatura Inválida", "route" => "fatura/index", "type" => $_SESSION["username"]]);
+            return;
         }
-        else{
-            $this->renderView("erro", ["error" => "Erro adicione associe artigos a fatura", "route" => "fatura/show", "type" => ""]);
-        }
+
+        $fatura->changeEstado($id);
+        $this->redirectToRoute("fatura/index&i=".$_SESSION["username"]);
+
         
     }
 
     public function print($id)
     {
-        $empresa = Empresa::first();
+        $auth = new Auth();
+        $role = $auth->getRole();
+
+        
         $fatura = Fatura::find_by_id($id);
+
+        if($fatura == null){
+            $this->redirecttoroute("");
+        }
+
+        $empresa = Empresa::first();
         $cliente = Utilizador::find_by_id($fatura->cliente_id);
         $linhas = LinhaFatura::all(array('conditions' => 'Fatura_id = '.$fatura->id));
-        
-        $this->renderFatura(["empresa" => $empresa, "fatura" => $fatura, "cliente" => $cliente, "linhas" => $linhas]);
+
+
+
+        if($role == "cliente" && $cliente->username == $_SESSION["username"]){
+            $this->renderFatura(["empresa" => $empresa, "fatura" => $fatura, "cliente" => $cliente, "linhas" => $linhas]);
+            return;
+        }else if($role == "administrador" || $role == "funcionario"){
+            $this->renderFatura(["empresa" => $empresa, "fatura" => $fatura, "cliente" => $cliente, "linhas" => $linhas]);
+            return;
+        }else{
+            $this->redirecttoroute("");
+        }
+
     }
 
 

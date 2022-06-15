@@ -15,6 +15,16 @@ Class Utilizador extends ActiveRecord\Model
             return true;
         } 
     }
+
+    public static function verifyEmail($email){
+        $emailRegex = '/^\\S+@\\S+\\.\\S+$/';
+
+        if(preg_match($emailRegex, $email)){
+            return true;
+        }
+        return false;
+
+    }
         
     
 
@@ -33,33 +43,36 @@ Class Utilizador extends ActiveRecord\Model
     
     public function verificarDados($dados)
     {
+        $emailRegex = '/^\\S+@\\S+\\.\\S+$/';
+
         if(isset($dados))
         {
             extract($dados);
             if(empty($username) || empty($pass) || empty($nif) || empty($email) || empty($morada) || empty($telefone) || empty($localidade) || empty($codigopostal))
             {
-                return false;
+                return "Preencha todos os campos";
             }
             if(trim($username) == "" || trim($pass) == "" || trim($nif) == "" || trim($email) == "" || trim($morada) == "" || trim($telefone) == "" || trim($localidade) == "" || trim($codigopostal) == "")
             {
-                return false;
+                return "Preencha todos os campos";
             }
-            if(strlen((string)$nif) < 9 || strlen((string)$nif) > 9)
+            if(strlen((string)$nif) < 9 || strlen((string)$nif) > 9 || $nif < 100000000)
             {
-                return false;
+                return "Nif inválido";
             }
-            if(strlen((string)$telefone) < 9 || strlen((string)$telefone) > 9)
+            if(strlen((string)$telefone) < 9 || strlen((string)$telefone) > 9 || $telefone < 100000000)
             {
-                return false;
+                return "Telefone inválido";
             }
-            if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-            {
-                return false;
+            if(!preg_match($emailRegex, $email)) {
+                return "Email inválido";
             }   
-            if(!preg_match("/^([0-9]{4})-([0-9]{3})$/", $codigopostal))
+            if(! preg_match("/^([0-9]{4})-([0-9]{3})$/", $codigopostal))
             {
-                return false;
+                return "Codigo de Postal inválido";
             }
+        
+            
             
         }
         return true;
@@ -74,6 +87,17 @@ Class Utilizador extends ActiveRecord\Model
         }
     }
 
+    public function nifInUse($nif){
+        $users = Utilizador::all();
+
+        foreach($users as $user){
+            if($user->nif == $nif){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public static function getUser($id)
     {
         $user = Utilizador::find_by_id($id);
@@ -83,21 +107,17 @@ Class Utilizador extends ActiveRecord\Model
         }
     }
 
+
     public function isUsed($id)
     {
         
-        $faturas = Fatura::all();
+        $faturas = Fatura::all(array('conditions' => "utilizador_id =$id"));
 
-        foreach($faturas as $fatura)
-        {
-            if($fatura->utilizador_id == $id)
-            {
-                return false;
-            }
+        if(empty($faturas)){
+            return true;
+        }else{
+            return false;
         }
-
-
-        return true;
 
     }
 

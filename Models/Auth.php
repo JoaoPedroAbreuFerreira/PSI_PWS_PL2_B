@@ -23,6 +23,21 @@ Class Auth
         } 
     }
 
+    public static function getRole()
+    {
+        
+
+        if(isset($_SESSION["username"]))
+        {
+            $user = Utilizador::find_by_username($_SESSION["username"]);
+            return $user->role;
+        }
+        else
+        {
+            return false;
+        } 
+    }
+
     public function isLoggedIn()
     {
         if(isset($_SESSION["username"])) 

@@ -1,7 +1,7 @@
 
 <div class="container" align="center">
 <label class="ok3"><h2>Registar Fatura</h2></label>
-
+<label class="ok3"><?php if(isset($error)){echo $error;}?></label>
 <form action="index.php?r=fatura/create" method="post" class="needs-validation row justify-content-center">
     <?php require_once("./views/layouts/searchbarUsers.php"); ?>
     <table class="table tablestriped">

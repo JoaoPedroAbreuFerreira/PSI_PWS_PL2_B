@@ -1,18 +1,19 @@
 
 <div class="container" align="center">
 <label class="ok3"><h2>REGISTAR IVAS</h2></label>
+<label class="ok3"><?php if(isset($error)){echo $error;}?></label>
 <form action="index.php?r=iva/create" method="post" class="needs-validation row justify-content-center" novalidate>
         <div class="col col-6">
             <div class="mb-3">
-                <label for="inputPercentagem" class="form-label ok2">Percentagem:</label>
-                <input type="number" class="form-control" id="inputPercentagem" name="percentagem" min="0" step="1"required>%
+                <label for="inputPercentagem" class="form-label ok2">Percentagem: %</label>
+                <input type="number" class="form-control" id="inputPercentagem" name="percentagem" value="<?php if(isset($iva)){echo $iva["percentagem"];}?>" min="0" step="1"required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>
             </div>
             <div class="mb-3">
                 <label for="inputDescricao" class="form-label ok2">Descrição:</label>
-                <input type="text" class="form-control" id="inputDescricao" name="desc" required>
+                <input type="text" class="form-control" id="inputDescricao" value="<?php if(isset($iva)){echo $iva["descricao"];}?>" name="desc" required>
                 <div class="invalid-feedback">
                     Campo obrigatório!
                 </div>

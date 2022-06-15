@@ -8,9 +8,30 @@ Class Fatura extends ActiveRecord\Model
         if(isset($dados))
         {
             extract($dados);
-            if(empty($utilizador_id) || empty($cliente_id) ||empty($valorTotal) || empty($ivaTotal))
+            $cliente = Utilizador::find_by_id($cliente_id);
+            if(empty($utilizador_id) || empty($cliente_id) || empty($valorTotal) || empty($ivaTotal))
             {
-                return false;
+                return "Preencha todos os campos";
+            }
+            if(trim($utilizador_id) == "" || trim($cliente_id) == "" || trim($valorTotal) == "" || trim($ivaTotal) == "")
+            {
+                return "Preencha todos os campos";
+            }
+            if($cliente == null)
+            {
+                return "Cliente inválido";
+            }
+            if($cliente->role != "cliente")
+            {
+                return "Cliente inválido";
+            }
+            if($valorTotal < 0 || $valorTotal > 99999999 || !is_numeric($valorTotal))
+            {
+                return "Valor inválido";
+            }
+            if($ivaTotal < 0 || $ivaTotal > 99999999 || !is_numeric($ivaTotal))
+            {
+                return "Valor total do iva inválido";
             }
         }
         return true;

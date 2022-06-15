@@ -13,5 +13,9 @@
 <br>
 <a href="index.php?r=fatura/show" class="btn btn-primary" id="coids">Emitir Fatura</a>
 <br>
+<a href="index.php?r=fatura/index&i=<?= $_SESSION["username"]?>" class="btn btn-warning" id="coids">Histórico de Faturas</a>
+<br>
+<a href="index.php?r=empresa/index" class="btn btn-secundary"id="coids">Gerir Empresa</a>
+<br>
 <a href='index.php?r=auth/logout' class="btn btn-primary" role="button"id="coids">Log Out</a>   
 </div>
