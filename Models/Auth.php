@@ -12,7 +12,7 @@ Class Auth
 
         if($valid->searchUtilizador($user, $pass)) 
         {
-            $_SESSION["username"] = $user;
+            $_SESSION["username"] = trim($user);
             $_SESSION["password"] = $pass;
 
             return true; 

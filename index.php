@@ -155,6 +155,10 @@ switch ($rota)
         $faturaController->update($index);
         break;
 
+    case "fatura/delete":
+        $faturaController->delete($index);
+        break;
+
     default:
         $userController->index();
         

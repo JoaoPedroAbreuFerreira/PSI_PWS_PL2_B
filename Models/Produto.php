@@ -75,6 +75,11 @@ Class Produto extends ActiveRecord\Model
         $produto->update_attributes(array("stock" => $produto->stock - $quantidade));
     }
 
+    public function revertStock($produto, $quantidade)
+    {
+        $produto->update_attributes(array("stock" => $produto->stock + $quantidade));
+    }
+
     public function IvaExistValid($id){
         $ivas = Iva::all(array('conditions' => 'vigor = 1'));
 
