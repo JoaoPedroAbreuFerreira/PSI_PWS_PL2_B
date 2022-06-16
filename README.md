@@ -6,9 +6,6 @@ Projeto da disciplina de Programação Web Servidor.
   - João Jesus (22118874)
   - Rodrigo Carreira (2213146)
 
-### Logins:
-Role / Username / Password
-
 ### Conta Admin (Username / Pass)
 ##### admin / admin
 
