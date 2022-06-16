@@ -12,24 +12,27 @@ Class Iva extends ActiveRecord\Model
             {
                 return "Preencha todos os campos";
             }
-            if(trim($descricao) == ""){
+            if(trim($descricao) == "")
+            {
                 return "Preencha a descrição";
             }
-            if($percentagem <= 0 || $percentagem >= 100){
+            if($percentagem <= 0 || $percentagem >= 100)
+            {
                 return "Percentagem Inválida";
             }
-            if(!is_numeric($vigor)){
+            if(!is_numeric($vigor))
+            {
                 return "Vigor Inválido";
             }
         }
         return true;
-        
     }
     
     public static function getIvaValue($id)
     {
         $iva = Iva::find_by_id($id);
-        if($iva == null){
+        if($iva == null)
+        {
             return false;
         }
 
@@ -38,7 +41,6 @@ Class Iva extends ActiveRecord\Model
 
     public function isUsed($id)
     {
-        
         $produtos = Produto::all();
 
         foreach($produtos as $produto)
@@ -48,9 +50,6 @@ Class Iva extends ActiveRecord\Model
                 return false;
             }
         }
-
-
         return true;
-
     }
 }
