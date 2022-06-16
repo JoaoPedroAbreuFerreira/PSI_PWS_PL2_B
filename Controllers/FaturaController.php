@@ -31,7 +31,7 @@ Class FaturaController extends Base
                 break;
             case "cliente":
                 if($username == $_SESSION["username"]){
-                    $faturas = Fatura::all(array('conditions' => 'cliente_id = '.$user->id));
+                    $faturas = Fatura::all(array('conditions'=>array('cliente_id = ? AND estado = ?', $user->id, "Emitida")));
                     if($faturas == null){
                         $this-> renderView("erro", ["error" => "Não existe nenhuma fatura emitida", "route" => "", "type" => ""]);
                         return;
@@ -180,6 +180,12 @@ Class FaturaController extends Base
 
     public function update($id){
         $auth = new Auth();
+        $role = $auth->getRole();
+        if($role != "funcionario" && $role != "administrador"){
+            $this->redirectToRoute("");
+            return;
+        }
+
         $fatura = Fatura::find_by_id($id);
         if($fatura == null || $fatura->estado != "Em Lancamento"){
             $this->renderView("erro", ["error" => "Fatura Inválida", "route" => "fatura/index", "type" => $_SESSION["username"]]);
@@ -189,6 +195,35 @@ Class FaturaController extends Base
         $fatura->changeEstado($id);
         $this->redirectToRoute("fatura/index&i=".$_SESSION["username"]);
 
+        
+    }
+
+
+    public function delete($id){
+        $auth = new Auth();
+        $role = $auth->getRole();
+        if($role != "funcionario" && $role != "administrador"){
+            $this->redirectToRoute("");
+            return;
+        }
+
+        $fatura = Fatura::find_by_id($id);
+        if($fatura == null || $fatura->estado != "Em Lancamento"){
+            $this->renderView("erro", ["error" => "Fatura Inválida", "route" => "fatura/index", "type" => $_SESSION["username"]]);
+            return;
+        }
+
+        $linhas = LinhaFatura::all(array('conditions' => "fatura_id = $id"));
+
+        foreach($linhas as $linha){
+            $produto = Produto::find_by_id($linha->produto_id);
+            $produto->revertStock($produto, $linha->quantidade);
+            $linha->delete();
+
+        }
+
+        $fatura->delete();
+        $this->redirectToRoute("fatura/index&i=".$_SESSION["username"]);
         
     }
 
