@@ -180,6 +180,12 @@ Class FaturaController extends Base
 
     public function update($id){
         $auth = new Auth();
+        $role = $auth->getRole();
+        if($role != "funcionario" && $role != "administrador"){
+            $this->redirectToRoute("");
+            return;
+        }
+
         $fatura = Fatura::find_by_id($id);
         if($fatura == null || $fatura->estado != "Em Lancamento"){
             $this->renderView("erro", ["error" => "Fatura Inválida", "route" => "fatura/index", "type" => $_SESSION["username"]]);
@@ -195,6 +201,12 @@ Class FaturaController extends Base
 
     public function delete($id){
         $auth = new Auth();
+        $role = $auth->getRole();
+        if($role != "funcionario" && $role != "administrador"){
+            $this->redirectToRoute("");
+            return;
+        }
+
         $fatura = Fatura::find_by_id($id);
         if($fatura == null || $fatura->estado != "Em Lancamento"){
             $this->renderView("erro", ["error" => "Fatura Inválida", "route" => "fatura/index", "type" => $_SESSION["username"]]);
