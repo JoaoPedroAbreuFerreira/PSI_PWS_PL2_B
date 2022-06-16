@@ -9,11 +9,14 @@ Projeto da disciplina de Programação Web Servidor.
 ### Logins:
 Role / Username / Password
 
-admin - admin - admin
+### Conta Admin (Username / Pass)
+##### admin / admin
 
-funcionario - joao - funcionario
-funcionario - rodrigo - funcionario
+### Contas Funcionario (Username / Pass)
+##### joao / funcionario
+##### rodrigo / funcionario
 
-cliente - marco - cliente
-cliente - fernando - cliente
-cliente - eduardo - cliente
+### Contas Cliente (Username / Pass)
+##### marco / cliente
+##### fernando / cliente
+##### eduardo / cliente
