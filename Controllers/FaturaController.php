@@ -155,9 +155,14 @@ Class FaturaController extends Base
                 "valorIva" => $ivalinha
             ];
 
+
             $linha = new LinhaFatura();
-            
-            if($linha->verificarDados($linhadados))
+
+            $error = $linha->verificarDados($linhadados);
+
+            if((int)$_POST["quantidade"][$i] > 0){
+  
+            if($error === true)
             {
                 $linha::create($linhadados); 
                 $produto->changeStock($produto, $_POST["quantidade"][$i]);
@@ -168,11 +173,12 @@ Class FaturaController extends Base
                 $fatura->delete();
                 $produtos = Produto::all();
                 $clientes = Utilizador::all(array('conditions' => 'role = "cliente"'));
-                $this->renderView("registerfatura", ["error" => "Quantidade Inválida", 'produtos' => $produtos, "clientes" => $clientes]);
+                $this->renderView("registerfatura", ["error" => $error, 'produtos' => $produtos, "clientes" => $clientes]);
                
             }    
 
         }
+    }
 
     }
     $this->redirectToRoute("fatura/index&i=".$_SESSION["username"]);

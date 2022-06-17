@@ -115,6 +115,12 @@ Class IvaController extends Base{
             $this->redirectToRoute("");
         }else{
         $iva = Iva::find_by_id($id);
+
+        if($iva->isUsed($id) == false){
+            $this->renderView("erro", ["error" => "Erro Iva não pode ser editado pois foi usado no registo de um Produto", "route" => "iva/index", "type" => ""]);
+            return;
+        }
+
         if($iva == null){
             $this->redirectToRoute("");
         }
